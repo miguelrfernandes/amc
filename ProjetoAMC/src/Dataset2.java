@@ -10,7 +10,7 @@ public class Dataset2 {
 	
 	// Count: recebe uma lista de variáveis e valores destas e retorna o número
 	//de vezes que estas variáveis tomam simultaneamente esses valores no dataset.
-	public int count(int[] vars, int[] val) {
+	public int Count(int[] vars, int[] val) {
 		int r = 0;
 		for (int i = 0; i < data.size(); i++) {
 			boolean c = true;
@@ -23,7 +23,7 @@ public class Dataset2 {
 	}
 	
 	// Add: adiciona um vetor ao dataset.
-	public void add(int[] v) {
+	public void Add(int[] v) {
 		data.add(v);
 	}
 	
