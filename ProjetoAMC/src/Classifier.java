@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Classifier {  // vou supor que a classe MRFT pedida é a "MRFTree"
+public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e a "MRFTree"
 
 	// atributos
 	
@@ -35,23 +35,23 @@ public class Classifier {  // vou supor que a classe MRFT pedida é a "MRFTree"
 		return "Classificador [MRFT List =" + MRFTList + ", Frequencia das Classes =" + FreqList + "]";
 	}
 	 
-	public double Classify(int[] amostra) {  // o valor da classe é sempre um número certo?
-		if  (MRFTree.prob(amostra) == 0) { 				
-			throw new AssertionError("Amostra não está no dataset");
-		}
-		int m = 0;
+	public double Classify(int[] amostra) {  // cada classe (por ex. benigno) e representada por um unico valor certo?
+		int m = 0; // tamanho do dataset
 		for (int k=0; k < MRFTList.size(); k++) {
-			m = m + MRFTree.size(k);
+			m = m + MRFTList.get(k).size();
+			if  (MRFTList.get(k).prob(amostra) == 0) { 				
+				throw new AssertionError("Amostra nao esta no dataset");
+			}
 		}
 		ArrayList<Double> odds = new ArrayList<Double>();
-		for (int C=0; C < FreqList.size(); C++) {  // C = variável classe C
+		for (int C=0; C < FreqList.size(); C++) {  // C = variavel classe C
 			double PrV = (FreqList.get(C)/m) * (MRFTList.get(C).prob(amostra));
 			odds.add(PrV);
 		}
 		
-		for (int c=0; c < Dataset2.ClassValuesList().size(); c++) {
-			if (ClassValuesList.get(c) == Collections.max(odds)) {
-				return ClassValuesList.get(c);
+		for (int c=0; c < odds.size(); c++) {
+			if (odds.get(c) == Collections.max(odds)) {
+				return Dataset2.ClassValuesList.get(c);
 			}
 		}
 		 
@@ -60,7 +60,7 @@ public class Classifier {  // vou supor que a classe MRFT pedida é a "MRFTree"
 }
 
 
-/* Colocar no módulo MRFTree:
+/* Colocar no modulo MRFTree:
  * 
  * public int size() {
  * 		return this.Dataset2.size();
@@ -81,8 +81,9 @@ public class Classifier {  // vou supor que a classe MRFT pedida é a "MRFTree"
  *}
  */
 
-// Na função classify eu assumo que o array com as frequências das classes, bem como o MRFTList estao ordenados da mesma forma
-// Ou seja, que para a classe C1 por exemplo, a sua MRF e frequência são MRFTList.get(1) e FreqList.get(1), respetivamente
-// Assumo também que a MRFTList nao tem as classes associadas a cada MRFTree. Se tiver, a ClassValuesList não é necessária
-// Assum que o conjunto de dados é do tipo
-// data = [[x1,x2,...,xn,c2], [x1,x2,...,xn,c2], ...]
+// Na funcao classify eu assumo que o array com as frequencias das classes, bem como o MRFTList estao ordenados da mesma forma
+// Ou seja, que para a classe C1 por exemplo, a sua MRF e frequencia sao MRFTList.get(1) e FreqList.get(1), respetivamente
+// Assumo tambem que a MRFTList nao tem o valor das classes, associadas a cada MRFTree. Se tiver, a ClassValuesList nao e necessaria
+// Por exemplo, MRFTList = [[MRFTree1, c1], [MRFTree2, c2], ...] --> Eu assumo que nao temos c1, c2, etc. na MRFTList
+// Assum que o conjunto de dados e do tipo
+// data = [[x1,x2,...,xn,c1], [x1,x2,...,xn,c2], ...]
