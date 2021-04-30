@@ -83,6 +83,6 @@ public class Classifier {  // vou supor que a classe MRFT pedida é a "MRFTree"
 
 // Na função classify eu assumo que o array com as frequências das classes, bem como o MRFTList estao ordenados da mesma forma
 // Ou seja, que para a classe C1 por exemplo, a sua MRF e frequência são MRFTList.get(1) e FreqList.get(1), respetivamente
-// Assumo também que a MRFTList nao tem as classes associadas a cada MRFTree
+// Assumo também que a MRFTList nao tem as classes associadas a cada MRFTree. Se tiver, a ClassValuesList não é necessária
 // Assum que o conjunto de dados é do tipo
 // data = [[x1,x2,...,xn,c2], [x1,x2,...,xn,c2], ...]
