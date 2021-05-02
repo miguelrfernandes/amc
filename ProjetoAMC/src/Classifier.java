@@ -40,12 +40,7 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 	 
 	public double Classify(int[] amostra) {  // cada classe (por ex. benigno) e representada por um unico valor certo?
 		int m = MRFTList.get(0).getDatabaseSize(); // tamanho do dataset
-		for (int k=0; k < MRFTList.size(); k++) {
-			//m = m + MRFTList.get(k).size();
-			if  (MRFTList.get(k).prob(amostra) == 0) { 				
-				throw new AssertionError("Amostra nao esta no dataset");
-			}
-		}
+		
 		ArrayList<Double> odds = new ArrayList<Double>();
 		for (int C=0; C < FreqList.size(); C++) {  // C = variavel classe C
 			double PrV = (FreqList.get(C)/m) * (MRFTList.get(C).prob(amostra));
