@@ -14,6 +14,10 @@ public class MRFTree {
 			}
 	}
 	
+	public int getDatabaseSize(){
+		return m;
+	}
+	
 	public double[][] phi(double i) {
 		return i;
 	}
