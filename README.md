@@ -5,3 +5,9 @@ Este projeto enquadra-se na cadeira de AMC, é disponibilizado um enunciado pelo
 
 Relatório com 4 páginas:
 O que incluir no relatório? (ex. introdução do projeto (objetivos), introdução teórica, descrição da implementação (classes e métodos), escolhas feitas ao longo do projeto (opções de diferentes implementações e justificações (eficiência)), instruções de utilização, resultados, análise de resultados, conclusões).
+
+Classes:
+Database
+WeightedGraph
+MRFT
+Classifier
