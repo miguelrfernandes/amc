@@ -1,17 +1,26 @@
 
 public class MRFTree {
-	int[][] phi;
 	int[] e;
+	int m;
 	
-	// Método Construtor que recebe uma árvore, e um dataset e coloca os 𝜙(𝑥#, 𝑥$) em cada árvore.
-	public MRFTree(wg g, Dataset1 dataset) {
-		// fixa-se a aresta especial e como a primeira aresta do nó 0
-		
-		g.addEdge(0, 0, 0);
+	// Método Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset e coloca os 𝜙(𝑥#, 𝑥$) em cada arvore.
+	public MRFTree(wg1 g, Dataset1 T) {
+		m = T.size();
+		// fixa-se a aresta especial e como a primeira aresta do no 0
+		int e = 0;
+		// adiciona-se uma matriz com os valor de phi(x_i, x_j) a cada aresta da árvore
+		for (int i = 0, i < m, i++) {
+			g.addEdge(0, 0, phi(e));
+			}
 	}
 	
-	public double phi(double i, double j) {
+	public double[][] phi(double i) {
 		return i;
+	}
+	
+	
+	public double size() {
+		return m;
 	}
 
 	// Prob: dado um vetor de dados 𝑥1, ... , 𝑥( retorna a probabilidade destes dados no dataset.

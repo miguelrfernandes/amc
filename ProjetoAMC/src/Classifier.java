@@ -8,12 +8,14 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 	ArrayList<MRFTree> MRFTList;
 	ArrayList<Integer> FreqList;   
 	
+	// metodo construtor
 	public Classifier(ArrayList<MRFTree> MRFTList, ArrayList<Integer> FreqList) {
 		this.MRFTList = MRFTList;
 		this.FreqList = FreqList;
 		
 	}
-
+	
+	// getter e setters
 	public ArrayList<MRFTree> getMRFTList() {
 		return MRFTList;
 	}
@@ -30,6 +32,7 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 		FreqList = freqList;
 	}
 
+	// metodo toString
 	@Override
 	public String toString() {
 		return "Classificador [MRFT List =" + MRFTList + ", Frequencia das Classes =" + FreqList + "]";
@@ -66,7 +69,7 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
  * 		return this.Dataset2.size();
  * }
  * 
- * Colocar no módulo Dataset2: 
+ * Colocar no mï¿½dulo Dataset2: 
  * 
  * public int size() {
  * 		return this.data.size();

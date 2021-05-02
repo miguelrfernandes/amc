@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Dataset1 {
@@ -35,6 +34,9 @@ public class Dataset1 {
 		return data.get(v);
 	}
 	
+	public int size() {
+		return data.size();
+	}
 	
 	
 	@Override
