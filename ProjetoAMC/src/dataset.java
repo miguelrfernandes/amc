@@ -1,34 +1,100 @@
 
-public class dataset {
-	//Implementação com array de arrays não é possível pois é necessário alterar o tamanho
-	//do dataset (método add)
-	int data[][];
+import java.util.ArrayList;
+import java.util.Arrays;
+public class Dataset{
+	ArrayList<int[]> data;
+	int n;// o java come�a a conta do 0; este n refere-se ao numero de elementos de cada 
+	int [] var; // � poss�vel que precisemos mais tarde
 	
-	public dataset(int[][] data) {
-		super();
+	
+	public Dataset(int n){
+		this.n=n;
+		this.var = new int[n];
+		this.data = new ArrayList<int[]>();
+}
+	public ArrayList<int[]> getData() {
+		return data;
+	}
+
+	public void setData(ArrayList<int[]> data) {
 		this.data = data;
 	}
 
-	// Count:recebe uma lista de variáveis e valores destas e retorna o número
-	//de vezes que estas variáveis tomam simultaneamente os esses valores no dataset.
-	public int count(int[] vars, int[] val) {
-		int r = 0;
-		for (int[] row : data) {
+
+	public int getN() {
+		return n;
+	}
+
+	public void setN(int n) {
+		this.n = n;
+	}
+
+	public int[] getVar() {
+		return var;
+	}
+
+	public void setVar(int[] var) {
+		this.var = var;
+	}
+
+	@Override
+	public String toString() {
+		return "DataSet_ [data=" + data + ", n=" + n + ", var=" + Arrays.toString(var) + "]";// TODO toString cada elemento de data fazer ciclo for
+	
+	}
+	public void Add(int[] v) {
+		
+		if (v.length!= this.n) {
+			throw new AssertionError(" wrong dimension ");
+		}
+		
+		else{data.add(v);
+	
+		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores m�ximos das variaveis aleatorias do dataset
+		}
+	}
+	
+	private int[] var_max(int[] v, int [] var) {
+		for (int i=0; i < var.length; i++) {
+			if(var[i]<v[i]){ 
+				var[i]=v[i];
+			}
+			} return var;
+		}
+	
+	public int Count(int[] vars, int[] val) {// pensar se quero adicionar a verifica��o de tamanho
+		int r = 0; 
+		for (int i = 0; i < data.size(); i++ )  {
 			boolean c = true;
-			for (int var : vars) {
-				if (row[var] != val[var]) c = false;
+			for (int j=0; j<vars.length; j++) { //adicionar c à guarda para aumentar eficiência
+				if (data.get(i)[vars[j]] != val[j]) c = false;
 			}
 			if (c) r++;
 		}
 		return r;
 	}
 	
-	// Add: adiciona um vetor ao dataset.
-	public void add(int[] v) {
-		data[0] = v;
+	public ArrayList<int[]> Fiber(int c) {
+		ArrayList<int[]> fibra = new ArrayList<int[]>();
+		for (int i = 0; i < data.size(); i++ ) {
+			if (data.get(i)[this.n-1]==c) {
+				fibra.add(Arrays.copyOf(data.get(i), data.get(i).length -1));
+			}
+		}
+		if (!fibra.isEmpty()) {
+		return fibra;
+	}
+		else {
+			throw new AssertionError("classe is not verified");
+		}
+	
 	}
 	
-	// Fiber: dado um valor da classe retorna a fibra (Dataset) associada
-	// a esse valor da classe.
-	// O que é uma fibra (Dataset)?
+	
+	
+	
 }
+
+	
+
+	
