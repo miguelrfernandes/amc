@@ -49,7 +49,7 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 		
 		for (int c=0; c < odds.size(); c++) {
 			if (odds.get(c) == Collections.max(odds)) {
-				return Dataset2.ClassValuesList.get(c);
+				return Dataset2.ClassValuesList.get(c);  //não faz sentido
 			}
 		}
 		 
@@ -64,7 +64,7 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
  * 		return this.Dataset2.size();
  * }
  * 
- * Colocar no mï¿½dulo Dataset2: 
+ * Colocar no modulo Dataset2: 
  * 
  * public int size() {
  * 		return this.data.size();
