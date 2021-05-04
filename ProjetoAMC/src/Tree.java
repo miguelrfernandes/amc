@@ -12,6 +12,10 @@ public class Tree {
 		pais[i] = pai;
 	}
 	
+	public boolean EdgeQ(int i, int j) {
+		return pais[i] == j || pais[j] == i;
+	}
+	
 	/*
 	 public ArrayList<Integer> DFS() { // Depth First Search
 		ArrayList<Integer> r = new ArrayList<Integer>();
