@@ -43,10 +43,10 @@ public class Dataset{
 			if (i==0) {
 				System.out.println("[" + Arrays.toString(this.data.get(0)) + ",");
 			}
-			if (i == this.data.size() - 1) {
+			if (i !=0 && i == this.data.size() - 1) {
 				System.out.println(Arrays.toString(this.data.get(i)) + "]");
 			}
-			else {
+			if (i != 0 && i != this.data.size() - 1){
 				System.out.println(Arrays.toString(this.data.get(i)) + ",");
 			}
 		}
@@ -93,20 +93,20 @@ public class Dataset{
 	
 	// TERCEIRA FUNCAO
 	
-	public ArrayList<int[]> Fiber(int c) {
+	public Dataset Fiber(int c) {
+		Dataset fibra = new Dataset(this.n - 1);
 		for (int i = 0; i < data.size(); i++ ) {
-			if (data.get(i)[this.n-1]==c) {
-				fibra.add(Arrays.copyOf(data.get(i), data.get(i).length -1));
+			if (data.get(i)[this.n-1] == c) {
+		
+				int[] aux= Arrays.copyOf(data.get(i), data.get(i).length - 1);
+				fibra.Add(aux);
+				
 			}
-		}
-		if (!fibra.isEmpty()) {
-		return fibra;
-		}
+		} 
+		if (fibra.data.size()!= 0) return fibra;
 		else {
 			throw new AssertionError("classe is not verified");
-		}
-	
-	}
+		}}
 	
 	
 	
