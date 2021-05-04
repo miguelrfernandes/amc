@@ -1,10 +1,10 @@
 
-public class dataset {
+public class datasetOld {
 	//Implementação com array de arrays não é possível pois é necessário alterar o tamanho
 	//do dataset (método add)
 	int data[][];
 	
-	public dataset(int[][] data) {
+	public datasetOld(int[][] data) {
 		super();
 		this.data = data;
 	}
