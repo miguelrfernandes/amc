@@ -52,19 +52,19 @@ public class Main {
 		dataeg2.print();
 		
 		
-		/*
-		
-		ArrayList<int[]> fibra2 = dataset2.Fiber(1);
 		
 		
-		WeightedGraph grafo = new WeightedGraph(10);
+		//ArrayList<int[]> fibra2 = dataeg2.Fiber(1);
+		
+		
+		//WeightedGraph grafo = new WeightedGraph(10);
 		// adicionar pesos ao grafico
-		Tree maximal = grafo.MST();
+		//Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		
 		for (int i = 0; i < 2; i++) {
-			MRFTree markov = new MRFTree(maximal, dataset2.Fiber(i));
-			listamrft.add(markov);
+			//MRFTree markov = new MRFTree(maximal, dataset2.Fiber(i));
+			//listamrft.add(markov);
 		}
 		
 		//Classifier classificador = new Classifier(listamrft, classfreq); */

@@ -32,17 +32,23 @@ public class MRFTree {
 			d++;
 		}
 		
+		// TODO aumentar eficiencia
 		// adicionamos uma matriz com os valores de phi(xi,xj) a cada aresta da nova arvore
 		for (int i = 0; i < n; i++) { // for aresta in arvore
-			// TODO trocar para apenas as arestas da arvore dada
 			for (int j = 0; j < n; j++) {
-				markovtree.Add(i, j, phi(i,j));
-				int[] a = new int[2];
-				a[0] = i;
-				a[1] = j;
-				E.add(a);
+				if (arvore.EdgeQ(i, j)) {
+					markovtree.Add(i, j, phi(i,j));
+					int[] a = new int[2];
+					a[0] = i;
+					a[1] = j;
+					E.add(a);
+				}
 			}
 		}
+	}
+	
+	public int getDatabaseSize() {
+		return m;
 	}
 
 	public double[][] phi(int i, int j) {  // calculo do phi
@@ -70,7 +76,6 @@ public class MRFTree {
 		return phiv;
 	}
 	
-	// TODO
 	// Prob: dado um vetor de dados 𝑥1, ... , 𝑥( retorna a probabilidade destes dados no dataset.
 	public double prob(int[] v) {
 		double r;
