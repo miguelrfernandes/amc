@@ -25,11 +25,11 @@ public class Main {
 			dataset2.Add(exemplo2[i]);
 		}
 	
-		ArrayList<int[]> fibra2 = dataset2.Fiber(1);
+		Dataset fibra2 = dataset2.Fiber(0);
 		
 
 	// para ver se a fibra está a funcionar
-		for ( int[] ve: fibra2) {
+		for ( int[] ve: dataset2.data) {
 			for(int i: ve) {
 				System.out.println(i);
 			}

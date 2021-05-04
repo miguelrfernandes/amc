@@ -16,25 +16,13 @@ public class Dataset{
 		return data;
 	}
 
-	public void setData(ArrayList<int[]> data) {
-		this.data = data;
-	}
-
 
 	public int getN() {
 		return n;
 	}
-
-	public void setN(int n) {
-		this.n = n;
-	}
-
+	
 	public int[] getVar() {
 		return var;
-	}
-
-	public void setVar(int[] var) {
-		this.var = var;
 	}
 
 	@Override
@@ -74,24 +62,24 @@ public class Dataset{
 		return r;
 	}
 	
-	public ArrayList<int[]> Fiber(int c) {
-		ArrayList<int[]> fibra = new ArrayList<int[]>();
+	public Dataset Fiber(int c) {
+		Dataset fibra = new Dataset(this.n - 1);
+		
 		for (int i = 0; i < data.size(); i++ ) {
 			if (data.get(i)[this.n-1]==c) {
-				fibra.add(Arrays.copyOf(data.get(i), data.get(i).length -1));
+		
+				int[] aux= Arrays.copyOf(data.get(i), data.get(i).length -1);
+				fibra.Add(aux);
 			}
 		}
-		if (!fibra.isEmpty()) {
+		if (fibra.data.size()!= 0) {
 		return fibra;
 	}
 		else {
-			throw new AssertionError("classe is not verified");
+			throw new AssertionError("class is not verified");
 		}
 	
 	}
-	
-	
-	
 	
 }
 
