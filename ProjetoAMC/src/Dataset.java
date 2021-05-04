@@ -37,10 +37,19 @@ public class Dataset{
 		this.var = var;
 	}
 
-	@Override
-	public String toString() {
-		return "Dataset [data=" + data + ", n=" + n + ", var=" + Arrays.toString(var) + "]";// TODO toString cada elemento de data fazer ciclo for
 	
+	public void print() {
+		for (int i = 0; i < this.data.size(); i++) {
+			if (i==0) {
+				System.out.println("[" + Arrays.toString(this.data.get(0)) + ",");
+			}
+			if (i == this.data.size() - 1) {
+				System.out.println(Arrays.toString(this.data.get(i)) + "]");
+			}
+			else {
+				System.out.println(Arrays.toString(this.data.get(i)) + ",");
+			}
+		}
 	}
 	
 	// PRIMEIRA FUNCAO
@@ -51,7 +60,7 @@ public class Dataset{
 			throw new AssertionError(" wrong dimension ");
 		}
 		
-		else{
+		else {
 		
 		data.add(v);
 		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores máximos das variaveis aleatorias do dataset
@@ -68,6 +77,8 @@ public class Dataset{
 		return var;
 		}
 	
+	// SEGUNDA FUNCAO
+	
 	public int Count(int[] vars, int[] val) {// pensar se quero adicionar a verificação de tamanho
 		int r = 0; 
 		for (int i = 0; i < data.size(); i++ )  {
@@ -80,8 +91,9 @@ public class Dataset{
 		return r;
 	}
 	
+	// TERCEIRA FUNCAO
+	
 	public ArrayList<int[]> Fiber(int c) {
-		ArrayList<int[]> fibra = new ArrayList<int[]>();
 		for (int i = 0; i < data.size(); i++ ) {
 			if (data.get(i)[this.n-1]==c) {
 				fibra.add(Arrays.copyOf(data.get(i), data.get(i).length -1));

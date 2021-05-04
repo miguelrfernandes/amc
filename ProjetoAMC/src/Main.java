@@ -19,22 +19,45 @@ public class Main {
 		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,1},
 		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,0}};
 		
-		Dataset dataset2 = new Dataset(15);
+		System.out.println(Arrays.deepToString(exemplo1));
+		System.out.println(Arrays.deepToString(exemplo2));
 		
-		for (int i=0; i<exemplo2.length; i++) {
-			dataset2.Add(exemplo2[i]);
-		}
+		Dataset dataeg1 = new Dataset(10);
+		Dataset dataeg2 = new Dataset(15);
 	
+	
+		for (int i=0; i < exemplo1.length; i++) {
+			dataeg1.Add(exemplo1[i]);
+		}
+		
+		for (int i=0; i < exemplo2.length; i++) {
+			dataeg2.Add(exemplo2[i]);
+		}
+		
+		dataeg1.print();
+		dataeg2.print();
+		
+		int[] vars = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}; // n = 10
+		int[] val = {5,2,5,6,3,5,6,7,3,0};
+		System.out.println(dataeg1.Count(vars, val));
+		System.out.println(dataeg2.Count(vars, val));
+		
+		int[] vetor1 = {5,2,5,2,3,5,6,7,3,0};
+		int[] vetor2 = {5,2,5,2,3,5,6,7,0};
+		
+		dataeg1.Add(vetor1);
+		dataeg1.print();
+		
+		dataeg1.Add(vetor2);
+		dataeg2.print();
+		
+		
+		
+		/*
+		
 		ArrayList<int[]> fibra2 = dataset2.Fiber(1);
 		
-
-		// para ver se a fibra est� a funcionar
-		for ( int[] ve: fibra2) {
-			for(int i: ve) {
-				System.out.println(i);
-			}
-		}
-	
+		
 		WeightedGraph grafo = new WeightedGraph(10);
 		// adicionar pesos ao grafico
 		Tree maximal = grafo.MST();
@@ -45,6 +68,7 @@ public class Main {
 			listamrft.add(markov);
 		}
 		
-		Classifier classificador = new Classifier(listamrft, classfreq);
+		//Classifier classificador = new Classifier(listamrft, classfreq); */
+		
 	}
 }
