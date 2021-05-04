@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 public class Dataset{
 	ArrayList<int[]> data;
-	int n;// o java comeÁa a conta do 0; este n refere-se ao numero de elementos de cada 
-	int [] var; // È possÌvel que precisemos mais tarde
+	int n;// o java come√ßa a conta do 0; este n refere-se ao numero de elementos de cada vetor de data
+	int [] var; // √© poss√≠vel que precisemos mais tarde
 	
 	
 	public Dataset(int n){
-		this.n=n;
-		this.var = new int[n];
+		this.n=n;  // numero de variaveis aleatorias + a vari·vel da classe
+		this.var = new int[n]; //lista com os valores maximos das variaveis aleatorias, sem a classe vari·vel da classe
 		this.data = new ArrayList<int[]>();
 }
 	public ArrayList<int[]> getData() {
@@ -27,34 +27,40 @@ public class Dataset{
 
 	@Override
 	public String toString() {
-		return "DataSet_ [data=" + data + ", n=" + n + ", var=" + Arrays.toString(var) + "]";// TODO toString cada elemento de data fazer ciclo for
+		return "Dataset [data=" + data + ", n=" + n + ", var=" + Arrays.toString(var) + "]";// TODO toString cada elemento de data fazer ciclo for
 	
 	}
+	
+	// PRIMEIRA FUNCAO
+	
 	public void Add(int[] v) {
 		
-		if (v.length!= this.n) {
+		if (v.length != this.n) {
 			throw new AssertionError(" wrong dimension ");
 		}
 		
-		else{data.add(v);
-	
-		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores m·ximos das variaveis aleatorias do dataset
+		else{
+		
+		data.add(v);
+		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores m√°ximos das variaveis aleatorias do dataset
+		
 		}
 	}
 	
-	private int[] var_max(int[] v, int [] var) {
+	private int[] var_max(int[] v, int[] var) {
 		for (int i=0; i < var.length; i++) {
 			if(var[i]<v[i]){ 
 				var[i]=v[i];
 			}
-			} return var;
+		} 
+		return var;
 		}
 	
-	public int Count(int[] vars, int[] val) {// pensar se quero adicionar a verificaÁ„o de tamanho
+	public int Count(int[] vars, int[] val) {// pensar se quero adicionar a verifica√ß√£o de tamanho
 		int r = 0; 
 		for (int i = 0; i < data.size(); i++ )  {
 			boolean c = true;
-			for (int j=0; j<vars.length; j++) { //adicionar c √† guarda para aumentar efici√™ncia
+			for (int j=0; j < vars.length; j++) { //adicionar c √É¬† guarda para aumentar efici√É¬™ncia
 				if (data.get(i)[vars[j]] != val[j]) c = false;
 			}
 			if (c) r++;
@@ -74,7 +80,7 @@ public class Dataset{
 		}
 		if (fibra.data.size()!= 0) {
 		return fibra;
-	}
+		}
 		else {
 			throw new AssertionError("class is not verified");
 		}

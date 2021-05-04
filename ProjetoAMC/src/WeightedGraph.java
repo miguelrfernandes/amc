@@ -10,9 +10,9 @@ import java.util.Arrays;
 			this.dim=dim;
 			this.ma = new double[dim][dim];}
 			
-		//cada aresta para além de ter destino tem um peso temos de criar uma estrutura em java
-		// sempre que há a situação de herança, primeira coisa a fzer no metodo construtor da classe que extende outra classe é chamar o método 
-		// construtor da classe que estou a extender utilizando o método super
+		//cada aresta para alï¿½m de ter destino tem um peso temos de criar uma estrutura em java
+		// sempre que hï¿½ a situaï¿½ï¿½o de heranï¿½a, primeira coisa a fzer no metodo construtor da classe que extende outra classe ï¿½ chamar o mï¿½todo 
+		// construtor da classe que estou a extender utilizando o mï¿½todo super
 		
 		
 		public int getDim() {
@@ -22,7 +22,7 @@ import java.util.Arrays;
 		public String toString() {
 			return "weightedgraph [dim=" + dim + ", ma=" + Arrays.toString(ma) + "]";
 		}
-		//como grafo é completo não é necessário questionar se existe aresta entre dois nós pois haverá		
+		//como grafo ï¿½ completo nï¿½o ï¿½ necessï¿½rio questionar se existe aresta entre dois nï¿½s pois haverï¿½		
 		
 		public void Add(int i, int j, double w){
 				if (i>=0 && i<this.dim && j>=0 && j<this.dim) {
@@ -35,7 +35,13 @@ import java.util.Arrays;
 	
 		
 		/*public int getWeight(int i, int j) {
-			//se necessário implementar
+			//se necessï¿½rio implementar
 		}*/
+		
+		public Tree MST() {
+			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices
+			// determina a MST
+			return maximal;
+		}
 
 	}
