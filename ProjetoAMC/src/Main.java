@@ -28,17 +28,15 @@ public class Main {
 		Dataset fibra2 = dataset2.Fiber(0);
 		
 
-<<<<<<< HEAD
-	// para ver se a fibra está a funcionar
+	// para ver se a fibra estï¿½ a funcionar
+		/*
 		for ( int[] ve: dataset2.data) {
-=======
 		// para ver se a fibra estï¿½ a funcionar
 		for ( int[] ve: fibra2) {
->>>>>>> 8f8193e0048e1f031735b3d1f2d330450a1a85a2
 			for(int i: ve) {
 				System.out.println(i);
 			}
-		}
+		}*/
 	
 		WeightedGraph grafo = new WeightedGraph(10);
 		// adicionar pesos ao grafico
@@ -46,10 +44,10 @@ public class Main {
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		
 		for (int i = 0; i < 2; i++) {
-			MRFTree markov = new MRFTree(maximal, dataset2, i);
+			MRFTree markov = new MRFTree(maximal, dataset2.Fiber(i));
 			listamrft.add(markov);
 		}
 		
-		Classifier classificador = new Classifier(listamrft, classfreq);
+		Classifier classificador = new Classifier(listamrft, null);
 	}
 }

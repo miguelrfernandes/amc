@@ -1,24 +1,21 @@
-// import java.util.ArrayList;
 
 public class MRFTree {
 	// consideramos como no de partida o primeiro no (no 0)
 	int[] e; // aresta especial
-	int mc;
+	int mc; // dimensao da fibra do dataset
 	int m; // tamanho do dataset
-	int n;
-	int[] D;
-	double delta = 0.2;
-	Dataset ds;
+	int n; // numero de medicoes
+	int[] D; // dimensao do dominio do dataset
+	double delta = 0.2; // pseudo-contagem
 	Dataset tfiber;
 	
-	// Método Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset e coloca os 𝜙(𝑥#, 𝑥$) em cada arvore.
-	public MRFTree(Tree arvore, Dataset ds, int c) { // trocar para apenas receber o dataset tfiber
-		Dataset tfiber = ds.Fiber(c);
+	// Método Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset e coloca os 𝜙(𝑥#, 𝑥$) em cada aresta da arvore.
+	public MRFTree(Tree arvore, Dataset tfiber) {
+		
 		n = tfiber.getN();
 		mc = tfiber.data.size();
 		
-		D = ds.getVar();
-		this.ds = ds;
+		D = tfiber.getVar();
 		
 		WeightedTree markovtree = new WeightedTree(n);
 		
@@ -28,33 +25,18 @@ public class MRFTree {
 		
 		int d = 1;
 		while (e[1] == 0) {
-			if (arvore.EdgeQ(0, d)) e[1] = d; // a aresta especial e a aresta que liga o no 0 a outra no (sendo este o no minimo...)
+			if (arvore.EdgeQ(0, d)) e[1] = d; // fixa-se a aresta especial como a aresta que liga o no 0 a outra no (sendo este o no minimo...)
 			d++;
 		}
 		
-		// adicionamos os phi a cada aresta da nova arvore
+		// adicionamos uma matriz com os valores de phi(xi,xj) a cada aresta da nova arvore
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				markovtree.Add(i, j, phi(i,j)); // i j?
+				markovtree.Add(i, j, phi(i,j));
 			}
 		}
-		
-		// m= tfiber.size();
-		// fixa-se a aresta especial e como a primeira aresta do no 0
-		// int e = 0;
-		// adiciona-se uma matriz com os valor de phi(x_i, x_j) a cada aresta da árvore
-		/* for (int i = 0, i < m, i++) {
-			g.addEdge(0, 0, phi(e)); // alterar para .add
-		}*/
 	}
-	
-	// X = (1,5,2,6,7,3,5)
-	// filter(X, x%2 == 0)
-	
-	public int getDatabaseSize(){
-		return m;
-	}
-	
+
 	public double[][] phi(int i, int j) {  // calculo do phi
 		double[][] phiv = new double[n][n];
 		
@@ -62,7 +44,7 @@ public class MRFTree {
 			for (int xi = 0; xi < n; xi++) {
 				for (int xj = 0; xj < n; xj++) {
 					int[] vars = {i, j};
-					int[] vals = {xi, xj};					         ;
+					int[] vals = {xi, xj};
 					phiv[xi][xj] = (tfiber.Count(vars, vals) + delta) / (mc + delta * D[i] * D[j]);
 				}
 			}
@@ -77,14 +59,10 @@ public class MRFTree {
 				}
 			}
 		}
-		return phiv; // TODO, não está feito
+		return phiv;
 	}
 	
-	
-	public double size() {
-		return m;
-	}
-
+	// TODO
 	// Prob: dado um vetor de dados 𝑥1, ... , 𝑥( retorna a probabilidade destes dados no dataset.
 	public double prob(int[] v) {
 		//return phi[v[0]] + phi[v[1]]; //não faço ideia
