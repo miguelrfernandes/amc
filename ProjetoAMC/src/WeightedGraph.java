@@ -34,9 +34,13 @@ import java.util.Arrays;
 		}
 	
 		
-		/*public int getWeight(int i, int j) {
-			//se necess�rio implementar
-		}*/
+		public double getWeight(int i, int j) {
+			if (i< this.dim || j<this.dim){
+				throw new AssertionError("node not in graph");
+	}	
+			else{
+					return ma[i][j];		}
+		}
 		
 		public Tree MST() {
 			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices
