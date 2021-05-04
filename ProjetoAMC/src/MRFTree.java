@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class MRFTree {
 	// consideramos como no de partida o primeiro no (no 0)
 	int[] e; // aresta especial
+	int mc;
 	int m; // tamanho do dataset
 	int n;
 	int[] D;
@@ -14,6 +15,7 @@ public class MRFTree {
 		ArrayList<int[]> tfiber = ds.Fiber(c);
 		n = tfiber.get(0).length;
 		D = ds.getVar();
+		this.ds = ds;
 		
 		WeightedTree markovtree = new WeightedTree(n);
 		e = new int[2];
@@ -51,7 +53,9 @@ public class MRFTree {
 		if (e[0] == k && e[1] == l) { // verifica se esta e a aresta especial
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
-					r[k][l] = (ds.co + delta) / (mc + delta * D[i] * D[j]);
+					int[] vars = {0, 0};
+					int[] vals = {0, 0};					         ;
+					r[k][l] = (ds.Count(vars, vals) + delta) / (mc + delta * D[i] * D[j]);
 				}
 			}
 		} else {
