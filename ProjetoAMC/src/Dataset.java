@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 public class Dataset{
 	ArrayList<int[]> data;
-	int n;// o java come�a a conta do 0; este n refere-se ao numero de elementos de cada 
-	int [] var; // � poss�vel que precisemos mais tarde
+	int n;// o java começa a conta do 0; este n refere-se ao numero de elementos de cada 
+	int [] var; // é possível que precisemos mais tarde
 	
 	
 	public Dataset(int n){
@@ -50,7 +50,7 @@ public class Dataset{
 		
 		else{data.add(v);
 	
-		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores m�ximos das variaveis aleatorias do dataset
+		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores máximos das variaveis aleatorias do dataset
 		}
 	}
 	
@@ -62,11 +62,11 @@ public class Dataset{
 			} return var;
 		}
 	
-	public int Count(int[] vars, int[] val) {// pensar se quero adicionar a verifica��o de tamanho
+	public int Count(int[] vars, int[] val) {// pensar se quero adicionar a verificação de tamanho
 		int r = 0; 
 		for (int i = 0; i < data.size(); i++ )  {
 			boolean c = true;
-			for (int j=0; j<vars.length; j++) { //adicionar c à guarda para aumentar eficiência
+			for (int j=0; j<vars.length; j++) { //adicionar c Ã  guarda para aumentar eficiÃªncia
 				if (data.get(i)[vars[j]] != val[j]) c = false;
 			}
 			if (c) r++;
