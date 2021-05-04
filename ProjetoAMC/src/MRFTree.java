@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class MRFTree {
 	// consideramos como no de partida o primeiro no (no 0)
@@ -7,7 +8,9 @@ public class MRFTree {
 	int n; // numero de medicoes
 	int[] D; // dimensao do dominio do dataset
 	double delta = 0.2; // pseudo-contagem
+	ArrayList<int[]> E; // arestas
 	Dataset tfiber;
+	WeightedTree markovtree;
 	
 	// Método Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset e coloca os 𝜙(𝑥#, 𝑥$) em cada aresta da arvore.
 	public MRFTree(Tree arvore, Dataset tfiber) {
@@ -17,7 +20,7 @@ public class MRFTree {
 		
 		D = tfiber.getVar();
 		
-		WeightedTree markovtree = new WeightedTree(n);
+		markovtree = new WeightedTree(n);
 		
 		e = new int[2]; //aresta especial
 		e[0] = 0;
@@ -30,9 +33,14 @@ public class MRFTree {
 		}
 		
 		// adicionamos uma matriz com os valores de phi(xi,xj) a cada aresta da nova arvore
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) { // for aresta in arvore
+			// TODO trocar para apenas as arestas da arvore dada
 			for (int j = 0; j < n; j++) {
 				markovtree.Add(i, j, phi(i,j));
+				int[] a = new int[2];
+				a[0] = i;
+				a[1] = j;
+				E.add(a);
 			}
 		}
 	}
@@ -65,7 +73,11 @@ public class MRFTree {
 	// TODO
 	// Prob: dado um vetor de dados 𝑥1, ... , 𝑥( retorna a probabilidade destes dados no dataset.
 	public double prob(int[] v) {
-		//return phi[v[0]] + phi[v[1]]; //não faço ideia
-		return -1.0;
+		double r;
+		r = 1;
+		for (int[] a : E) {
+			r = r * markovtree.getWeight(a[0],a[1])[v[a[0]]][v[a[1]]];
+		}
+		return r;
 	}
 }

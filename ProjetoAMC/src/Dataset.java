@@ -8,8 +8,8 @@ public class Dataset{
 	
 	
 	public Dataset(int n){
-		this.n=n;  // numero de variaveis aleatorias + a variável da classe
-		this.var = new int[n]; //lista com os valores maximos das variaveis aleatorias, sem a classe variável da classe
+		this.n=n;  // numero de variaveis aleatorias + a variï¿½vel da classe
+		this.var = new int[n]; //lista com os valores maximos das variaveis aleatorias, sem a classe variï¿½vel da classe
 		this.data = new ArrayList<int[]>();
 }
 	public ArrayList<int[]> getData() {
@@ -92,7 +92,7 @@ public class Dataset{
 	}
 	
 	// TERCEIRA FUNCAO
-	
+	/*
 	public ArrayList<int[]> Fiber(int c) {
 		for (int i = 0; i < data.size(); i++ ) {
 			if (data.get(i)[this.n-1]==c) {
@@ -108,7 +108,7 @@ public class Dataset{
 	
 	}
 	
-	
+	*/
 	
 	
 }

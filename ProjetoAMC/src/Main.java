@@ -52,7 +52,6 @@ public class Main {
 		dataeg2.print();
 		
 		
-		
 		/*
 		
 		ArrayList<int[]> fibra2 = dataset2.Fiber(1);
