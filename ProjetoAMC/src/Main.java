@@ -16,7 +16,7 @@ public class Main {
 		// Exemplo 2 — 14 medições, tamanha, cor, regularidade..., carcinoma (0), adenoma (1), sarcoma (2)
 		int[][] exemplo2 = {{5,2,5,6,3,5,6,7,3,5,2,5,6,4,0},
 		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,0},
-		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,0},
+		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,1},
 		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,0}};
 		
 		Dataset dataset2 = new Dataset(15);
@@ -28,13 +28,23 @@ public class Main {
 		ArrayList<int[]> fibra2 = dataset2.Fiber(1);
 		
 
-	// para ver se a fibra est� a funcionar
+		// para ver se a fibra est� a funcionar
 		for ( int[] ve: fibra2) {
 			for(int i: ve) {
 				System.out.println(i);
 			}
 		}
-	}
+	
+		WeightedGraph grafo = new WeightedGraph(10);
+		// adicionar pesos ao grafico
+		Tree maximal = grafo.MST();
+		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		
-
+		for (int i = 0; i < 2; i++) {
+			MRFTree markov = new MRFTree(maximal, dataset2.Fiber(i));
+			listamrft.add(markov);
+		}
+		
+		Classifier classificador = new Classifier(listamrft, classfreq);
+	}
 }
