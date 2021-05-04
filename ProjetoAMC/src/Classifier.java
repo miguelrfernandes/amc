@@ -49,10 +49,11 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 		
 		for (int c=0; c < odds.size(); c++) {
 			if (odds.get(c) == Collections.max(odds)) {
-				return Dataset2.ClassValuesList.get(c);  //não faz sentido
+				//return Dataset2.ClassValuesList.get(c);  nï¿½o faz sentido
+				
 			}
 		}
-		 
+		return -1.0;
 	}
 
 }
