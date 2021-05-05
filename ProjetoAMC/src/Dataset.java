@@ -107,40 +107,25 @@ public class Dataset{
 		}
 		return r;
 	}
-
-//<<<<<<< HEAD
 	
-<<<<<<< HEAD
-	public Dataset Fiber(int c) {
-		Dataset fibra = new Dataset(this.n - 1);
-		fibra.var = this.var;
-		for (int i = 0; i < data.size(); i++ ) {
-			if (data.get(i)[this.n-1]==c) {
-		
-				int[] aux= Arrays.copyOf(data.get(i), data.get(i).length -1);
-=======
 	// TERCEIRA FUNCAO
 	
 	public Dataset Fiber(int c) {
 		Dataset fibra = new Dataset(this.n - 1);
+		fibra.var = this.var;
 		for (int i = 0; i < data.size(); i++ ) {
 			if (data.get(i)[this.n-1] == c) {
 		
 				int[] aux= Arrays.copyOf(data.get(i), data.get(i).length - 1);
->>>>>>> 99d774c0690c87cf7c51b5ab1a318f0644d3b895
+
 				fibra.Add(aux);
 				
 			}
-		} 
-		if (fibra.data.size()!= 0) return fibra;
-		else {
+		} if (fibra.data.size()!= 0) return fibra;
+		  else {
 			throw new AssertionError("classe is not verified");
 		}}
-<<<<<<< HEAD
-=======
-	
->>>>>>> 99d774c0690c87cf7c51b5ab1a318f0644d3b895
-	
+
 	
 	
 }
