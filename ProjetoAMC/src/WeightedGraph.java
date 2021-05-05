@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-	public class WeightedGraph{
+	public class WeightedGraph {
 			
 		int dim;
 		double [][] ma;
@@ -19,8 +19,22 @@ import java.util.Arrays;
 			return this.dim;
 		}
 		
-		public String toString() {
-			return "weightedgraph [dim=" + dim + ", ma=" + Arrays.toString(ma) + "]";
+		public void print() {  // para melhor visualizacao do output
+			System.out.println("Weighted Graph");
+			for (int i = 0; i < dim; i++) {
+				if (i==0 && dim != 1) {
+					System.out.println("[" + Arrays.toString(this.ma[0]) + ",");
+				}
+				if (i==0 && dim == 1) {
+					System.out.println("[" + Arrays.toString(this.ma[0]) + "]");
+				}
+				if (i !=0 && i == dim - 1) {
+					System.out.println(Arrays.toString(this.ma[i]) + "]");
+				}
+				if (i != 0 && i != dim - 1){
+					System.out.println(Arrays.toString(this.ma[i]) + ",");
+				}
+			}
 		}
 		//como grafo � completo n�o � necess�rio questionar se existe aresta entre dois n�s pois haver�		
 		
@@ -35,17 +49,17 @@ import java.util.Arrays;
 	
 		
 		public double getWeight(int i, int j) {
-			if (i< this.dim || j<this.dim){
+			if (i >= this.dim || j >= this.dim){
 				throw new AssertionError("node not in graph");
 	}	
 			else{
 					return ma[i][j];		}
 		}
-		
-		public Tree MST() {
+		/*
+		public Tree MST() {  // arvore de extensao maxima
 			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices
 			// determina a MST
 			return maximal;
-		}
+		}*/
 
 	}

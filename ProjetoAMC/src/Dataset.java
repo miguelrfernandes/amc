@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class Dataset{
 	ArrayList<int[]> data;
@@ -58,7 +57,8 @@ public class Dataset{
 	public void setclassvalues(ArrayList<Integer> classvalues) {
 		this.classvalues = classvalues;
 	}
-	public void print() {
+	public void print() {  // para melhor visualizacao do output
+		System.out.println("Dataset");
 		for (int i = 0; i < this.data.size(); i++) {
 			if (i==0 && this.data.size() != 1) {
 				System.out.println("[" + Arrays.toString(this.data.get(0)) + ",");
@@ -124,8 +124,8 @@ public void fiberAdd(int[] v) {
 			this.Freqlist.set(i, ++l);
 		}
 		else {
-		
-			for(int k=0; k <= i-this.Freqlist.size(); k++) {
+			int aux = this.Freqlist.size();
+			for(int k=0; k <= i-aux; k++) {
 				this.Freqlist.add(0);
 			}
 			

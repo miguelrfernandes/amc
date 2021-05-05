@@ -6,18 +6,20 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+	
+	// CLASSE DATASET
 		
 		// Exemplo 1 — 9 medições, tamanha, cor, regularidade..., beningno (0) ou maligno (1)
 		int[][] exemplo1 = {{5,2,5,6,3,5,6,7,3,0},
-		{5,2,5,2,3,5,6,7,3,0},
+		{5,2,5,2,3,5,6,7,3,1},
 		{1,2,5,6,4,5,6,7,9,1},
 		{5,2,2,6,3,5,6,7,3,0}};
 		
 		// Exemplo 2 — 14 medições, tamanha, cor, regularidade..., carcinoma (0), adenoma (1), sarcoma (2)
-		int[][] exemplo2 = {{5,2,5,6,3,5,6,7,3,5,2,5,6,4,0},
-		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,0},
-		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,1},
-		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,0}};
+		int[][] exemplo2 = {{5,2,5,6,3,5,6,7,3,5,2,5,6,4,1},
+		{5,2,8,6,3,5,6,7,3,5,2,5,9,4,0},
+		{5,2,5,6,3,7,6,7,3,5,2,5,6,4,2},
+		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,2}};
 		
 		System.out.println(Arrays.deepToString(exemplo1));
 		System.out.println();
@@ -85,21 +87,34 @@ public class Main {
 	    System.out.println(Arrays.toString(dataeg1.getVar()));
 	    System.out.println(Arrays.toString(dataeg2.getVar()));
 		
-	    /*
-		ArrayList<int[]> fibra2 = dataeg2.Fiber(1);
+	   
 		
+	// CLASSE WEIGHTED GRAPH
 		
-		//WeightedGraph grafo = new WeightedGraph(10);
-		// adicionar pesos ao grafico
-		//Tree maximal = grafo.MST();
+		WeightedGraph grafo = new WeightedGraph(10);
+		grafo.print();
+		System.out.println();
+		
+		// FUNCAO ADD
+		grafo.Add(0,  1, 4.5);
+		grafo.Add(4,  7, 2.5);
+		grafo.Add(8,  6, 1.7);
+		grafo.Add(9,  2, 2.4);
+		grafo.print();
+		System.out.println();
+		System.out.println(grafo.getWeight(4,5));
+		System.out.println(grafo.getWeight(4,7));
+		System.out.println(grafo.getWeight(7,4));
+		System.out.println();
+		 /*
+		Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		
 		for (int i = 0; i < 2; i++) {
-			//MRFTree markov = new MRFTree(maximal, dataset2.Fiber(i));
-			//listamrft.add(markov);
+			MRFTree markov = new MRFTree(maximal, dataset2.Fiber(i));
+			listamrft.add(markov);
 		}
 		
 		//Classifier classificador = new Classifier(listamrft, classfreq); */
-		
 	}
 }
