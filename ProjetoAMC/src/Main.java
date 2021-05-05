@@ -10,7 +10,7 @@ public class Main {
 		// Exemplo 1 — 9 medições, tamanha, cor, regularidade..., beningno (0) ou maligno (1)
 		int[][] exemplo1 = {{5,2,5,6,3,5,6,7,3,0},
 		{5,2,5,2,3,5,6,7,3,0},
-		{1,2,5,6,4,5,6,7,3,1},
+		{1,2,5,6,4,5,6,7,9,1},
 		{5,2,2,6,3,5,6,7,3,0}};
 		
 		// Exemplo 2 — 14 medições, tamanha, cor, regularidade..., carcinoma (0), adenoma (1), sarcoma (2)
@@ -70,11 +70,20 @@ public class Main {
 	    //System.out.println();
 	    //dataeg1.Fiber(2).print();
 	   
-	    // EXPERIMENTAR LISTA COM FREQUENCIAS DE CLASSES E VALORES DA CLASSE
+	 // EXPERIMENTAR LISTA COM FREQUENCIAS DE CLASSES + LISTA COM VALORES DA CLASSE 
 	    System.out.println();
 	    System.out.println(dataeg1.getFreqlist());
+	    System.out.println(dataeg2.getFreqlist());
+	    
+	 // EXPERIMENTAR LISTA COM VALORES DA CLASSE 
 	    System.out.println();
 	    System.out.println(dataeg1.getclassvalues());
+	    System.out.println(dataeg2.getclassvalues());
+	    
+	 // EXPERIMENTAR LISTA COM VALORES MAXIMOS DE CADA VARIAVEL ALEATORIA
+	    System.out.println();
+	    System.out.println(Arrays.toString(dataeg1.getVar()));
+	    System.out.println(Arrays.toString(dataeg2.getVar()));
 		
 	    /*
 		ArrayList<int[]> fibra2 = dataeg2.Fiber(1);
