@@ -26,7 +26,7 @@ public class Main {
 		
 		Dataset dataeg1 = new Dataset(10);
 		Dataset dataeg2 = new Dataset(15);
-	
+		
 	
 		for (int i=0; i < exemplo1.length; i++) {
 			dataeg1.Add(exemplo1[i]);
@@ -56,9 +56,9 @@ public class Main {
 		dataeg1.Add(vetor1);
 		dataeg1.print();
 		
-		/*
-		dataeg1.Add(vetor2);;
-		dataeg2.print();*/
+		
+		//dataeg1.Add(vetor2);;
+		//dataeg2.print();
 	
 		
 		// EXPERIMENTAR FUNCAO FIBER
@@ -67,12 +67,17 @@ public class Main {
 	    dataeg1.Fiber(0).print();
 	    System.out.println();
 	    dataeg1.Fiber(1).print();
+	    //System.out.println();
+	    //dataeg1.Fiber(2).print();
+	   
+	    // EXPERIMENTAR LISTA COM FREQUENCIAS DE CLASSES E VALORES DA CLASSE
 	    System.out.println();
-	    dataeg1.Fiber(2).print();
+	    System.out.println(dataeg1.getFreqlist());
+	    System.out.println();
+	    System.out.println(dataeg1.getclassvalues());
 		
-		
-		
-		//ArrayList<int[]> fibra2 = dataeg2.Fiber(1);
+	    /*
+		ArrayList<int[]> fibra2 = dataeg2.Fiber(1);
 		
 		
 		//WeightedGraph grafo = new WeightedGraph(10);
