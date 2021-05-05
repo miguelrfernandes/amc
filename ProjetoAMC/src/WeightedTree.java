@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class WeightedTree{ //PhiTree
+public class WeightedTree { //PhiTree
 	double [][][][] ma;
 	int dim;
 	
@@ -12,7 +12,7 @@ public class WeightedTree{ //PhiTree
 		this.dim = dim;
 		int i = 1;
 		int j = 1;
-		this.ma = new double[dim][dim][i][j];
+		this.ma = new double[dim][dim][i][j]; // a aresta que liga o no i ao no j tem a matriz [dim][dim] associada
 	}
 	
 	public int getDim() {
@@ -21,7 +21,7 @@ public class WeightedTree{ //PhiTree
 	
 	@Override
 	public String toString() {
-		return "WeightedTree [ma=" + Arrays.toString(ma) + ", dim=" + dim + "]";
+		return "WeightedTree [ma=" + Arrays.deepToString(ma) + ", dim=" + dim + "]";
 	}
 
 	public void Add(int i, int j, double[][] phi){

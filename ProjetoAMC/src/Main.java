@@ -9,13 +9,17 @@ public class Main {
 	
 	// CLASSE DATASET
 		
-		// Exemplo 1 — 9 medições, tamanha, cor, regularidade..., beningno (0) ou maligno (1)
-		int[][] exemplo1 = {{5,2,5,6,3,5,6,7,3,0},
+		 System.out.println();
+		 System.out.println("------------------------------CLASSE DATASET------------------------------");
+		 System.out.println();
+		
+	 // Exemplo 1 - 9 medicoes, tamanha, cor, regularidade..., beningno (0) ou maligno (1)
+		int[][] exemplo1 = {{5,100,5,6,3,5,6,7,3,0},
 		{5,2,5,2,3,5,6,7,3,1},
 		{1,2,5,6,4,5,6,7,9,1},
 		{5,2,2,6,3,5,6,7,3,0}};
 		
-		// Exemplo 2 — 14 medições, tamanha, cor, regularidade..., carcinoma (0), adenoma (1), sarcoma (2)
+	 // Exemplo 2 - 14 medicoes, tamanha, cor, regularidade..., carcinoma (0), adenoma (1), sarcoma (2)
 		int[][] exemplo2 = {{5,2,5,6,3,5,6,7,3,5,2,5,6,4,1},
 		{5,2,8,6,3,5,6,7,3,5,2,5,9,4,0},
 		{5,2,5,6,3,7,6,7,3,5,2,5,6,4,2},
@@ -43,7 +47,7 @@ public class Main {
 		dataeg2.print();
 		System.out.println();
 		
-		// EXPERIMENTAR FUNCAO COUNT
+	 // EXPERIMENTAR FUNCAO COUNT
 		int[] vars = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}; // n = 10
 		int[] val = {5,2,5,6,3,5,6,7,3,0};
 		System.out.println(dataeg1.Count(vars, val));
@@ -51,7 +55,7 @@ public class Main {
 		System.out.println(dataeg2.Count(vars, val));
 		System.out.println();
 		
-		// EXPERIMENTAR FUNCAO ADD
+	 // EXPERIMENTAR FUNCAO ADD
 		int[] vetor1 = {5,2,5,2,3,5,6,7,3,0};
 		int[] vetor2 = {5,2,5,2,3,5,6,7,0};
 		
@@ -63,12 +67,14 @@ public class Main {
 		//dataeg2.print();
 	
 		
-		// EXPERIMENTAR FUNCAO FIBER
+	 // EXPERIMENTAR FUNCAO FIBER
 		
 		System.out.println();
 	    dataeg1.Fiber(0).print();
 	    System.out.println();
 	    dataeg1.Fiber(1).print();
+	    System.out.println();
+	    dataeg2.Fiber(2).print();
 	    //System.out.println();
 	    //dataeg1.Fiber(2).print();
 	   
@@ -87,7 +93,9 @@ public class Main {
 	    System.out.println(Arrays.toString(dataeg1.getVar()));
 	    System.out.println(Arrays.toString(dataeg2.getVar()));
 		
-	   
+	    System.out.println();
+	    System.out.println("---------------------------CLASSE WEIGHTED GRAPH---------------------------------");
+	    System.out.println();
 		
 	// CLASSE WEIGHTED GRAPH
 		
@@ -106,7 +114,80 @@ public class Main {
 		System.out.println(grafo.getWeight(4,7));
 		System.out.println(grafo.getWeight(7,4));
 		System.out.println();
-		 /*
+
+		 System.out.println();
+	    System.out.println("---------------------------CLASSE WEIGHTEDTREE---------------------------------");
+	    System.out.println();
+		
+	// CLASSE WEIGHTEDTREE
+		
+		WeightedTree WT = new WeightedTree(10); // 10 v.a.s
+		System.out.println(WT);
+		
+		double[][] phi1 = {{0.5,0.5,0.5,0.54,0.52,0.5,0.5,0.5,0.5,0.5},
+		{0.5,0.5,0.5,0.5,0.51,0.5,0.5,0.5,0.5,0.5},
+		{0.5,0.2,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5},
+		{0.5,0.3,0.5,0.1,0.5,0.5,0.5,0.5,0.5,0.5}};
+		
+		WT.Add(0, 1, phi1);
+		WT.Add(5, 4, phi1);
+		WT.Add(6, 7, phi1);
+		WT.Add(3, 8, phi1);
+		
+		System.out.println(WT);
+		
+		System.out.println();
+	    System.out.println("------------------------------CLASSE TREE------------------------------");
+	    System.out.println();
+					
+	// CLASS TREE
+		
+		Tree T = new Tree(10);
+		System.out.println(T);
+		T.addEdge(1, 0);
+		T.addEdge(2, 0);
+		T.addEdge(3, 0);
+		T.addEdge(4, 0);
+		T.addEdge(5, 1);
+		T.addEdge(6, 1);
+		T.addEdge(7, 1);
+		T.addEdge(8, 2);
+		T.addEdge(9, 2);
+		System.out.println();
+		System.out.println(T);
+		System.out.println();
+		System.out.println(T.EdgeQ(0, 9)); 
+		System.out.println(T.EdgeQ(0, 1)); 
+		System.out.println(T.EdgeQ(2, 9));
+		
+		 System.out.println();
+		 System.out.println("-------------------------CLASSE MRFT-----------------------------------");
+		 System.out.println();
+		
+	// CLASSE MRFT
+		
+		Tree arvore = new Tree(9); //dataeg1 tem 9 v.a.s (x1, ..., x9)
+		MRFTree MT = new MRFTree(arvore, dataeg1.Fiber(0)); //print de MT em falta
+		int[] v1 = {4,2,5,6,3,5,6,7,3};
+		int[] v2 = {1,0,5,6,4,5,6,7,8};
+		int[] v3 = {5,4,2,8,3,8,6,2,8};
+		System.out.println(MT.prob(v1));
+		System.out.println(MT.prob(v2));
+		System.out.println(MT.prob(v3));
+		
+		System.out.println();
+		
+		Tree arvore2 = new Tree(14); //dataeg1 tem 14 v.a.s (x1, ..., x14)
+		MRFTree MT2 = new MRFTree(arvore2, dataeg2.Fiber(2)); //print de MT em falta
+		int[] w1 = {10,2,5,6,3,13,6,7,3,5,2,5,6,4};
+		int[] w2 = {5,2,5,12,3,5,6,7,3,5,2,5,6,4};
+		int[] w3 = {5,2,5,6,3,5,6,7,3,5,2,5,6,4};
+		System.out.println(MT2.prob(w1));
+		System.out.println(MT2.prob(w2));
+		System.out.println(MT2.prob(w3));
+		
+		
+		/* 
 		Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		

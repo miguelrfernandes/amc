@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 //import java.util.ArrayList;
 //import java.util.Stack;
 
@@ -15,6 +17,13 @@ public class Tree {
 	public boolean EdgeQ(int i, int j) {
 		return pais[i] == j || pais[j] == i;
 	}
+
+	@Override
+	public String toString() { 
+		return "Tree [pais=" + Arrays.toString(pais) + "]";
+	}
+	
+	
 	
 	/*
 	 public ArrayList<Integer> DFS() { // Depth First Search

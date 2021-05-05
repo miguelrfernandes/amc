@@ -12,8 +12,11 @@ public class MRFTree {
 	Dataset tfiber;
 	WeightedTree markovtree;
 	
-	// Método Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset e coloca os 𝜙(𝑥#, 𝑥$) em cada aresta da arvore.
+	// Metodo Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset e coloca os phi(xi, xj) em cada aresta da arvore.
 	public MRFTree(Tree arvore, Dataset tfiber) {
+		
+		this.tfiber = tfiber;
+		this.E = new ArrayList<int[]>();
 		
 		n = tfiber.getN();
 		mc = tfiber.data.size();
@@ -47,6 +50,8 @@ public class MRFTree {
 		}
 	}
 	
+	// fazer metodo toString para MRFTree?
+	
 	public int getDatabaseSize() {
 		return m;
 	}
@@ -76,7 +81,7 @@ public class MRFTree {
 		return phiv;
 	}
 	
-	// Prob: dado um vetor de dados 𝑥1, ... , 𝑥( retorna a probabilidade destes dados no dataset.
+	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset.
 	public double prob(int[] v) {
 		double r;
 		r = 1;
@@ -85,4 +90,6 @@ public class MRFTree {
 		}
 		return r;
 	}
+	
+	
 }
