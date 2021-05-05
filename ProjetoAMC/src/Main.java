@@ -70,12 +70,12 @@ public class Main {
 	    //System.out.println();
 	    //dataeg1.Fiber(2).print();
 	   
-	 // EXPERIMENTAR LISTA COM FREQUENCIAS DE CLASSES + LISTA COM VALORES DA CLASSE 
+	 // EXPERIMENTAR LISTA COM FREQUENCIAS DAS CLASSES 
 	    System.out.println();
 	    System.out.println(dataeg1.getFreqlist());
 	    System.out.println(dataeg2.getFreqlist());
 	    
-	 // EXPERIMENTAR LISTA COM VALORES DA CLASSE 
+	 // EXPERIMENTAR LISTA COM VALORES DA VARIAVEL CLASSE 
 	    System.out.println();
 	    System.out.println(dataeg1.getclassvalues());
 	    System.out.println(dataeg2.getclassvalues());
