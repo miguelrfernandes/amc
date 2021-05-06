@@ -83,10 +83,6 @@ public class Main {
 	    System.out.println(dataeg1.getFreqlist());
 	    System.out.println(dataeg2.getFreqlist());
 	    
-	 // EXPERIMENTAR LISTA COM VALORES DA VARIAVEL CLASSE 
-	    System.out.println();
-	    //System.out.println(dataeg1.getclassvalues());
-	    //System.out.println(dataeg2.getclassvalues());
 	    
 	 // EXPERIMENTAR LISTA COM VALORES MAXIMOS DE CADA VARIAVEL ALEATORIA
 	    System.out.println();
@@ -187,6 +183,7 @@ public class Main {
 		System.out.println(MT.prob(v2));
 		System.out.println(MT.prob(v3));
 
+
 		/*
 		Tree arvore1 = new Tree(9); //dataeg1 tem 9 v.a.s (x1, ..., x9)
 		MRFTree MTdataeg1 = new MRFTree(arvore1, dataeg1.Fiber(0)); //print de MT em falta
@@ -209,6 +206,7 @@ public class Main {
 		System.out.println(MTdataeg2.prob(w2));
 		//System.out.println(MTdataeg2.prob(w3));
 		 */
+
 		
 		System.out.println();
 	    System.out.println("------------------------------CLASSE CLASSIFIER------------------------------");
