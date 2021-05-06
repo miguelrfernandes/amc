@@ -21,7 +21,6 @@ public class MRFTree {
 		n = tfiber.getN();
 		mc = tfiber.data.size();
 		
-		D = tfiber.getVar();
 		
 		markovtree = new WeightedTree(n);
 		

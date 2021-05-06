@@ -4,15 +4,15 @@ import java.util.Arrays;
 
 public class Dataset{
 	ArrayList<int[]> data;
-	int n;// o java come√ßa a conta do 0; este n refere-se ao numero de elementos de cada vetor de data
-	int[] var; // √© poss√≠vel que precisemos mais tarde
+	int n;// o java come√ßa a conta do 0; este n refere-se ao numero de vari·veis aleatÛrias de cada vetor de data
+	int[] D; // √© poss√≠vel que precisemos mais tarde
 	ArrayList<Integer> Freqlist;
 	ArrayList<Integer> classvalues;
 
 	
 	public Dataset(int n){
-		this.n=n;  // numero de variaveis aleatorias + a vari·vel da classe
-		this.var = new int[n-1]; //lista com os valores maximos das variaveis aleatorias, sem a classe vari·vel da classe
+		this.n=n;  // numero de variaveis aleatorias 
+		this.D = new int[n]; //lista com os valores maximos das variaveis aleatorias, sem a classe vari·vel da classe
 		this.data = new ArrayList<int[]>();
 		this.Freqlist = new ArrayList<Integer>();
 		this.classvalues = new ArrayList<Integer>();
@@ -34,12 +34,12 @@ public class Dataset{
 		this.n = n;
 	}
 
-	public int[] getVar() {
-		return var;
+	public int[] getD() {
+		return D;
 	}
 
-	public void setVar(int[] var) {
-		this.var = var;
+	public void setD(int[] D) {
+		this.D = D;
 	}
 
 	
@@ -79,14 +79,18 @@ public class Dataset{
 	
 	public void Add(int[] v) {
 		
-		if (v.length != this.n) {
+		if (v.length != this.n + 1) {
 			throw new AssertionError(" wrong dimension ");
 		}
 		
 		else {
 		
 		data.add(v);
-		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores m√°ximos das variaveis aleatorias do dataset
+		
+		
+		
+		
+		this.D = var_max(v, this.D); // aqui estamos a atualizar o conjuntos de valores m√°ximos das variaveis aleatorias do dataset
 		this.classvalues = ClassValues(v); // nao faz sentido em fibras, pq nao tem a classe nas amostras
 		this.Freqlist = FreqList(v); // nao faz sentido nas fibras, pq nao tem a classe nas amostras 
 		}
@@ -109,15 +113,15 @@ private void fiberAdd(int[] v) {
 	private ArrayList<Integer> ClassValues(int[] v) {
 		boolean t = true;
 		for (int classe : this.classvalues) {
-			if (classe == v[this.n-1]) {
+			if (classe == v[this.n]) {
 				t = false;
 			}
 		}
-		if (t) { this.classvalues.add(v[this.n-1]); }
+		if (t) { this.classvalues.add(v[this.n]); }
 		return classvalues;
 	}
 	private ArrayList<Integer> FreqList(int[] v) {
-		int i = v[this.n-1];
+		int i = v[this.n];
 		
 		if (this.Freqlist.size() > i) {
 			
@@ -137,13 +141,13 @@ private void fiberAdd(int[] v) {
 		return this.Freqlist;	
 	}
  	
-	private int[] var_max(int[] v, int[] var) {
-		for (int i=0; i < var.length; i++) {
-			if(var[i]<v[i]){ 
-				var[i]=v[i];
+	private int[] var_max(int[] v, int[] D) {
+		for (int i=0; i < D.length; i++) {
+			if(D[i]<v[i]){ 
+				D[i]=v[i];
 			}
 		} 
-		return var;
+		return D;
 		}
 	
 	// SEGUNDA FUNCAO
@@ -163,8 +167,8 @@ private void fiberAdd(int[] v) {
 	// TERCEIRA FUNCAO
 	
 	public Dataset Fiber(int c) {
-		Dataset fibra = new Dataset(this.n - 1);
-		fibra.var = this.var;
+		Dataset fibra = new Dataset(this.n-1);
+		fibra.D = this.D;
 		for (int i = 0; i < data.size(); i++ ) {
 			if (data.get(i)[this.n-1] == c) {
 		
