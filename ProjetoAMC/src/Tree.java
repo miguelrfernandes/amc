@@ -8,7 +8,8 @@ public class Tree {
 	int[] pais;
 	
 	public Tree(int dim) {
-		pais = new int[dim]; // gostei desta implementação compacta
+		pais = new int[dim]; // gostei desta implementaï¿½ï¿½o compacta
+		for (int i = 0; i < dim; i++) pais[i] = -1; // iniciamos esta matriz com -1
 	}
 	
 	public void addEdge(int i, int pai) {
@@ -17,6 +18,10 @@ public class Tree {
 	
 	public boolean EdgeQ(int i, int j) {
 		return pais[i] == j || pais[j] == i;
+	}
+	
+	public int pai(int i) {
+		return pais[i];
 	}
 
 	@Override

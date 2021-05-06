@@ -83,10 +83,12 @@ public class Main {
 	    System.out.println(dataeg1.getFreqlist());
 	    System.out.println(dataeg2.getFreqlist());
 	    
-	 // EXPERIMENTAR LISTA COM VALORES DA VARIAVEL CLASSE 
-	    System.out.println();
-	    System.out.println(dataeg1.getclassvalues());
-	    System.out.println(dataeg2.getclassvalues());
+
+	 //EXPERIMENTAR LISTA COM VALORES DA VARIAVEL CLASSE 
+	  //  System.out.println();
+	   // System.out.println(dataeg1.getclassvalues());
+	  //  System.out.println(dataeg2.getclassvalues());
+
 	    
 	 // EXPERIMENTAR LISTA COM VALORES MAXIMOS DE CADA VARIAVEL ALEATORIA
 	    System.out.println();
@@ -166,17 +168,41 @@ public class Main {
 		
 	// CLASSE MRFT
 		
+		Tree arvore = new Tree(9); //dataeg1 tem 9 v.a.s (x1, ..., x9)
+		arvore.addEdge(0, 1);
+		arvore.addEdge(1, 3);
+		arvore.addEdge(1, 2);
+		arvore.addEdge(4, 0);
+		arvore.addEdge(2, 7);
+		arvore.addEdge(2, 5);
+		arvore.addEdge(5, 6);
+		arvore.addEdge(6, 8);
+		
+		MRFTree MT = new MRFTree(arvore, dataeg1.Fiber(0)); //print de MT em falta
+		int[] v1 = {4,2,5,6,3,5,6,7,3};
+		int[] v2 = {1,0,5,6,4,5,6,7,5};
+		int[] v3 = {5,4,2,5,3,3,6,2,5};
+		
+		System.out.println(MT);
+		
+		System.out.println(MT.prob(v1));
+		System.out.println(MT.prob(v2));
+		System.out.println(MT.prob(v3));
+
+
+		/*
 		Tree arvore1 = new Tree(9); //dataeg1 tem 9 v.a.s (x1, ..., x9)
 		MRFTree MTdataeg1 = new MRFTree(arvore1, dataeg1.Fiber(0)); //print de MT em falta
 		//int[] v1 = {4,20,5,6,3,5,6,7,3};  //falta corrigir no MRFTree
-		int[] v2 = {1,2,5,6,4,5,6,7,8};
+		//int[] v2 = {1,2,5,6,4,5,6,7,8};
 		//int[] v3 = {5,400,2,8,3,8,6,2,8}; //deve dar erro pq o valor maximo de x2 e 100
 		//System.out.println(MTdataeg1.prob(v1));
 		System.out.println(MTdataeg1.prob(v2));
 		//System.out.println(MTdataeg1.prob(v3));
+		*/
 		
-		System.out.println();
 		
+		/*
 		Tree arvore2 = new Tree(14); //dataeg1 tem 14 v.a.s (x1, ..., x14)
 		MRFTree MTdataeg2 = new MRFTree(arvore2, dataeg2.Fiber(2)); //print de MT em falta
 		//int[] w1 = {5,20,5,6,3,3,6,7,3,5,2,5,6,4}; //falta corrigir no MRFTree
@@ -185,12 +211,15 @@ public class Main {
 		//System.out.println(MTdataeg2.prob(w1));
 		System.out.println(MTdataeg2.prob(w2));
 		//System.out.println(MTdataeg2.prob(w3));
+		 */
+
 		
 		System.out.println();
 	    System.out.println("------------------------------CLASSE CLASSIFIER------------------------------");
 	    System.out.println();
 					
-	// CLASS CLASSIFIER
+	// CLASS CLASSIFIER 
+	    /*
 	    
 	    // com dataset do exemplo1 
 	    MRFTree MT0eg1 = new MRFTree(arvore1, dataeg1.Fiber(0));
@@ -224,7 +253,7 @@ public class Main {
 		
 		
 		
-		/* 
+		 
 		Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		
@@ -233,6 +262,6 @@ public class Main {
 			listamrft.add(markov);
 		}
 		
-		//Classifier classificador = new Classifier(listamrft, classfreq); */
+		Classifier classificador = new Classifier(listamrft, classfreq); */
 	}
 }
