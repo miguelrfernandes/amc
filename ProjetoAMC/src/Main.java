@@ -13,25 +13,25 @@ public class Main {
 		 System.out.println("------------------------------CLASSE DATASET------------------------------");
 		 System.out.println();
 		
-	 // Exemplo 1 - 9 medicoes, tamanha, cor, regularidade..., beningno (0) ou maligno (1)
+	 // Exemplo 1 - 9 medicoes, tamanha, cor, regularidade..., classes: beningno (0) ou maligno (1)
 		int[][] exemplo1 = {{5,100,5,6,3,5,6,7,3,0},
 		{5,2,5,2,3,5,6,7,3,1},
 		{1,2,5,6,4,5,6,7,9,1},
 		{5,2,2,6,3,5,6,7,3,0}};
 		
-	 // Exemplo 2 - 14 medicoes, tamanha, cor, regularidade..., carcinoma (0), adenoma (1), sarcoma (2)
+	 // Exemplo 2 - 14 medicoes, tamanha, cor, regularidade..., classes: carcinoma (0), adenoma (1), sarcoma (2)
 		int[][] exemplo2 = {{5,2,5,6,3,5,6,7,3,5,2,5,6,4,1},
 		{5,2,8,6,3,5,6,7,3,5,2,5,9,4,0},
 		{5,2,5,6,3,7,6,7,3,5,2,5,6,4,2},
-		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,2}};
+		{5,2,5,6,3,5,6,7,3,5,2,5,6,4,2}}; 
 		
 		System.out.println(Arrays.deepToString(exemplo1));
 		System.out.println();
 		System.out.println(Arrays.deepToString(exemplo2));
 		System.out.println();
 		
-		Dataset dataeg1 = new Dataset(10);
-		Dataset dataeg2 = new Dataset(15);
+		Dataset dataeg1 = new Dataset(9);
+		Dataset dataeg2 = new Dataset(14);
 		
 	
 		for (int i=0; i < exemplo1.length; i++) {
@@ -90,11 +90,11 @@ public class Main {
 	    
 	 // EXPERIMENTAR LISTA COM VALORES MAXIMOS DE CADA VARIAVEL ALEATORIA
 	    System.out.println();
-	    System.out.println(Arrays.toString(dataeg1.getVar()));
-	    System.out.println(Arrays.toString(dataeg2.getVar()));
+	    System.out.println(Arrays.toString(dataeg1.getD()));
+	    System.out.println(Arrays.toString(dataeg2.getD()));
 		
 	    System.out.println();
-	    System.out.println("---------------------------CLASSE WEIGHTED GRAPH---------------------------------");
+	    System.out.println("---------------------------CLASSE WEIGHTEDGRAPH---------------------------------");
 	    System.out.println();
 		
 	// CLASSE WEIGHTED GRAPH
@@ -166,6 +166,7 @@ public class Main {
 		
 	// CLASSE MRFT
 		
+<<<<<<< HEAD
 		Tree arvore = new Tree(9); //dataeg1 tem 9 v.a.s (x1, ..., x9)
 		arvore.addEdge(0, 1);
 		arvore.addEdge(1, 3);
@@ -186,20 +187,68 @@ public class Main {
 		System.out.println(MT.prob(v1));
 		System.out.println(MT.prob(v2));
 		System.out.println(MT.prob(v3));
+=======
+		Tree arvore1 = new Tree(9); //dataeg1 tem 9 v.a.s (x1, ..., x9)
+		MRFTree MTdataeg1 = new MRFTree(arvore1, dataeg1.Fiber(0)); //print de MT em falta
+		//int[] v1 = {4,20,5,6,3,5,6,7,3};  //falta corrigir no MRFTree
+		int[] v2 = {1,2,5,6,4,5,6,7,8};
+		//int[] v3 = {5,400,2,8,3,8,6,2,8}; //deve dar erro pq o valor maximo de x2 e 100
+		//System.out.println(MTdataeg1.prob(v1));
+		System.out.println(MTdataeg1.prob(v2));
+		//System.out.println(MTdataeg1.prob(v3));
+>>>>>>> e298f36db93a3b33a2e1d09c1e5716dca8d4f39b
 		
 		
 		
 		Tree arvore2 = new Tree(14); //dataeg1 tem 14 v.a.s (x1, ..., x14)
-		MRFTree MT2 = new MRFTree(arvore2, dataeg2.Fiber(2)); //print de MT em falta
-		int[] w1 = {10,2,5,6,3,13,6,7,3,5,2,5,6,4};
-		int[] w2 = {5,2,5,12,3,5,6,7,3,5,2,5,6,4};
-		int[] w3 = {5,2,5,6,3,5,6,7,3,5,2,5,6,4};
-		System.out.println(MT2.prob(w1));
-		System.out.println(MT2.prob(w2));
-		System.out.println(MT2.prob(w3));
+		MRFTree MTdataeg2 = new MRFTree(arvore2, dataeg2.Fiber(2)); //print de MT em falta
+		//int[] w1 = {5,20,5,6,3,3,6,7,3,5,2,5,6,4}; //falta corrigir no MRFTree
+		int[] w2 = {5,2,5,2,3,5,6,7,3,5,2,5,6,4};
+		//int[] w3 = {10,2,5,6,3,5,6,7,3,5,2,5,6,4}; //deve dar erro pq o valor maximo e 5
+		//System.out.println(MTdataeg2.prob(w1));
+		System.out.println(MTdataeg2.prob(w2));
+		//System.out.println(MTdataeg2.prob(w3));
+		
+		System.out.println();
+	    System.out.println("------------------------------CLASSE CLASSIFIER------------------------------");
+	    System.out.println();
+					
+	// CLASS CLASSIFIER 
+	    /*
+	    
+	    // com dataset do exemplo1 
+	    MRFTree MT0eg1 = new MRFTree(arvore1, dataeg1.Fiber(0));
+	    MRFTree MT1eg1 = new MRFTree(arvore1, dataeg1.Fiber(1));
+	    
+	    ArrayList<MRFTree> listamrft1 = new ArrayList<MRFTree>();
+	    listamrft1.add(MT0eg1);
+	    listamrft1.add(MT1eg1);
+	    ArrayList<Integer> classfreq1 = dataeg1.getFreqlist();
+	    
+	    int[] amostra1 = {5,2,5,2,3,5,6,7,3}; //tirada do exemplo 1. a classe do vetor e 1
+		Classifier CFdataeg1 = new Classifier(listamrft1, classfreq1);
+		System.out.println(CFdataeg1.classify(amostra1)); 
 		
 		
-		/* 
+		// com dataset do exemplo2
+		MRFTree MT0eg2 = new MRFTree(arvore2, dataeg2.Fiber(0));
+	    MRFTree MT1eg2 = new MRFTree(arvore2, dataeg2.Fiber(1));
+	    MRFTree MT2eg2 = new MRFTree(arvore2, dataeg2.Fiber(2));
+	    
+	    ArrayList<MRFTree> listamrft2 = new ArrayList<MRFTree>();
+	    listamrft2.add(MT0eg2);
+	    listamrft2.add(MT1eg2);
+	    listamrft2.add(MT2eg2);
+	    
+	    ArrayList<Integer> classfreq2 = dataeg2.getFreqlist();
+	    
+	    int[] amostra2 = {5,2,5,6,3,7,6,7,3,5,2,5,6,4}; //tirada do exemplo 2. a classe do vetor e 2
+		Classifier CFdataeg2 = new Classifier(listamrft2, classfreq2);
+		System.out.println(CFdataeg2.classify(amostra2));
+		
+		
+		
+		 
 		Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		
@@ -208,6 +257,6 @@ public class Main {
 			listamrft.add(markov);
 		}
 		
-		//Classifier classificador = new Classifier(listamrft, classfreq); */
+		Classifier classificador = new Classifier(listamrft, classfreq); */
 	}
 }
