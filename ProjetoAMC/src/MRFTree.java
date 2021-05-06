@@ -12,8 +12,8 @@ public class MRFTree {
 	Dataset tfiber;
 	WeightedTree markovtree;
 	
-	// Metodo Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset e coloca os phi(xi, xj) em cada aresta da arvore.
-	public MRFTree(Tree arvore, Dataset tfiber) {
+	// Metodo Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset (fibras) e coloca os phi(xi, xj) em cada aresta da arvore.
+	public MRFTree(Tree arvore, Dataset tfiber) { // árvore provém do MST do Weightedgraph
 		
 		this.tfiber = tfiber;
 		this.E = new ArrayList<int[]>();
@@ -25,14 +25,14 @@ public class MRFTree {
 		
 		markovtree = new WeightedTree(n);
 		
-		e = new int[2]; //aresta especial
+		e = new int[2]; //aresta especial 
 		e[0] = 0;
 		e[1] = 0;
 		
 		int d = 1;
 		while (e[1] == 0) {
 			if (arvore.EdgeQ(0, d)) e[1] = d; // fixa-se a aresta especial como a aresta que liga o no 0 a outra no (sendo este o no minimo...)
-			d++;
+			d++; 
 		}
 		
 		// TODO aumentar eficiencia
@@ -71,7 +71,7 @@ public class MRFTree {
 			for (int xi = 0; xi < n; xi++) {
 				for (int xj = 0; xj < n; xj++) {
 					int[] vars = {i, j};
-					int[] vals = {xi, xj};	
+					int[] vals = {xi, xj};	//Bea: acho que aqui os valores de xi e xj devem estar majorados não por n mas por Di e Dj, ou não? Porque são valores e Dj pode ser maior que n.
 					int[] var = {i};
 					int[] val = {xi};
 					phiv[xi][xj] = (tfiber.Count(vars, vals) + delta) / (tfiber.Count(var, val) + delta * D[j]);

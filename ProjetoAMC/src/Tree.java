@@ -3,11 +3,12 @@ import java.util.Arrays;
 //import java.util.ArrayList;
 //import java.util.Stack;
 
+
 public class Tree {
 	int[] pais;
 	
 	public Tree(int dim) {
-		pais = new int[dim];
+		pais = new int[dim]; // gostei desta implementação compacta
 	}
 	
 	public void addEdge(int i, int pai) {
