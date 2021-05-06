@@ -7,7 +7,6 @@ public class Dataset{
 	int n;// o java come√ßa a conta do 0; este n refere-se ao numero de vari·veis aleatÛrias de cada vetor de data
 	int[] D; // √© poss√≠vel que precisemos mais tarde
 	ArrayList<Integer> Freqlist;
-	ArrayList<Integer> classvalues;
 
 	
 	public Dataset(int n){
@@ -15,7 +14,7 @@ public class Dataset{
 		this.D = new int[n]; //lista com os valores maximos das variaveis aleatorias, sem a classe vari·vel da classe
 		this.data = new ArrayList<int[]>();
 		this.Freqlist = new ArrayList<Integer>();
-		this.classvalues = new ArrayList<Integer>();
+	
 }
 	public ArrayList<int[]> getData() {
 		return data;
@@ -50,13 +49,7 @@ public class Dataset{
 		Freqlist = freqlist;
 	}
 	
-	public ArrayList<Integer> getclassvalues() {
-		return classvalues;
-	}
 	
-	public void setclassvalues(ArrayList<Integer> classvalues) {
-		this.classvalues = classvalues;
-	}
 	public void print() {  // para melhor visualizacao do output
 		System.out.println("Dataset");
 		for (int i = 0; i < this.data.size(); i++) {
@@ -87,7 +80,7 @@ public class Dataset{
 			if(this.data.isEmpty()) {
 				data.add(v);
 			}
-			else {  // estou a ordenar o dataset utilizando uma funÁ„o do java. eu escolho a posiÁ„o com base no n˙mero 
+			else {  // estou a ordenar o dataset utilizando uma funÁ„o do javae, em que escolho a posiÁ„o com base no n˙mero 
 				int aux=0;
 				for(int i = 0; i<v[this.n]; i++) {
 					aux = aux + this.Freqlist.get(i);
