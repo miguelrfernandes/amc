@@ -13,13 +13,13 @@ public class Main {
 		 System.out.println("------------------------------CLASSE DATASET------------------------------");
 		 System.out.println();
 		
-	 // Exemplo 1 - 9 medicoes, tamanha, cor, regularidade..., beningno (0) ou maligno (1)
+	 // Exemplo 1 - 9 medicoes, tamanha, cor, regularidade..., classes: beningno (0) ou maligno (1)
 		int[][] exemplo1 = {{5,100,5,6,3,5,6,7,3,0},
 		{5,2,5,2,3,5,6,7,3,1},
 		{1,2,5,6,4,5,6,7,9,1},
 		{5,2,2,6,3,5,6,7,3,0}};
 		
-	 // Exemplo 2 - 14 medicoes, tamanha, cor, regularidade..., carcinoma (0), adenoma (1), sarcoma (2)
+	 // Exemplo 2 - 14 medicoes, tamanha, cor, regularidade..., classes: carcinoma (0), adenoma (1), sarcoma (2)
 		int[][] exemplo2 = {{5,2,5,6,3,5,6,7,3,5,2,5,6,4,1},
 		{5,2,8,6,3,5,6,7,3,5,2,5,9,4,0},
 		{5,2,5,6,3,7,6,7,3,5,2,5,6,4,2},
@@ -30,8 +30,8 @@ public class Main {
 		System.out.println(Arrays.deepToString(exemplo2));
 		System.out.println();
 		
-		Dataset dataeg1 = new Dataset(10);
-		Dataset dataeg2 = new Dataset(15);
+		Dataset dataeg1 = new Dataset(9);
+		Dataset dataeg2 = new Dataset(14);
 		
 	
 		for (int i=0; i < exemplo1.length; i++) {
@@ -90,8 +90,8 @@ public class Main {
 	    
 	 // EXPERIMENTAR LISTA COM VALORES MAXIMOS DE CADA VARIAVEL ALEATORIA
 	    System.out.println();
-	    System.out.println(Arrays.toString(dataeg1.getVar()));
-	    System.out.println(Arrays.toString(dataeg2.getVar()));
+	    System.out.println(Arrays.toString(dataeg1.getD()));
+	    System.out.println(Arrays.toString(dataeg2.getD()));
 		
 	    System.out.println();
 	    System.out.println("---------------------------CLASSE WEIGHTED GRAPH---------------------------------");
