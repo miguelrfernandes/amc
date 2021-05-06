@@ -167,15 +167,27 @@ public class Main {
 	// CLASSE MRFT
 		
 		Tree arvore = new Tree(9); //dataeg1 tem 9 v.a.s (x1, ..., x9)
+		arvore.addEdge(0, 1);
+		arvore.addEdge(1, 3);
+		arvore.addEdge(1, 2);
+		arvore.addEdge(4, 0);
+		arvore.addEdge(2, 7);
+		arvore.addEdge(2, 5);
+		arvore.addEdge(5, 6);
+		arvore.addEdge(6, 8);
+		
 		MRFTree MT = new MRFTree(arvore, dataeg1.Fiber(0)); //print de MT em falta
-		int[] v1 = {4,2,5,6,3,5,6,7,3};
+		int[] v1 = {40,2,5,6,3,5,6,7,3};
 		int[] v2 = {1,0,5,6,4,5,6,7,8};
 		int[] v3 = {5,4,2,8,3,8,6,2,8};
+		
+		System.out.println(MT);
+		
 		System.out.println(MT.prob(v1));
 		System.out.println(MT.prob(v2));
 		System.out.println(MT.prob(v3));
 		
-		System.out.println();
+		
 		
 		Tree arvore2 = new Tree(14); //dataeg1 tem 14 v.a.s (x1, ..., x14)
 		MRFTree MT2 = new MRFTree(arvore2, dataeg2.Fiber(2)); //print de MT em falta
