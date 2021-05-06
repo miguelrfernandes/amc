@@ -89,7 +89,7 @@ public class Dataset{
 			}
 		
 		this.D = var_max(v, this.D); // aqui estamos a atualizar o conjuntos de valores máximos das variaveis aleatorias do dataset
-		this.classvalues = ClassValues(v); // nao faz sentido em fibras, pq nao tem a classe nas amostras
+		
 		this.Freqlist = FreqList(v); // nao faz sentido nas fibras, pq nao tem a classe nas amostras 
 		}
 	}
@@ -108,16 +108,7 @@ private void fiberAdd(int[] v) {
 		}
 	}
 	
-	private ArrayList<Integer> ClassValues(int[] v) {
-		boolean t = true;
-		for (int classe : this.classvalues) {
-			if (classe == v[this.n]) {
-				t = false;
-			}
-		}
-		if (t) { this.classvalues.add(v[this.n]); }
-		return classvalues;
-	}
+	
 	private ArrayList<Integer> FreqList(int[] v) {
 		int i = v[this.n];
 		
@@ -165,7 +156,7 @@ private void fiberAdd(int[] v) {
 	// TERCEIRA FUNCAO
 	
 	public Dataset Fiber(int c) {
-		Dataset fibra = new Dataset(this.n-1);
+		Dataset fibra = new Dataset(this.n);
 		fibra.D = this.D;
 		for (int i = 0; i < data.size(); i++ ) {
 			if (data.get(i)[this.n-1] == c) {
