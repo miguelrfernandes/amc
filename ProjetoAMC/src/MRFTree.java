@@ -17,6 +17,7 @@ public class MRFTree {
 		
 		this.tfiber = tfiber;
 		this.E = new ArrayList<int[]>();
+		this.D = new int[n];
 		
 		n = tfiber.getN();
 		mc = tfiber.data.size();

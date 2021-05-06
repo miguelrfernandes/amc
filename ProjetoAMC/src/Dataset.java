@@ -172,10 +172,10 @@ private void fiberAdd(int[] v) {
 	// TERCEIRA FUNCAO
 	
 	public Dataset Fiber(int c) {
-		Dataset fibra = new Dataset(this.n-1);
+		Dataset fibra = new Dataset(this.n);
 		fibra.D = this.D;
 		for (int i = 0; i < data.size(); i++ ) {
-			if (data.get(i)[this.n-1] == c) {
+			if (data.get(i)[this.n] == c) {
 		
 				int[] aux = Arrays.copyOf(data.get(i), data.get(i).length-1);
 				fibra.fiberAdd(aux);

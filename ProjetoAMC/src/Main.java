@@ -190,7 +190,8 @@ public class Main {
 	    System.out.println("------------------------------CLASSE CLASSIFIER------------------------------");
 	    System.out.println();
 					
-	// CLASS CLASSIFIER
+	// CLASS CLASSIFIER 
+	    /*
 	    
 	    // com dataset do exemplo1 
 	    MRFTree MT0eg1 = new MRFTree(arvore1, dataeg1.Fiber(0));
@@ -224,7 +225,7 @@ public class Main {
 		
 		
 		
-		/* 
+		 
 		Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		
@@ -233,6 +234,6 @@ public class Main {
 			listamrft.add(markov);
 		}
 		
-		//Classifier classificador = new Classifier(listamrft, classfreq); */
+		Classifier classificador = new Classifier(listamrft, classfreq); */
 	}
 }
