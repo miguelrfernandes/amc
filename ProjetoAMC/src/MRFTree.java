@@ -60,7 +60,7 @@ public class MRFTree {
 		double[][] phiv = new double[n][n];
 		
 		if (i == e[0] && j == e[1]) { // verifica se esta e a aresta especial
-			for (int xi = 0; xi < n; xi++) {
+			for (int xi = 0; xi < n; xi++) {//Bea: acho que aqui os valores de xi e xj devem estar majorados não por n mas por Di e Dj, ou não? Porque são valores e Dj pode ser maior que n.
 				for (int xj = 0; xj < n; xj++) {
 					int[] vars = {i, j};
 					int[] vals = {xi, xj};
@@ -81,7 +81,7 @@ public class MRFTree {
 		return phiv;
 	}
 	
-	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset.
+	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset. 
 	public double prob(int[] v) {
 		double r;
 		r = 1;
