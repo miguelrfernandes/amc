@@ -81,12 +81,12 @@ public class MRFTree {
 		return phiv;
 	}
 	
-	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset. 
+	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset - ou seja, P_Mc
 	public double prob(int[] v) {
 		double r;
 		r = 1;
 		for (int[] a : E) {
-			r = r * markovtree.getWeight(a[0],a[1])[v[a[0]]][v[a[1]]];
+			r = r * markovtree.getWeight(a[0],a[1])[v[a[0]]][v[a[1]]]; 
 		}
 		return r;
 	}
