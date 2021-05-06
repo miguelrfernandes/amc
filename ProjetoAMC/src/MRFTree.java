@@ -25,6 +25,7 @@ public class MRFTree {
 		n = tfiber.getN();
 		mc = tfiber.data.size();
 		
+		D = tfiber.getD();
 		
 		markovtree = new WeightedTree(n);
 		
@@ -66,6 +67,7 @@ public class MRFTree {
 					// calcula-se o phi para esta aresta
 					// e guarda-se os resultados deste calculo numa matriz
 					// com os diferentes valores de phi(xi,xj) nesta aresta da arvore
+					System.out.println(o + " " + i);
 					markovtree.Add(o, i, phi(o,i));
 				}
 			}
@@ -88,7 +90,12 @@ public class MRFTree {
 	}
 
 	public double[][] phi(int i, int j) {  // metodo para calculo do phi de uma aresta
-		double[][] phiv = new double[D[i]+1][D[j]+2];
+		System.out.println(i + " " + j);
+		System.out.println(Arrays.toString(D));
+		System.out.println((D[i]+1) + " " + (D[j]+1));
+		
+		double[][] phiv = new double[D[i]+1][D[j]+1];
+		
 		
 		if (i == e[0] && j == e[1]) { // verifica se esta e a aresta especial
 			for (int xi = 0; xi <= D[i]; xi++) {//Bea: acho que aqui os valores de xi e xj devem estar majorados n�o por n mas por Di e Dj, ou n�o? Porque s�o valores e Dj pode ser maior que n.
@@ -119,16 +126,17 @@ public class MRFTree {
 		// System.out.println(E.toString());
 		boolean c = true;
 		for (int i = 0; i < n && c; i++) {
-			c = v[i] < D[i];
+			c = v[i] <= D[i];
 		}
 		if (c) {
 			for (int[] a : E) {
-				System.out.println(Arrays.deepToString(markovtree.getWeight(a[0],a[1])));
+				//System.out.println(Arrays.deepToString(markovtree.getWeight(a[0],a[1])));
 				r = r * markovtree.getWeight(a[0],a[1])[v[a[0]]][v[a[1]]];
 			}
 			return r;
 		} else {
-			throw new AssertionError("valor fora do dominio");
+			System.out.println(Arrays.toString(v) + " (>) " + Arrays.toString(D));
+			throw new AssertionError("Valor fora do dominio");
 		}
 	}
 	
