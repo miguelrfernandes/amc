@@ -38,7 +38,7 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 		return "Classificador [MRFT List =" + MRFTList + ", Frequencia das Classes =" + FreqList + "]";
 	}
 	 
-	public double Classify(int[] amostra) {  // cada classe (por ex. benigno) e representada por um unico valor certo?
+	public double Classify(int[] amostra) {  // cada classe (por ex. benigno) e representada por um unico valor certo? - resposta: sim
 		int m = MRFTList.get(0).getDatabaseSize(); // tamanho do dataset
 		
 		ArrayList<Double> odds = new ArrayList<Double>();

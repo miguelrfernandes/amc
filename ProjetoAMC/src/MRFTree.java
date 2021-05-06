@@ -82,7 +82,7 @@ public class MRFTree {
 	}
 	
 	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset - ou seja, P_Mc
-	public double prob(int[] v) {
+	public double prob(int[] v) {// acrescentar erro para o caso de valor da variavel não estar no dominio
 		double r;
 		r = 1;
 		for (int[] a : E) {
