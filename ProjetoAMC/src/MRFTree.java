@@ -67,7 +67,7 @@ public class MRFTree {
 					// calcula-se o phi para esta aresta
 					// e guarda-se os resultados deste calculo numa matriz
 					// com os diferentes valores de phi(xi,xj) nesta aresta da arvore
-					System.out.println(o + " " + i);
+					//System.out.println(o + " " + i);
 					markovtree.Add(o, i, phi(o,i));
 				}
 			}
@@ -90,9 +90,9 @@ public class MRFTree {
 	}
 
 	public double[][] phi(int i, int j) {  // metodo para calculo do phi de uma aresta
-		System.out.println(i + " " + j);
+		/*System.out.println(i + " " + j);
 		System.out.println(Arrays.toString(D));
-		System.out.println((D[i]+1) + " " + (D[j]+1));
+		System.out.println((D[i]+1) + " " + (D[j]+1));*/
 		
 		double[][] phiv = new double[D[i]+1][D[j]+1];
 		

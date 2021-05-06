@@ -213,15 +213,14 @@ public class Main {
 	    System.out.println();
 					
 	// CLASS CLASSIFIER 
-	    /*
+	    
 	    
 	    // com dataset do exemplo1 
-	    MRFTree MT0eg1 = new MRFTree(arvore1, dataeg1.Fiber(0));
-	    MRFTree MT1eg1 = new MRFTree(arvore1, dataeg1.Fiber(1));
+	    MRFTree MT1 = new MRFTree(arvore, dataeg1.Fiber(1));
 	    
 	    ArrayList<MRFTree> listamrft1 = new ArrayList<MRFTree>();
-	    listamrft1.add(MT0eg1);
-	    listamrft1.add(MT1eg1);
+	    listamrft1.add(MT);
+	    listamrft1.add(MT1);
 	    ArrayList<Integer> classfreq1 = dataeg1.getFreqlist();
 	    
 	    int[] amostra1 = {5,2,5,2,3,5,6,7,3}; //tirada do exemplo 1. a classe do vetor e 1
@@ -230,6 +229,18 @@ public class Main {
 		
 		
 		// com dataset do exemplo2
+		
+		Tree arvore2 = new Tree(14); //dataeg1 tem 14 v.a.s (x1, ..., x14)
+		arvore.addEdge(0, 1);
+		arvore.addEdge(1, 3);
+		arvore.addEdge(1, 2);
+		arvore.addEdge(4, 0);
+		arvore.addEdge(2, 7);
+		arvore.addEdge(2, 5);
+		arvore.addEdge(5, 6);
+		arvore.addEdge(6, 8);
+		
+		
 		MRFTree MT0eg2 = new MRFTree(arvore2, dataeg2.Fiber(0));
 	    MRFTree MT1eg2 = new MRFTree(arvore2, dataeg2.Fiber(1));
 	    MRFTree MT2eg2 = new MRFTree(arvore2, dataeg2.Fiber(2));
@@ -247,7 +258,7 @@ public class Main {
 		
 		
 		
-		 
+		/*
 		Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
 		
