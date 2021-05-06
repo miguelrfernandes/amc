@@ -84,11 +84,16 @@ public class Dataset{
 		}
 		
 		else {
-		
-		data.add(v);
-		
-		
-		
+			if(this.data.isEmpty()) {
+				data.add(v);
+			}
+			else {  // estou a ordenar o dataset utilizando uma função do java. eu escolho a posição com base no número 
+				int aux=0;
+				for(int i = 0; i<v[this.n]+1; i++) {
+					aux = aux + this.Freqlist.get(i);
+				}
+				data.add(aux, v);
+			}
 		
 		this.D = var_max(v, this.D); // aqui estamos a atualizar o conjuntos de valores mÃ¡ximos das variaveis aleatorias do dataset
 		this.classvalues = ClassValues(v); // nao faz sentido em fibras, pq nao tem a classe nas amostras
