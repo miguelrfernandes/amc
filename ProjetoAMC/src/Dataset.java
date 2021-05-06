@@ -88,11 +88,11 @@ public class Dataset{
 		data.add(v);
 		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores m√°ximos das variaveis aleatorias do dataset
 		this.classvalues = ClassValues(v); // nao faz sentido em fibras, pq nao tem a classe nas amostras
-		this.Freqlist = FreqList(v); // nao faz sentido nas fibras, pq nao tem a classe nas amostras
+		this.Freqlist = FreqList(v); // nao faz sentido nas fibras, pq nao tem a classe nas amostras 
 		}
 	}
 	
-public void fiberAdd(int[] v) {
+private void fiberAdd(int[] v) {
 		
 		if (v.length != this.n) {
 			throw new AssertionError(" wrong dimension ");
@@ -101,7 +101,8 @@ public void fiberAdd(int[] v) {
 		else {
 		
 		data.add(v);
-		this.var = var_max(v, this.var); // aqui estamos a atualizar o conjuntos de valores m√°ximos das variaveis aleatorias do dataset
+		/*this.var = var_max(v, this.var);*/ // esta funÁ„o nao È necess·ria pois queremos que var da fibra seja igual a var do dataset
+		
 		}
 	}
 	
