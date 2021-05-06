@@ -89,7 +89,7 @@ public class Dataset{
 			}
 			else {  // estou a ordenar o dataset utilizando uma função do java. eu escolho a posição com base no número 
 				int aux=0;
-				for(int i = 0; i<v[this.n]+1; i++) {
+				for(int i = 0; i<v[this.n]; i++) {
 					aux = aux + this.Freqlist.get(i);
 				}
 				data.add(aux, v);
@@ -183,7 +183,7 @@ private void fiberAdd(int[] v) {
 			}
 		} if (fibra.data.size()!= 0) return fibra;
 		  else {
-			throw new AssertionError("classe is not verified");
+			throw new AssertionError("class is not verified");
 		}}
 
 	

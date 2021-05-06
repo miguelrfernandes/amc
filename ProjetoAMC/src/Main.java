@@ -30,8 +30,8 @@ public class Main {
 		System.out.println(Arrays.deepToString(exemplo2));
 		System.out.println();
 		
-		Dataset dataeg1 = new Dataset(10);
-		Dataset dataeg2 = new Dataset(15);
+		Dataset dataeg1 = new Dataset(9);
+		Dataset dataeg2 = new Dataset(14);
 		
 	
 		for (int i=0; i < exemplo1.length; i++) {
@@ -90,8 +90,8 @@ public class Main {
 	    
 	 // EXPERIMENTAR LISTA COM VALORES MAXIMOS DE CADA VARIAVEL ALEATORIA
 	    System.out.println();
-	    System.out.println(Arrays.toString(dataeg1.getVar()));
-	    System.out.println(Arrays.toString(dataeg2.getVar()));
+	    System.out.println(Arrays.toString(dataeg1.getD()));
+	    System.out.println(Arrays.toString(dataeg2.getD()));
 		
 	    System.out.println();
 	    System.out.println("---------------------------CLASSE WEIGHTED GRAPH---------------------------------");
