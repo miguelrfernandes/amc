@@ -66,7 +66,7 @@ public class Main {
 		//dataeg1.Add(vetor2);;
 		//dataeg2.print();
 	
-		
+		 System.out.println("------------------------------Fiber------------------------------");
 	 // EXPERIMENTAR FUNCAO FIBER
 		
 		System.out.println();
@@ -77,7 +77,7 @@ public class Main {
 	    dataeg2.Fiber(2).print();
 	    //System.out.println();
 	    //dataeg1.Fiber(2).print();
-	   
+	    System.out.println("------------------------------classes------------------------------");
 	 // EXPERIMENTAR LISTA COM FREQUENCIAS DAS CLASSES 
 	    System.out.println();
 	    System.out.println(dataeg1.getFreqlist());

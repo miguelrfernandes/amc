@@ -169,38 +169,36 @@ private void fiberAdd(int[] v) {
 		} if (fibra.data.size()!= 0) return fibra;
 		  else {
 			throw new AssertionError("class is not verified");
-		}}
+		}
+}}
 
 	
 	
 	/*public Dataset Fiber(int c) {
+		
 		Dataset fibra = new Dataset(this.n);
 		fibra.D = this.D;
+		
 		if (this.Freqlist.size()> c){
 			int i = 0;			
 			for (int k = 0; k < this.Freqlist.size(); k++){
 				if ( k < c ){
 					i = i + this.Freqlist.get(k);}
+				
+				
+			
 			for (int j=i; j< i + Freqlist.get(c); j++) {
-					int[] aux = Arrays.copyOf(data.get(j), data.get(j).length-1);
+					int[] aux = Arrays.copyOf(this.data.get(j), this.data.get(j).length-1);
 					fibra.fiberAdd(aux);
-			} return fibra;
 		}
 	}
-		
-		
-		else {
-			throw new AssertionError("class is not verified");
+		return fibra;
 }
+		else 
+		{throw new AssertionError("class is not verified");}	
+	}
+	
 }*/
-	  
-	  
-	
-	
-	
-	
-	
-}
 
 	
 
