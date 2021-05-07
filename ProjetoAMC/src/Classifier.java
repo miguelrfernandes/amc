@@ -33,7 +33,7 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 		// determinamos a classe mais provavel, isto e, que tem maior probabilidade para amostra dada
 		int r = 0;
 		boolean erro = false; // para garantir que encontramos a classe e mais provavel
-		for (int c=0; c < odds.size(); c++) { // TODO adicionar erro a guarda
+		for (int c=0; c < odds.size() && !erro; c++) {
 			if (odds.get(c) == Collections.max(odds)) {
 				r = c;
 				erro = true;

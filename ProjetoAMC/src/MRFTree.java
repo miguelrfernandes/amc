@@ -46,7 +46,7 @@ public class MRFTree {
 			int o = q.remove();
 			// TODO podemos aumentar a eficiencia ao nao ver os nos que ja foram vistos
 			for (int i = 0; i < n; i++) { // para cada no da arvore
-				if (arvore.EdgeQ(i, o) && !visited[i]) { // se o no i e filho do no o
+				if (!visited[i] && arvore.EdgeQ(i, o)) { // se o no i e filho do no o
 					if (especial) {
 						// fixa-se a aresta especial como a aresta que liga o no definido anteriormente ao no de menor ordem (que esteja ligado)
 						e[1] = i;

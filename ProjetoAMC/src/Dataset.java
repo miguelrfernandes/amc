@@ -125,11 +125,13 @@ public class Dataset{
 	// metodo que recebe um lista de variaveis e uma lista dos seus valores respetivos e faz uma contagem
 	// recebe uma lista de variáveis e valores destas e retorna o número de vezes que estas variáveis tomam simultaneamente os esses valores no dataset.
 	public int Count(int[] vars, int[] val) {
-		// TODO verificar se os valores esta no dominio e variaveis sao todas menores que n
+		// nao precisamos de confirmar se o valores pertencem ao dominio de cada variavel
+		// pois esta funcao pressupoe que isto ja tenha sido verificado previamente no classifier
+		// desta forma, poupamos algum trabalho computacional
 		int r = 0; 
 		for (int i = 0; i < data.size(); i++ )  {
 			boolean c = true;
-			for (int j=0; j < vars.length; j++) { // TODO adicionar && c ou || c a guarda para aumentar eficiÃªncia
+			for (int j=0; j < vars.length && c; j++) {
 				if (data.get(i)[vars[j]] != val[j]) c = false;
 			}
 			if (c) r++;
