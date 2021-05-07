@@ -5,6 +5,8 @@ import java.util.Arrays;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		long tempo = System.nanoTime();
 		// TODO Auto-generated method stub
 	
 	// CLASSE DATASET
@@ -33,6 +35,8 @@ public class Main {
 		Dataset dataeg1 = new Dataset(9);
 		Dataset dataeg2 = new Dataset(14);
 		
+		
+		System.out.println(dataeg1.Freqlist);
 	
 		for (int i=0; i < exemplo1.length; i++) {
 			dataeg1.Add(exemplo1[i]);
@@ -42,9 +46,9 @@ public class Main {
 			dataeg2.Add(exemplo2[i]);
 		}
 		
-		dataeg1.print();
+		System.out.println(dataeg1);
 		System.out.println();
-		dataeg2.print();
+		System.out.println(dataeg2);
 		System.out.println();
 		
 	 // EXPERIMENTAR FUNCAO COUNT
@@ -60,7 +64,7 @@ public class Main {
 		int[] vetor2 = {5,2,5,2,3,5,6,7,0};
 		
 		dataeg1.Add(vetor1);
-		dataeg1.print();
+		System.out.println(dataeg1);
 		
 		
 		// dataeg1.Add(vetor2);;
@@ -70,18 +74,17 @@ public class Main {
 	 // EXPERIMENTAR FUNCAO FIBER
 		
 		System.out.println();
-	    dataeg1.Fiber(0).print();
+		System.out.println(dataeg1.Fiber(0));
 	    System.out.println();
-	    dataeg1.Fiber(1).print();
-	    System.out.println();
-	    dataeg2.Fiber(2).print();
+	    System.out.println(dataeg1.Fiber(1));
+	    System.out.println(dataeg2.Fiber(2));
 	    //System.out.println();
 	    //dataeg1.Fiber(2).print();
 	    System.out.println("------------------------------classes------------------------------");
 	 // EXPERIMENTAR LISTA COM FREQUENCIAS DAS CLASSES 
 	    System.out.println();
-	    System.out.println(dataeg1.getFreqlist());
-	    System.out.println(dataeg2.getFreqlist());
+	    System.out.println(dataeg1.Freqlist);
+	    System.out.println(dataeg2.Freqlist);
 	    
 	    
 	 // EXPERIMENTAR LISTA COM VALORES MAXIMOS DE CADA VARIAVEL ALEATORIA
@@ -221,12 +224,13 @@ public class Main {
 	    ArrayList<MRFTree> listamrft1 = new ArrayList<MRFTree>();
 	    listamrft1.add(MT);
 	    listamrft1.add(MT1);
-	    ArrayList<Integer> classfreq1 = dataeg1.getFreqlist();
+	    ArrayList<Integer> classfreq1 = dataeg1.Freqlist;
 	    
 	    int[] amostra1 = {5,2,5,2,3,5,6,7,3}; //tirada do exemplo 1. a classe do vetor e 1
 		Classifier CFdataeg1 = new Classifier(listamrft1, classfreq1);
 		System.out.println(CFdataeg1.classify(amostra1)); 
 		
+		// System.out.println(CFdataeg1);
 		
 		// com dataset do exemplo2
 		
@@ -250,14 +254,42 @@ public class Main {
 	    listamrft2.add(MT1eg2);
 	    listamrft2.add(MT2eg2);
 	    
-	    ArrayList<Integer> classfreq2 = dataeg2.getFreqlist();
+	    ArrayList<Integer> classfreq2 = dataeg2.Freqlist;
 	    
 	    int[] amostra2 = {5,2,5,6,3,7,6,7,3,5,2,5,6,4}; //tirada do exemplo 2. a classe do vetor e 2
 		Classifier CFdataeg2 = new Classifier(listamrft2, classfreq2);
-		System.out.println(CFdataeg2.classify(amostra2));
+		// System.out.println(CFdataeg2.classify(amostra2));
 		
 		
+		// TODO apagar isto antes de enviar ao prof.
+		System.out.println();
+	    System.out.println("------------------------------Teste------------------------------");
+	    System.out.println();
+	    
+	    System.out.println(System.nanoTime() - tempo);
+	    
+	    /*
+	    Dataset ds1 = new Dataset();
+		Dataset ds2 = new Dataset();
+		Dataset ds3 = new Dataset();
+		Tree arvore1 = new Tree(8);
+		MRFTree mrftree1;
 		
+		int[][] arestas = {{0,4}, {0,6}, {1,2}, {2,1}, {2,3}, {2,6}, {2,7}, {3,5}, {4,3}, {4,5}, {5,3}, {6,3}, {6,5}, {7,2}, {7,5}};
+		for(int[] e : arestas) {
+			arvore1.addEdge(e[0], e[1]);
+		}
+		
+		ds1 = new Dataset(3);
+		ds2 = new Dataset(8);
+		ds1.Add(new int[] {1, 2, 3});
+		ds1.Add(new int[] {2, 3, 5});
+		ds1.Add(new int[] {2, 3, 6});
+		ds1.Add(new int[] {7, 8, 10});
+		assertEquals(ds1.getValues().size(), 4);
+		ds2.add(new int[] {1, 2, 3, 4, 5, 6, 7, 8});
+		assertEquals(ds2.getValues().size(), 1);
+		*/
 		/*
 		Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);

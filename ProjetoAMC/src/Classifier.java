@@ -4,9 +4,8 @@ import java.util.Collections;
 public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e a "MRFTree"
 
 	// atributos
-	
-	ArrayList<MRFTree> MRFTList;
-	ArrayList<Integer> FreqList;   
+	private ArrayList<MRFTree> MRFTList;
+	private ArrayList<Integer> FreqList;   
 	
 	// metodo construtor
 	public Classifier(ArrayList<MRFTree> MRFTList, ArrayList<Integer> FreqList) {
@@ -15,23 +14,6 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 		
 	}
 	
-	// getter e setters
-	public ArrayList<MRFTree> getMRFTList() {
-		return MRFTList;
-	}
-
-	public void setMRFTList(ArrayList<MRFTree> mRFTList) {
-		MRFTList = mRFTList;
-	}
-
-	public ArrayList<Integer> getFreqList() {
-		return FreqList;
-	}
-
-	public void setFreqList(ArrayList<Integer> freqList) {
-		FreqList = freqList;
-	}
-
 	// metodo toString
 	@Override
 	public String toString() {
@@ -40,23 +22,25 @@ public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e 
 	 
 	public int classify(int[] amostra) {  
 		int m = 0;
-		for (int freq : FreqList) {
-			m += freq;  // tamanho do dataset original, donde se tirou a fiber
-		}
+		for (int freq : FreqList) m += freq;  // tamanho do dataset original, donde se tirou a fiber
+		
 		ArrayList<Double> odds = new ArrayList<Double>();
 		for (int C=0; C < FreqList.size(); C++) {  // C = variavel classe C
 			double PrV = (FreqList.get(C)/m) * (MRFTList.get(C).prob(amostra));
 			odds.add(PrV);
 		}
-		int cmax = 0;
-		boolean b = false;
-		for (int c=0; c < odds.size(); c++) {
+		
+		// determinamos a classe mais provavel, isto e, que tem maior probabilidade para amostra dada
+		int r = 0;
+		boolean erro = false; // para garantir que encontramos a classe e mais provavel
+		for (int c=0; c < odds.size(); c++) { // TODO adicionar erro a guarda
 			if (odds.get(c) == Collections.max(odds)) {
-				cmax = c;
-				b = true;
+				r = c;
+				erro = true;
 			}
 		}
-		if (b) {return cmax;}
+		
+		if (erro) return r;
 		else { throw new AssertionError("erro");}
 	}
 }
