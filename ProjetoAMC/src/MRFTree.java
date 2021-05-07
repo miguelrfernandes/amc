@@ -36,8 +36,8 @@ public class MRFTree {
 		// adicionamos o primeiro no a fila
 		q.add(e[0]);
 		
-		// adicionamos as arestas segundo a direcao definida pelo no fixado
 		
+		// adicionamos as arestas segundo a direcao definida pelo no fixado
 		boolean[] visited = new boolean[n];
 		
 		// usamos uma condicao para fazer um passo especial a primeira vez que encontra um filho ou pai deste no que foi fixado
@@ -67,6 +67,47 @@ public class MRFTree {
 			}
 			visited[o] = true;
 		}
+		
+		
+		// para melhorar
+		// este algoritmo nao e mais eficiente pois implica o uso do remove num arraylist que nao sabe que o numero e limitado...
+		// seria mais eficiente se a remocao fosse O(log(n))
+		
+		
+		/*
+		// adicionamos as arestas segundo a direcao definida pelo no fixado
+		ArrayList<Integer> notvisited = new ArrayList<Integer>();
+		
+		for (int i = 0; i < n; i++)  notvisited.add(i);
+		
+		// usamos uma condicao para fazer um passo especial a primeira vez que encontra um filho ou pai deste no que foi fixado
+		boolean especial = true;
+		while (!q.isEmpty()) {
+			int o = q.remove();
+			// TODO podemos aumentar a eficiencia ao nao ver os nos que ja foram vistos
+			for (int i : notvisited) { // para cada no da arvore
+				if (arvore.EdgeQ(i, o)) { // se o no i e filho do no o
+					if (especial) {
+						// fixa-se a aresta especial como a aresta que liga o no definido anteriormente ao no de menor ordem (que esteja ligado)
+						e[1] = i;
+						especial = false;
+					}
+					
+					// adiciona-se esta aresta a lista de arestas
+					E.add(new int[] {o, i});
+					
+					// e adiciona-se este no a queue
+					q.add(i);
+					
+					// calcula-se o phi para esta aresta
+					// e guarda-se os resultados deste calculo numa matriz
+					// com os diferentes valores de phi(xi,xj) nesta aresta da arvore
+					markovtree.Add(o, i, phi(o,i));
+				}
+			}
+			notvisited.remove(Integer.valueOf(o));
+		}
+		*/
 	}
 	
 	

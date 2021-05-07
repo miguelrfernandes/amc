@@ -280,7 +280,7 @@ public class Main {
 	    System.out.println("------------------------------Teste------------------------------");
 	    System.out.println();
 	    
-	    System.out.println(System.nanoTime() - tempo);
+	    
 	    /*
 	    
 	    Dataset ds1 = new Dataset(2);
@@ -328,6 +328,10 @@ public class Main {
 		System.out.println(mrftreeTeste.prob(testV3));
 		System.out.println(mrftreeTeste.prob(testV4));
 		System.out.println(mrftreeTeste.prob(testV5));
+		
+		System.out.println(System.nanoTime() - tempo);
+		
+		// 100 000 000
 		
 		/*
 		 * nossos:
