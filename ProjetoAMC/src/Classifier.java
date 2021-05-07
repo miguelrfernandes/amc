@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Classifier {  // vou supor que a classe MRFT pedida no enunciado e a "MRFTree"
+public class Classifier {  
 
 	// atributos
 	private ArrayList<MRFTree> MRFTList;
