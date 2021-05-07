@@ -33,7 +33,7 @@ import java.util.Arrays;
 			}
 			return r;
 		}
-		//como grafo � completo n�o � necess�rio questionar se existe aresta entre dois n�s pois haver�		
+		//como grafo e completo nao e necessario questionar se existe aresta entre dois nos pois havera		
 		
 		public void Add(int i, int j, double w){
 				if (i>=0 && i<this.dim && j>=0 && j<this.dim) {
