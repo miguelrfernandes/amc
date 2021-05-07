@@ -15,7 +15,7 @@ import java.util.Arrays;
 			return this.dim;
 		}
 		
-		public String toString() {  // para melhor visualizacao do output
+		public String toString() {  
 			String r = "Weighted Graph\n";
 			for (int i = 0; i < dim; i++) {
 				if (i==0 && dim != 1) {
@@ -33,12 +33,12 @@ import java.util.Arrays;
 			}
 			return r;
 		}
-		//como grafo e completo nao e necessario questionar se existe aresta entre dois nos pois havera		
+		
 		
 		public void Add(int i, int j, double w){
 				if (i>=0 && i<this.dim && j>=0 && j<this.dim) {
 					this.ma[i][j] = w;
-					this.ma[j][i] = w;// apesar de direcionado talvez seja melhor colocar aqui tb pois para pesquisas futuras pode dar jeito
+					this.ma[j][i] = w;
 				} else {
 					throw new AssertionError("node not in graph");
 			} 
