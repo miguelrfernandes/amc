@@ -21,12 +21,9 @@ public class MRFTree {
 		this.tfiber = tfiber;
 		this.E = new ArrayList<int[]>();
 		this.D = new int[n];
-		
 		n = tfiber.getN();
 		mc = tfiber.data.size();
-		
 		D = tfiber.getD();
-		
 		markovtree = new WeightedTree(n);
 		
 		
@@ -65,7 +62,6 @@ public class MRFTree {
 					// calcula-se o phi para esta aresta
 					// e guarda-se os resultados deste calculo numa matriz
 					// com os diferentes valores de phi(xi,xj) nesta aresta da arvore
-					//System.out.println(o + " " + i);
 					markovtree.Add(o, i, phi(o,i));
 				}
 			}
@@ -78,11 +74,12 @@ public class MRFTree {
 	@Override
 	public String toString() {
 		return "MRFTree [Aresta especial e =" + Arrays.toString(e) + ", mc=" + mc + ", m=" + m + ", n=" + n + ", D=" + Arrays.toString(D)
-				+ ", delta=" + delta + ", E=" + Arrays.deepToString(E.toArray()) + ", tfiber=" + tfiber + ", markovtree=" + markovtree + "]";
+				+ ", delta=" + delta + ",\n E=" + Arrays.deepToString(E.toArray()) + ",\n tfiber=" + tfiber + ",\n markovtree=" + markovtree + "]";
 	}
-
-	public double[][] phi(int i, int j) {  // metodo para calculo do phi de uma aresta
-		double[][] phiv = new double[D[i]+1][D[j]+1];
+	
+	// metodo para calculo do phi de uma aresta
+	public double[][] phi(int i, int j) {  
+		double[][] phiv = new double[D[i]+1][D[j]+1]; 
 		
 		if (i == e[0] && j == e[1]) { // verifica se esta e a aresta especial
 			for (int xi = 0; xi <= D[i]; xi++) {
