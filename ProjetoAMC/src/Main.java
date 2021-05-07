@@ -99,7 +99,7 @@ public class Main {
 	// CLASSE WEIGHTED GRAPH
 		
 		WeightedGraph grafo = new WeightedGraph(10);
-		grafo.print();
+		System.out.println(grafo);
 		System.out.println();
 		
 		// FUNCAO ADD
@@ -107,7 +107,7 @@ public class Main {
 		grafo.Add(4,  7, 2.5);
 		grafo.Add(8,  6, 1.7);
 		grafo.Add(9,  2, 2.4);
-		grafo.print();
+		System.out.println(grafo);
 		System.out.println();
 		System.out.println(grafo.getWeight(4,5));
 		System.out.println(grafo.getWeight(4,7));

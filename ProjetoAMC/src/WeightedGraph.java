@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 	public class WeightedGraph {
 			
-		int dim;
-		double [][] ma;
+		private int dim;
+		private double [][] ma;
 		
 		public WeightedGraph(int dim) {
 			
@@ -15,22 +15,23 @@ import java.util.Arrays;
 			return this.dim;
 		}
 		
-		public void print() {  // para melhor visualizacao do output
-			System.out.println("Weighted Graph");
+		public String toString() {  // para melhor visualizacao do output
+			String r = "Weighted Graph\n";
 			for (int i = 0; i < dim; i++) {
 				if (i==0 && dim != 1) {
-					System.out.println("[" + Arrays.toString(this.ma[0]) + ",");
+					r = r + ("[" + Arrays.toString(this.ma[0]) + ",\n");
 				}
 				if (i==0 && dim == 1) {
-					System.out.println("[" + Arrays.toString(this.ma[0]) + "]");
+					r = r + ("[" + Arrays.toString(this.ma[0]) + "]\n");
 				}
 				if (i !=0 && i == dim - 1) {
-					System.out.println(Arrays.toString(this.ma[i]) + "]");
+					r = r + (Arrays.toString(this.ma[i]) + "]\n");
 				}
 				if (i != 0 && i != dim - 1){
-					System.out.println(Arrays.toString(this.ma[i]) + ",");
+					r = r + (Arrays.toString(this.ma[i]) + ",\n");
 				}
 			}
+			return r;
 		}
 		//como grafo � completo n�o � necess�rio questionar se existe aresta entre dois n�s pois haver�		
 		

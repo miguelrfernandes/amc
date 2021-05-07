@@ -16,7 +16,7 @@ public class MRFTree {
 	private WeightedTree markovtree;
 	
 	// Metodo Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset (fibras) e coloca os phi(xi, xj) em cada aresta da arvore.
-	public MRFTree(Tree arvore, Dataset tfiber) { // �rvore prov�m do MST do Weightedgraph
+	public MRFTree(Tree arvore, Dataset tfiber) { // arvore provem do MST do Weightedgraph
 		
 		this.tfiber = tfiber;
 		this.E = new ArrayList<int[]>();
