@@ -63,8 +63,8 @@ public class Main {
 		dataeg1.print();
 		
 		
-		//dataeg1.Add(vetor2);;
-		//dataeg2.print();
+		// dataeg1.Add(vetor2);;
+		// dataeg2.print();
 	
 		 System.out.println("------------------------------Fiber------------------------------");
 	 // EXPERIMENTAR FUNCAO FIBER

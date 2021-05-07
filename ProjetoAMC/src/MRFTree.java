@@ -83,22 +83,11 @@ public class MRFTree {
 				+ ", delta=" + delta + ", E=" + Arrays.deepToString(E.toArray()) + ", tfiber=" + tfiber + ", markovtree=" + markovtree + "]";
 	}
 
-
-
-	public int getDatabaseSize() {
-		return m;
-	}
-
 	public double[][] phi(int i, int j) {  // metodo para calculo do phi de uma aresta
-		/*System.out.println(i + " " + j);
-		System.out.println(Arrays.toString(D));
-		System.out.println((D[i]+1) + " " + (D[j]+1));*/
-		
 		double[][] phiv = new double[D[i]+1][D[j]+1];
 		
-		
 		if (i == e[0] && j == e[1]) { // verifica se esta e a aresta especial
-			for (int xi = 0; xi <= D[i]; xi++) {//Bea: acho que aqui os valores de xi e xj devem estar majorados n�o por n mas por Di e Dj, ou n�o? Porque s�o valores e Dj pode ser maior que n.
+			for (int xi = 0; xi <= D[i]; xi++) {
 				for (int xj = 0; xj <= D[j]; xj++) {
 					int[] vars = {i, j};
 					int[] vals = {xi, xj};
@@ -109,7 +98,7 @@ public class MRFTree {
 			for (int xi = 0; xi <= D[i]; xi++) {
 				for (int xj = 0; xj <= D[j]; xj++) {
 					int[] vars = {i, j};
-					int[] vals = {xi, xj};	//Bea: acho que aqui os valores de xi e xj devem estar majorados n�o por n mas por Di e Dj, ou n�o? Porque s�o valores e Dj pode ser maior que n.
+					int[] vals = {xi, xj};
 					int[] var = {i};
 					int[] val = {xi};
 					phiv[xi][xj] = (tfiber.Count(vars, vals) + delta) / (tfiber.Count(var, val) + delta * D[j]);
@@ -120,17 +109,15 @@ public class MRFTree {
 	}
 	
 	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset - ou seja, P_Mc
-	public double prob(int[] v) {// acrescentar erro para o caso de valor da variavel n�o estar no dominio
+	public double prob(int[] v) {
 		double r;
 		r = 1;
-		// System.out.println(E.toString());
 		boolean c = true;
 		for (int i = 0; i < n && c; i++) {
 			c = v[i] <= D[i];
 		}
 		if (c) {
 			for (int[] a : E) {
-				//System.out.println(Arrays.deepToString(markovtree.getWeight(a[0],a[1])));
 				r = r * markovtree.getWeight(a[0],a[1])[v[a[0]]][v[a[1]]];
 			}
 			return r;
