@@ -32,7 +32,7 @@ public class Dataset{
 		return D;
 	}
 	
-	public String toString() {  // para melhor visualizacao do output
+	public String toString() {  
 		System.out.println("Dataset");
 		String r = "";
 		for (int i = 0; i < this.data.size(); i++) {
@@ -63,7 +63,7 @@ public class Dataset{
 			if(this.data.isEmpty()) {
 				data.add(v);
 			}
-			else {  // estou a ordenar o dataset utilizando uma fun��o do java, em que escolho a posi��o com base no n�mero 
+			else {  // estou a ordenar o dataset utilizando uma funcao do java, em que escolho a posicao com base no numero 
 				int aux=0;
 				for(int i = 0; i<v[this.n]; i++) {
 					aux = aux + this.Freqlist.get(i);
