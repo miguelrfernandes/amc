@@ -9,11 +9,7 @@ import java.util.Arrays;
 			
 			this.dim=dim;
 			this.ma = new double[dim][dim];}
-			
-		//cada aresta para al�m de ter destino tem um peso temos de criar uma estrutura em java
-		// sempre que h� a situa��o de heran�a, primeira coisa a fzer no metodo construtor da classe que extende outra classe � chamar o m�todo 
-		// construtor da classe que estou a extender utilizando o m�todo super
-		
+				
 		
 		public int getDim() {
 			return this.dim;
@@ -55,6 +51,7 @@ import java.util.Arrays;
 			else{
 					return ma[i][j];		}
 		}
+		
 		/*
 		public Tree MST() {  // arvore de extensao maxima
 			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices
