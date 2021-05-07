@@ -185,6 +185,8 @@ public class Main {
 		System.out.println(MT.prob(v1));
 		System.out.println(MT.prob(v2));
 		System.out.println(MT.prob(v3));
+		
+		
 
 
 		/*

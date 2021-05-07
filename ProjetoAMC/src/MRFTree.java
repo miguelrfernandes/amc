@@ -5,15 +5,15 @@ import java.util.Queue;
 
 public class MRFTree {
 	// consideramos como no de partida o primeiro no (no 0)
-	int[] e = new int[2]; // aresta especial
-	int mc; // dimensao da fibra do dataset
-	int m; // tamanho do dataset
-	int n; // numero de medicoes
-	int[] D; // dimensao do dominio do dataset
-	double delta = 0.2; // pseudo-contagem
-	ArrayList<int[]> E; // arestas
-	Dataset tfiber;
-	WeightedTree markovtree;
+	private int[] e = new int[2]; // aresta especial
+	private int mc; // dimensao da fibra do dataset
+	private int m; // tamanho do dataset
+	private int n; // numero de medicoes
+	private int[] D; // dimensao do dominio do dataset
+	private double delta = 0.2; // pseudo-contagem
+	private ArrayList<int[]> E; // arestas
+	private Dataset tfiber;
+	private WeightedTree markovtree;
 	
 	// Metodo Construtor que recebe uma arvore (um grafo em forma de arvore), e um dataset (fibras) e coloca os phi(xi, xj) em cada aresta da arvore.
 	public MRFTree(Tree arvore, Dataset tfiber) { // �rvore prov�m do MST do Weightedgraph
@@ -30,10 +30,8 @@ public class MRFTree {
 		markovtree = new WeightedTree(n);
 		
 		
-		// fixa-se o primeiro no da aresta especial como o no que nao tem pai
-		// isto nao funciona
+		// fixa-se o primeiro no como um no da aresta especial
 		e[0] = 0;
-		// while (arvore.pai(e[0]) != -1) e[0] = arvore.pai(e[0]);
 		
 		// criamos uma fila que vamos usar de seguida
 		Queue<Integer> q = new LinkedList<Integer>();
