@@ -166,6 +166,7 @@ public class Main {
 	// CLASSE MRFT
 		
 		Tree arvore = new Tree(9); //dataeg1 tem 9 v.a.s (x1, ..., x9)
+		/*
 		arvore.addEdge(0, 1);
 		arvore.addEdge(1, 3);
 		arvore.addEdge(1, 2);
@@ -174,6 +175,17 @@ public class Main {
 		arvore.addEdge(2, 5);
 		arvore.addEdge(5, 6);
 		arvore.addEdge(6, 8);
+		 este codigo da erro porque cada no da arvore pode ter apenas um pai
+		*/
+		
+		arvore.addEdge(1, 0);
+		arvore.addEdge(3, 1);
+		arvore.addEdge(2, 1);
+		arvore.addEdge(0, 4);
+		arvore.addEdge(7, 2);
+		arvore.addEdge(5, 2);
+		arvore.addEdge(6, 5);
+		arvore.addEdge(8, 6);
 		
 		MRFTree MT = new MRFTree(arvore, dataeg1.Fiber(0)); //print de MT em falta
 		int[] v1 = {4,2,5,6,3,5,6,7,3};
@@ -269,13 +281,13 @@ public class Main {
 	    System.out.println();
 	    
 	    System.out.println(System.nanoTime() - tempo);
-	    
 	    /*
-	    Dataset ds1 = new Dataset();
-		Dataset ds2 = new Dataset();
-		Dataset ds3 = new Dataset();
+	    
+	    Dataset ds1 = new Dataset(2);
+		Dataset ds2 = new Dataset(7);
+		//Dataset ds3 = new Dataset();
 		Tree arvore1 = new Tree(8);
-		MRFTree mrftree1;
+		// MRFTree mrftree1;
 		
 		int[][] arestas = {{0,4}, {0,6}, {1,2}, {2,1}, {2,3}, {2,6}, {2,7}, {3,5}, {4,3}, {4,5}, {5,3}, {6,3}, {6,5}, {7,2}, {7,5}};
 		for(int[] e : arestas) {
@@ -288,10 +300,55 @@ public class Main {
 		ds1.Add(new int[] {2, 3, 5});
 		ds1.Add(new int[] {2, 3, 6});
 		ds1.Add(new int[] {7, 8, 10});
-		assertEquals(ds1.getValues().size(), 4);
-		ds2.add(new int[] {1, 2, 3, 4, 5, 6, 7, 8});
-		assertEquals(ds2.getValues().size(), 1);
+		
+		ds2.Add(new int[] {1, 2, 3, 4, 5, 6, 7, 8});
 		*/
+		
+		Dataset dsteste = new Dataset(7);
+		dsteste.Add(new int[] {1, 2, 3, 4, 5, 6, 7, 8});
+		dsteste.Add(new int[] {1, 2, 3, 4, 5, 6, 7, 8});
+		dsteste.Add(new int[] {1, 2, 3, 4, 5, 6, 7, 8});
+		dsteste.Add(new int[] {1, 2, 3, 4, 5, 6, 7, 8});
+		Tree arvoreTeste = new Tree(8);
+		//int[][] edges = {{0,1}, {1,0}, {0,2}, {2,0}, {0,3}, {3,0}, {0,4}, {4,0}, {0,5}, {5,0}, {0,7}, {7,0}, {0,6}, {6,0}};
+		int[][] edges = {{1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {7,0}, {6,0}};
+		for(int[] e : edges) {
+			arvoreTeste.addEdge(e[0], e[1]);
+		}
+		
+		System.out.println(arvoreTeste);
+		
+		MRFTree mrftreeTeste = new MRFTree(arvoreTeste, dsteste);
+		
+		System.out.println(mrftreeTeste);
+		
+		int[] testV3 = new int[] {1,2,3,4,5,6,7,8};
+		int[] testV4 = new int[] {1,1,1,1,1,1,1,1};
+		int[] testV5 = new int[] {1,2,2,2,2,2,2,2};
+		System.out.println(mrftreeTeste.prob(testV3));
+		System.out.println(mrftreeTeste.prob(testV4));
+		System.out.println(mrftreeTeste.prob(testV5));
+		
+		/*
+		 * nossos:
+		0.40241752812404996
+		4.692033677540925E-9
+		9.853270722835943E-8
+		
+		outros:
+		0.2242444108529689
+		1.2450493451502612E-10
+		2.614603624815548E-9
+		TODO valores não estão iguais! verificar:
+		* prob ok
+		* phi ok
+		* arestas E 
+		* count
+		* dataset size
+		* dataset D
+		*/
+		
+		
 		/*
 		Tree maximal = grafo.MST();
 		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
