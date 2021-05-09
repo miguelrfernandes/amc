@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Dataset{
+public class Dataset {
 	protected ArrayList<int[]> data;
 	private int n; // numero de variaveis aleatorias, o java começa a conta do 0
-	private int[] D; // lista com os valores maximos das variaveis aleatorias, sem a classe vari�vel da classe
+	private int[] D; // lista com os valores maximos das variaveis aleatorias, sem a classe variavel da classe
 	protected ArrayList<Integer> Freqlist; // lista de frequencias de cada classe do dataset
 
 	
