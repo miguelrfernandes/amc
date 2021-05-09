@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class WeightedTree { //PhiTree
+public class WeightedTree { 
 	double [][][][] ma;
 	int dim;
 	
