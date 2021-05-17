@@ -78,8 +78,6 @@ public class JanelaClassificador {
 		frame.getContentPane().add(txtModelPath);
 		txtModelPath.setColumns(10);
 		
-		Classifier classificador;
-		
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override

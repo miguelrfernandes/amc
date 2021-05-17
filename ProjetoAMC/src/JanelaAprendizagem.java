@@ -1,8 +1,8 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
+//import java.awt.GridLayout;
+//import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
@@ -14,16 +14,16 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 
-import java.io.File;  // Import the File class
+//import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
+//import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner; // Import the Scanner class to read text files
+//import java.util.Arrays;
+//import java.util.Scanner; // Import the Scanner class to read text files
 
 public class JanelaAprendizagem {
 
@@ -53,14 +53,14 @@ public class JanelaAprendizagem {
 	public JanelaAprendizagem() {
 		initialize();
 	}
-	
-	
-	Dataset T;
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	 // Initialize the contents of the frame.
+
 	private void initialize() {
+		
+		// janela e suas caracteristicas
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,41 +85,46 @@ public class JanelaAprendizagem {
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Reading dataset<br></html>");
 				
-				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) {
+				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) { // leitura e gravação do dataset num ficheiro: "ds"
 				    String line;
 				    while ((line = br.readLine()) != null) {
 				       String[] values = line.split(",");
 				       ArrayList<Integer> v = new ArrayList<Integer>();
 				       // int v[] = new int[n];
-				       for (String a : values) v.add(Integer.parseInt(a));
-				       
+				       for (String a : values) { 
+				    	   v.add(Integer.parseInt(a));
+				       }
 				       int[] ret = new int[v.size()];
 				       for (int i=0; i < v.size(); i++)
 				       {
 				           ret[i] = v.get(i).intValue();
 				       }
-				       if (ds == null) ds = new Dataset(ret.length-1);
+				       if (ds == null) {
+				    	   ds = new Dataset(ret.length-1);
+				       }
 				       //lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)+ "" + v.size() + "" + ds.getN()
 				    	//	   + "" + ret  + "Reading dataset<br></html>");
 				       
-				       ds.Add(ret);
+				       ds.Add(ret); // ArrayList<int[]>
 				    }
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
+		
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+			
 					e1.printStackTrace();
 				}
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Training the model<br></html>");
 				
 				WeightedGraph wg = new WeightedGraph(ds.getN(),ds);
-				Tree mst = wg.MST();
+				Tree mst = wg.MST(); 
 				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
-				for (int i = 0; i < ds.getClassifierDomain(); i++) mrftList.add(new MRFTree(mst, ds.Fiber(i)));
+				for (int i = 0; i < ds.getClassifierDomain(); i++) { 
+					mrftList.add(new MRFTree(mst, ds.Fiber(i)));
+				}
 				
-				//Classifier classificador = new Classifier(mrftList, ds.Freqlist);
+				//Classifier classificador = new Classifier(mrftList, ds.Freqlist); --> Outra Janela
 				Model modelo = new Model(mrftList, ds.Freqlist);
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Saving the model<br></html>");
@@ -127,7 +132,7 @@ public class JanelaAprendizagem {
 				String savePath = txtSavePath.getText();
 				
 				try {
-				      File myObj = new File(savePath + "modelo.java");
+				      File myObj = new File(savePath + "modelo");
 				      if (myObj.createNewFile()) {
 				        System.out.println("File created: " + myObj.getName());
 				      } else {
@@ -151,6 +156,9 @@ public class JanelaAprendizagem {
 		        }
 			}
 		});
+		
+		// Caixas de texto dentro da janela, para colocacao de diretorios
+		
 		btnNewButton.setBounds(174, 149, 117, 29);
 		frame.getContentPane().add(btnNewButton);
 		

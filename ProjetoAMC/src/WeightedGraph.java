@@ -5,39 +5,40 @@ import java.util.Queue;
 	public class WeightedGraph {
 			
 		private int dim;
-		private double [][] ma;
+		private double[][] ma;
 		
 		public WeightedGraph(int dim) {
 			
-			this.dim=dim;
+			this.dim = dim;
 			this.ma = new double[dim][dim];}
 		
-		public WeightedGraph(int dim, Dataset T) {
-			
-			this.dim=dim;
+		public WeightedGraph(int dim, Dataset T) {  // construcao grafo completo e pesado - PASSO 1 
+													// Está correto.
+			this.dim = dim;
 			this.ma = new double[dim][dim];
 			
-			for (int k = 0; k < dim; k++) {
-				for (int l = 0; l < dim; l++) {
-					// calculamos a informaÃ§Ã£o mÃºtua de cada variÃ¡vel e guardamos
+			for (int i = 0; i < dim; i++) { // ciclo para atribuir peso a cada aresta entre variavel k e variavel l
+				for (int j = 0; j < dim; j++) {
+					// calculamos a informacao mutua de cada variavel e guardamos
 					// este valor na aresta deste grafo pesado completo
 					double I = 0.0;
 					
-					int m = dim;// ?
-					
-					for (int i = 0; i < dim; i++) { //TODO verificar a matematica
-						for (int j = 0; j < dim; j++) {
-							double prxixj = T.Count(new int[] {k,l}, new int[] {i, j}) / m; // ?? ou i j   k l??
-							double prxi = T.Count(new int[] {k}, new int[] {i}) / m; // ?? ou i k??
-							double prxj = T.Count(new int[] {l}, new int[] {j}) / m; // ?? ou j l??
-							if (prxixj == 0 && (prxixj / (prxi * prxj)) == 0) {
+					int m = dim;
+					// PASSO 2 - alterei as variaveis. acho que fica mais percetivel assim, de acordo com o enunciado
+					for (int xi = 0; xi < dim; xi++) { // ciclo que calcula o I, tendo em conta o dataset T
+						for (int xj = 0; xj < dim; xj++) { 
+							double prxixj = T.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  
+							double prxi = T.Count(new int[] {i}, new int[] {xi}) / m; 
+							double prxj = T.Count(new int[] {j}, new int[] {xj}) / m; 
+							if (prxixj == 0 || (prxixj / (prxi * prxj)) == 0) { // correto
 								I = I + 0;
-							} else {
-								I = I + prxixj * Math.log(prxixj / (prxi * prxj));
+							}
+							else {
+								I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto
 							}
 						}
 					}
-					this.ma[k][l] = I;
+					this.ma[i][j] = I; // atribuir peso I a cada aresta entre i e j
 				}
 			}
 		}
@@ -85,9 +86,9 @@ import java.util.Queue;
 					return ma[i][j];		}
 		}
 		
-		// TODO verificar se estÃ¡ correto
-		public Tree MST() {  // arvore de extensao maxima
-			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices
+		// MST() está correta e funciona -> ver exemplo no main
+		public Tree MST() {  // arvore de extensao maxima - soma dos pesos das arestas e maximal
+			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices //nao percebo, faz me sentido como esta
 			// determina a MST com o Algoritmo de Prim
 			
 			// lista dos custos maximos para cada no
@@ -114,14 +115,14 @@ import java.util.Queue;
 			
 			while (!Q.isEmpty()) {
 				int no = Q.remove();
-				double max = C[no];
+				double max = C[no]; // C = [0,-99,-99,-99,...]
 				for (int i = 0; i < dim; i++) {
 					if (!visited[i] && this.getWeight(i, no) > max) {
-						max = this.getWeight(i, no);
-						C[no] = i;
+						max = this.getWeight(i, no); // novo peso maximo
+						C[no] = i; // novo nó "C[no]" a partir do qual se vai continuar a MST
 					}
 				}
-				maximal.addEdge(no, C[no]);
+				maximal.addEdge(no, C[no]); //adicionar a MST a aresta com o peso máximo, em que o pai é o nó "no" e o filho o "C[no]"
 			}
 			
 			return maximal;

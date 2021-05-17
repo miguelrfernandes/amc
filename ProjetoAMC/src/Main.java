@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		long tempo = System.nanoTime();
-		// TODO Auto-generated method stub
+		
 	
 	// CLASSE DATASET
 		
@@ -37,6 +37,7 @@ public class Main {
 		
 		
 		System.out.println(dataeg1.Freqlist);
+		System.out.println();
 	
 		for (int i=0; i < exemplo1.length; i++) {
 			dataeg1.Add(exemplo1[i]);
@@ -275,7 +276,6 @@ public class Main {
 		// System.out.println(CFdataeg2.classify(amostra2));
 		
 		
-		// TODO apagar isto antes de enviar ao prof.
 		System.out.println();
 	    System.out.println("------------------------------Teste------------------------------");
 	    System.out.println();
@@ -331,37 +331,40 @@ public class Main {
 		
 		System.out.println(System.nanoTime() - tempo);
 		
-		// 100 000 000
+
+		System.out.println();
+	    System.out.println("------------------------------ ENTREGA 2 | TESTES ------------------------------");
+	    System.out.println();
+	    
+	    System.out.println();
+	    System.out.println("------------------------------ WEIGHTED GRAPH ------------------------------");
+	    System.out.println();
+	    
+	    int[][] exemplo3 = {{5,100,5,6,3,0},{5,44,5,6,3,1},{16,100,5,6,3,0},{5,100,5,28,3,0},{5,100,5,6,3,1},{5,100,5,6,3,0}};
+	    
+	    Dataset dataeg3 = new Dataset(5);
+	    
+	    for (int i=0; i < exemplo3.length; i++) dataeg3.Add(exemplo3[i]);
+	    
+	    WeightedGraph grafo3 = new WeightedGraph(5, dataeg3);
+		System.out.println(grafo3);
+		System.out.println();
 		
-		/*
-		 * nossos:
-		0.40241752812404996
-		4.692033677540925E-9
-		9.853270722835943E-8
-		
-		outros:
-		0.2242444108529689
-		1.2450493451502612E-10
-		2.614603624815548E-9
-		TODO valores não estão iguais! verificar:
-		* prob ok
-		* phi ok
-		* arestas E 
-		* count
-		* dataset size
-		* dataset D
-		*/
-		
-		
-		/*
-		Tree maximal = grafo.MST();
-		ArrayList<MRFTree> listamrft= new ArrayList<MRFTree>(2);
-		
-		for (int i = 0; i < 2; i++) {
-			MRFTree markov = new MRFTree(maximal, dataset2.Fiber(i));
-			listamrft.add(markov);
-		}
-		
-		Classifier classificador = new Classifier(listamrft, classfreq); */
+		// grafo pesado do enunciado do projeto
+		grafo3.Add(0, 4, 8);
+		grafo3.Add(0, 3, 7);
+		grafo3.Add(0, 1, 3);
+		grafo3.Add(4, 3, 3);
+		grafo3.Add(1, 3, 4);
+		grafo3.Add(1, 2, 1);
+		grafo3.Add(3, 2, 2);
+		System.out.println(grafo3);
+		System.out.println();
+		System.out.println(grafo3.getWeight(0,4));
+		System.out.println(grafo3.getWeight(3,0));
+		System.out.println(grafo3.getWeight(2,3));
+		System.out.println();
+		System.out.println(grafo3.MST()); //suposto retornar "Tree [pais=[-1,3,3,0,0]]" 
+	
 	}
 }
