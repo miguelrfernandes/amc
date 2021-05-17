@@ -142,18 +142,20 @@ public class JanelaAprendizagem {
 				      System.out.println("An error occurred.");
 				      error.printStackTrace();
 				    }
-
+				
 				try {
 					 
 		            FileOutputStream fileOut = new FileOutputStream(savePath + "modelo");
 		            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-		            objectOut.writeObject(modelo);
+		            objectOut.writeObject(modelo); 
 		            objectOut.close();
-		            System.out.println("The Object  was succesfully written to a file"); //TODO corrigir save file
-		 
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
+				
+				//TODO simplesmente pus o output na caixa em vez de na consola, mas não consigo perceber se o conteúdo está a ser gravado no ficheiro
+				
+				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "The Object  was succesfully written to a file<br></html>");
 			}
 		});
 		

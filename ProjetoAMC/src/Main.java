@@ -347,7 +347,7 @@ public class Main {
 	    for (int i=0; i < exemplo3.length; i++) dataeg3.Add(exemplo3[i]);
 	    
 	    WeightedGraph grafo3 = new WeightedGraph(5, dataeg3);
-		System.out.println(grafo3);
+		System.out.println(grafo3); //TODO output dá NaN
 		System.out.println();
 		
 		// grafo pesado do enunciado do projeto
@@ -358,7 +358,7 @@ public class Main {
 		grafo3.Add(1, 3, 4);
 		grafo3.Add(1, 2, 1);
 		grafo3.Add(3, 2, 2);
-		System.out.println(grafo3);
+		System.out.println(grafo3); //TODO output dá NaN
 		System.out.println();
 		System.out.println(grafo3.getWeight(0,4));
 		System.out.println(grafo3.getWeight(3,0));

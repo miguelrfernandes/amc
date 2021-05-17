@@ -10,18 +10,20 @@ import java.util.Queue;
 		public WeightedGraph(int dim) {
 			
 			this.dim = dim;
-			this.ma = new double[dim][dim];}
+			this.ma = new double[dim][dim];
+		
+		}
 		
 		public WeightedGraph(int dim, Dataset T) {  // construcao grafo completo e pesado - PASSO 1 
 													// Está correto.
 			this.dim = dim;
 			this.ma = new double[dim][dim];
-			
-			for (int i = 0; i < dim; i++) { // ciclo para atribuir peso a cada aresta entre variavel k e variavel l
+				
+			for (int i = 0; i < dim; i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j
 				for (int j = 0; j < dim; j++) {
 					// calculamos a informacao mutua de cada variavel e guardamos
 					// este valor na aresta deste grafo pesado completo
-					double I = 0.0;
+					double I = 0;
 					
 					int m = dim;
 					// PASSO 2 - alterei as variaveis. acho que fica mais percetivel assim, de acordo com o enunciado
@@ -30,7 +32,7 @@ import java.util.Queue;
 							double prxixj = T.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  
 							double prxi = T.Count(new int[] {i}, new int[] {xi}) / m; 
 							double prxj = T.Count(new int[] {j}, new int[] {xj}) / m; 
-							if (prxixj == 0 || (prxixj / (prxi * prxj)) == 0) { // correto
+							if (prxixj == 0 && (prxixj / (prxi * prxj)) == 0) { // indeterminacao 0*-inf
 								I = I + 0;
 							}
 							else {
@@ -87,6 +89,7 @@ import java.util.Queue;
 		}
 		
 		// MST() está correta e funciona -> ver exemplo no main
+		// faria sentido retornar uma WeightedTree e nao uma Tree?
 		public Tree MST() {  // arvore de extensao maxima - soma dos pesos das arestas e maximal
 			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices //nao percebo, faz me sentido como esta
 			// determina a MST com o Algoritmo de Prim
