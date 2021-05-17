@@ -85,7 +85,7 @@ public class JanelaAprendizagem {
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Reading dataset<br></html>");
 				
-				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) { // leitura e gravação do dataset num ficheiro: "ds"
+				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) { // leitura e gravação do dataset "ds" num ficheiro
 				    String line;
 				    while ((line = br.readLine()) != null) {
 				       String[] values = line.split(",");
