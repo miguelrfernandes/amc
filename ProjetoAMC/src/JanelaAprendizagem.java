@@ -85,7 +85,7 @@ public class JanelaAprendizagem {
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Reading dataset<br></html>");
 				
-				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) { // leitura e gravaÁ„o do dataset "ds" num ficheiro
+				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) { // leitura e grava√ß√£o do dataset "ds" num ficheiro
 				    String line;
 				    while ((line = br.readLine()) != null) {
 				       String[] values = line.split(",");
@@ -107,6 +107,7 @@ public class JanelaAprendizagem {
 				       
 				       ds.Add(ret); // ArrayList<int[]>
 				    }
+				//TODO aqui nao falta br.close() ?
 				} catch (FileNotFoundException e1) {
 		
 					e1.printStackTrace();
@@ -178,11 +179,12 @@ public class JanelaAprendizagem {
 		            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 		            objectOut.writeObject(modelo); 
 		            objectOut.close();
+			    //TODO aqui nao falta fileOut.close() ?
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
 				
-				//TODO simplesmente pus o output na caixa em vez de na consola, mas n„o consigo perceber se o conte˙do est· a ser gravado no ficheiro
+				//TODO simplesmente pus o output na caixa em vez de na consola, mas n√£o consigo perceber se o conte√∫do est√° a ser gravado no ficheiro
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "The Object  was succesfully written to a file<br></html>");
 			}
