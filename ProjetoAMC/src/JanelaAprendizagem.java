@@ -62,7 +62,7 @@ public class JanelaAprendizagem {
 		// janela e suas caracteristicas
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 325);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -117,7 +117,36 @@ public class JanelaAprendizagem {
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Training the model<br></html>");
 				
-				WeightedGraph wg = new WeightedGraph(ds.getN(),ds);
+				WeightedGraph wg = new WeightedGraph(ds.getN());
+				int[] D = ds.getD();
+				int m = 0;
+				for (int freq : ds.Freqlist) m += freq;
+				
+				// PASSO 2
+				for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j
+					for (int j = 0; j < wg.getDim(); j++) {
+						// calculamos a informacao mutua de cada variavel e guardamos
+						// este valor na aresta deste grafo pesado completo
+						double I = 0;
+						
+						// PASSO 2 - alterei as variaveis. acho que fica mais percetivel assim, de acordo com o enunciado
+						for (int xi = 0; xi <= D[i]; xi++) { // ciclo que calcula o I, tendo em conta o dataset T
+							for (int xj = 0; xj <= D[j]; xj++) { 
+								double prxixj = ds.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  
+								double prxi = ds.Count(new int[] {i}, new int[] {xi}) / m; 
+								double prxj = ds.Count(new int[] {j}, new int[] {xj}) / m; 
+								if (prxixj == 0 && (prxixj / (prxi * prxj)) == 0) { 
+									I = I + 0;
+								}
+								else {
+									I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto
+								}
+							}
+						}
+						wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
+					}
+				}
+				System.out.println(wg); //TODO output dá NaN
 				Tree mst = wg.MST(); 
 				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
 				for (int i = 0; i < ds.getClassifierDomain(); i++) { 

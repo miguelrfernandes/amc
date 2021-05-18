@@ -13,7 +13,7 @@ import java.util.Queue;
 			this.ma = new double[dim][dim];
 		
 		}
-		
+		/*
 		public WeightedGraph(int dim, Dataset T) {  // construcao grafo completo e pesado - PASSO 1 
 													// Está correto.
 			this.dim = dim;
@@ -44,7 +44,7 @@ import java.util.Queue;
 				}
 			}
 		}
-				
+		*/		
 		
 		public int getDim() {
 			return this.dim;

@@ -340,31 +340,24 @@ public class Main {
 	    System.out.println("------------------------------ WEIGHTED GRAPH ------------------------------");
 	    System.out.println();
 	    
-	    int[][] exemplo3 = {{5,100,5,6,3,0},{5,44,5,6,3,1},{16,100,5,6,3,0},{5,100,5,28,3,0},{5,100,5,6,3,1},{5,100,5,6,3,0}};
-	    
-	    Dataset dataeg3 = new Dataset(5);
-	    
-	    for (int i=0; i < exemplo3.length; i++) dataeg3.Add(exemplo3[i]);
-	    
-	    WeightedGraph grafo3 = new WeightedGraph(5, dataeg3);
-		System.out.println(grafo3); //TODO output dá NaN
-		System.out.println();
-		
 		// grafo pesado do enunciado do projeto
-		grafo3.Add(0, 4, 8);
-		grafo3.Add(0, 3, 7);
-		grafo3.Add(0, 1, 3);
-		grafo3.Add(4, 3, 3);
-		grafo3.Add(1, 3, 4);
-		grafo3.Add(1, 2, 1);
-		grafo3.Add(3, 2, 2);
-		System.out.println(grafo3); //TODO output dá NaN
+		// teste da MST()
+		
+		WeightedGraph gr = new WeightedGraph(5);
+		gr.Add(0, 4, 8);
+		gr.Add(0, 3, 7);
+		gr.Add(0, 1, 3);
+		gr.Add(4, 3, 3);
+		gr.Add(1, 3, 4);
+		gr.Add(1, 2, 1);
+		gr.Add(3, 2, 2);
+		System.out.println(gr); 
 		System.out.println();
-		System.out.println(grafo3.getWeight(0,4));
-		System.out.println(grafo3.getWeight(3,0));
-		System.out.println(grafo3.getWeight(2,3));
+		System.out.println(gr.getWeight(0,4));
+		System.out.println(gr.getWeight(3,0));
+		System.out.println(gr.getWeight(2,3));
 		System.out.println();
-		System.out.println(grafo3.MST()); //suposto retornar "Tree [pais=[-1,3,3,0,0]]" 
+		System.out.println(gr.MST()); //suposto retornar "Tree [pais=[-1,3,3,0,0]]" 
 	
 	}
 }

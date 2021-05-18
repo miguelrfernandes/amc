@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class Dataset {
 	protected ArrayList<int[]> data;
-	private int n; // numero de variaveis aleatorias, o java começa a conta do 0
+	private int n; // numero de variaveis aleatorias, o java comeca a contar do 0
 	private int[] D; // lista com os valores maximos das variaveis aleatorias, sem a classe variavel da classe
 	protected ArrayList<Integer> Freqlist; // lista de frequencias de cada classe do dataset
 
@@ -127,7 +127,7 @@ public class Dataset {
 		}
 	
 	// metodo que recebe um lista de variaveis e uma lista dos seus valores respetivos e faz uma contagem
-	// recebe uma lista de variáveis e valores destas e retorna o número de vezes que estas variáveis tomam simultaneamente os esses valores no dataset.
+	// recebe uma lista de variaveis e valores destas e retorna o numero de vezes que estas variaveis tomam simultaneamente os esses valores no dataset.
 	public int Count(int[] vars, int[] val) {
 		// nao precisamos de confirmar se o valores pertencem ao dominio de cada variavel
 		// pois esta funcao pressupoe que isto ja tenha sido verificado previamente no classifier
