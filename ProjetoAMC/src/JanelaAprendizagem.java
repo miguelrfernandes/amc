@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class JanelaAprendizagem {
 
-	private JFrame frame;
+	private JFrame frmJanelaAprendizagem;
 	private JTextField txtDsPath;
 	private JTextField txtSavePath;
 
@@ -39,7 +39,7 @@ public class JanelaAprendizagem {
 			public void run() {
 				try {
 					JanelaAprendizagem window = new JanelaAprendizagem();
-					window.frame.setVisible(true);
+					window.frmJanelaAprendizagem.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,15 +60,15 @@ public class JanelaAprendizagem {
 	private void initialize() {
 		
 		// janela e suas caracteristicas
-		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 325);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmJanelaAprendizagem = new JFrame();
+		frmJanelaAprendizagem.setTitle("Janela — Aprendizagem");
+		frmJanelaAprendizagem.setBounds(100, 100, 450, 325);
+		frmJanelaAprendizagem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmJanelaAprendizagem.getContentPane().setLayout(null);
 		
 		JLabel lblStatus = new JLabel("");
 		lblStatus.setBounds(37, 185, 388, 81);
-		frame.getContentPane().add(lblStatus);
+		frmJanelaAprendizagem.getContentPane().add(lblStatus);
 		
 		JButton btnNewButton = new JButton("Learn");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -108,6 +108,7 @@ public class JanelaAprendizagem {
 				       ds.Add(ret); // ArrayList<int[]>
 				    }
 				//TODO aqui nao falta br.close() ?
+				// nao tenho a certeza se e necessario neste caso...
 				} catch (FileNotFoundException e1) {
 		
 					e1.printStackTrace();
@@ -130,7 +131,7 @@ public class JanelaAprendizagem {
 						// este valor na aresta deste grafo pesado completo
 						double I = 0;
 						
-						// PASSO 2 - alterei as variaveis. acho que fica mais percetivel assim, de acordo com o enunciado
+						// PASSO 2 - as variaveis estao definidas de acordo com o enunciado
 						for (int xi = 0; xi <= D[i]; xi++) { // ciclo que calcula o I, tendo em conta o dataset T
 							for (int xj = 0; xj <= D[j]; xj++) { 
 								double prxixj = ds.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  
@@ -142,6 +143,8 @@ public class JanelaAprendizagem {
 								else {
 									I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto
 								}
+								// para debugging:
+								if (prxixj / (prxi * prxj) == 0) System.out.println("Erro — wg NaN causado por log(0)");
 							}
 						}
 						wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
@@ -193,7 +196,7 @@ public class JanelaAprendizagem {
 		// Caixas de texto dentro da janela, para colocacao de diretorios
 		
 		btnNewButton.setBounds(174, 149, 117, 29);
-		frame.getContentPane().add(btnNewButton);
+		frmJanelaAprendizagem.getContentPane().add(btnNewButton);
 		
 		//Create a file chooser
 		final JFileChooser fc = new JFileChooser();
@@ -218,12 +221,12 @@ public class JanelaAprendizagem {
 		});
 		txtDsPath.setText("Click here to select the path");
 		txtDsPath.setBounds(38, 43, 253, 26);
-		frame.getContentPane().add(txtDsPath);
+		frmJanelaAprendizagem.getContentPane().add(txtDsPath);
 		txtDsPath.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Dataset path");
 		lblNewLabel.setBounds(38, 15, 89, 16);
-		frame.getContentPane().add(lblNewLabel);
+		frmJanelaAprendizagem.getContentPane().add(lblNewLabel);
 		
 		txtSavePath = new JTextField();
 		txtSavePath.setText("Click here to select the path");
@@ -242,12 +245,12 @@ public class JanelaAprendizagem {
 			}
 		});
 		txtSavePath.setBounds(38, 109, 253, 26);
-		frame.getContentPane().add(txtSavePath);
+		frmJanelaAprendizagem.getContentPane().add(txtSavePath);
 		txtSavePath.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Save path for the model");
 		lblNewLabel_1.setBounds(38, 81, 149, 16);
-		frame.getContentPane().add(lblNewLabel_1);
+		frmJanelaAprendizagem.getContentPane().add(lblNewLabel_1);
 		
 		
 	}

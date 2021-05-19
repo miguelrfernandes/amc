@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class JanelaClassificador {
 
-	private JFrame frame;
+	private JFrame frmJanelaClassificador;
 	private JTextField txtModelPath;
 	private JTextField txtSample;
 
@@ -31,7 +31,7 @@ public class JanelaClassificador {
 			public void run() {
 				try {
 					JanelaClassificador window = new JanelaClassificador();
-					window.frame.setVisible(true);
+					window.frmJanelaClassificador.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,14 +50,15 @@ public class JanelaClassificador {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmJanelaClassificador = new JFrame();
+		frmJanelaClassificador.setTitle("Janela — Classificador");
+		frmJanelaClassificador.setBounds(100, 100, 450, 300);
+		frmJanelaClassificador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmJanelaClassificador.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Model");
 		lblNewLabel.setBounds(6, 6, 61, 16);
-		frame.getContentPane().add(lblNewLabel);
+		frmJanelaClassificador.getContentPane().add(lblNewLabel);
 		
 
 		
@@ -82,12 +83,12 @@ public class JanelaClassificador {
 		});
 		txtModelPath.setText("Click here to select the path for the file");
 		txtModelPath.setBounds(6, 34, 259, 26);
-		frame.getContentPane().add(txtModelPath);
+		frmJanelaClassificador.getContentPane().add(txtModelPath);
 		txtModelPath.setColumns(10);
 		
 		JLabel lblModelStatus = new JLabel("Model not yet loaded");
 		lblModelStatus.setBounds(145, 77, 160, 16);
-		frame.getContentPane().add(lblModelStatus);
+		frmJanelaClassificador.getContentPane().add(lblModelStatus);
 		
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -111,21 +112,21 @@ public class JanelaClassificador {
 			}
 		});
 		btnNewButton.setBounds(16, 72, 117, 29);
-		frame.getContentPane().add(btnNewButton);
+		frmJanelaClassificador.getContentPane().add(btnNewButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("Sample");
-		lblNewLabel_1.setBounds(6, 113, 61, 16);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel lblNewLabel_1 = new JLabel("<html>Sample — x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>");
+		lblNewLabel_1.setBounds(6, 115, 141, 24);
+		frmJanelaClassificador.getContentPane().add(lblNewLabel_1);
 		
 		txtSample = new JTextField();
-		txtSample.setText("x1,x2,...,xn");
+		txtSample.setText("0,...,0");
 		txtSample.setBounds(6, 141, 130, 26);
-		frame.getContentPane().add(txtSample);
+		frmJanelaClassificador.getContentPane().add(txtSample);
 		txtSample.setColumns(10);
 		
 		JLabel lblResult = new JLabel("Result: ");
-		lblResult.setBounds(26, 220, 61, 16);
-		frame.getContentPane().add(lblResult);
+		lblResult.setBounds(26, 228, 61, 16);
+		frmJanelaClassificador.getContentPane().add(lblResult);
 		
 		JButton btnClassify = new JButton("Classify");
 		btnClassify.addMouseListener(new MouseAdapter() {
@@ -147,13 +148,13 @@ public class JanelaClassificador {
 			}
 		});
 		btnClassify.setBounds(16, 179, 117, 29);
-		frame.getContentPane().add(btnClassify);
+		frmJanelaClassificador.getContentPane().add(btnClassify);
 		
 		
 		
 		JButton btnNewButton_2 = new JButton("Reset");
 		btnNewButton_2.setBounds(148, 141, 117, 29);
-		frame.getContentPane().add(btnNewButton_2);
+		frmJanelaClassificador.getContentPane().add(btnNewButton_2);
 		
 		
 	}

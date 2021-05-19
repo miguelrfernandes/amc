@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.LinkedList;
 
 public class WeightedTree { 
 	double [][][][] ma;
@@ -48,19 +47,5 @@ public class WeightedTree {
 	
 	public double[][] getWeight(int i, int j) {
 		return ma[i][j];
-	}
-	
-	public LinkedList<Integer> offspring(int o) {
-		LinkedList<Integer> r = new LinkedList<Integer>();
-		if (o>=0 && o<this.dim) {
-			for (int d = 0; d<this.dim; d++) {
-				if (ma[o][d][0][0] != 0.0){
-					r.add(d);
-				}
-			}
-			return r;
-		} else {
-			throw new AssertionError("node not in graph");
-		}
 	}
 }
