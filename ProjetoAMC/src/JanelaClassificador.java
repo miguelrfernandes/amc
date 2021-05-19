@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 public class JanelaClassificador {
 
@@ -18,6 +19,10 @@ public class JanelaClassificador {
 	private JTextField txtModelPath;
 	private JTextField txtSample;
 
+	
+	// Classifier
+	Classifier classificador = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -54,13 +59,15 @@ public class JanelaClassificador {
 		lblNewLabel.setBounds(6, 6, 61, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
+
+		
 		//Create a file chooser
 		final JFileChooser fc = new JFileChooser();
 		
 		txtModelPath = new JTextField();
 		txtModelPath.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) { // TODO adicionar restricao para ficheiros com a nossa implementacao modelo
 				//In response to a button click:
 				fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				int returnVal = fc.showOpenDialog(fc); //showOpenDialog(aComponent);
@@ -78,6 +85,10 @@ public class JanelaClassificador {
 		frame.getContentPane().add(txtModelPath);
 		txtModelPath.setColumns(10);
 		
+		JLabel lblModelStatus = new JLabel("Model not yet loaded");
+		lblModelStatus.setBounds(145, 77, 160, 16);
+		frame.getContentPane().add(lblModelStatus);
+		
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -87,11 +98,12 @@ public class JanelaClassificador {
 		            FileInputStream fileIn = new FileInputStream(modelPath);
 		            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 		 
-		            Object obj = objectIn.readObject(); // nao esta correto
-		            // classificador = objectIn.readObject();
+		            classificador = (Classifier)objectIn.readObject();
 		 
 		            System.out.println("The Object has been read from the file");
+		            lblModelStatus.setText("OK!");
 		            objectIn.close();
+		            fileIn.close();
 		 
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
@@ -120,9 +132,18 @@ public class JanelaClassificador {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String input = txtSample.getText();
-				//int[] sample = new int[];
-				//String result = classificador.classify(sample);
-				//lblResult.setText(result);
+				String[] values = input.split(",");
+				ArrayList<Integer> v = new ArrayList<Integer>();
+				for (String a : values) { 
+		    	   v.add(Integer.parseInt(a));
+				}
+				int[] sample = new int[classificador.getN()]; // TODO adicionar erro se v.size() != n
+				for (int i=0; i < v.size(); i++)
+				{
+		           sample[i] = v.get(i).intValue();
+				}	
+				String result = "Resultado = " + classificador.classify(sample);
+				lblResult.setText(result);
 			}
 		});
 		btnClassify.setBounds(16, 179, 117, 29);
@@ -134,8 +155,6 @@ public class JanelaClassificador {
 		btnNewButton_2.setBounds(148, 141, 117, 29);
 		frame.getContentPane().add(btnNewButton_2);
 		
-		JLabel lblModelStatus = new JLabel("Model not yet loaded");
-		lblModelStatus.setBounds(145, 77, 160, 16);
-		frame.getContentPane().add(lblModelStatus);
+		
 	}
 }

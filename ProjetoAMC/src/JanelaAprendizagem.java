@@ -147,15 +147,15 @@ public class JanelaAprendizagem {
 						wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
 					}
 				}
-				System.out.println(wg); //TODO output dá NaN
+				System.out.println(wg); //TODO output dï¿½ NaN
 				Tree mst = wg.MST(); 
 				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
 				for (int i = 0; i < ds.getClassifierDomain(); i++) { 
 					mrftList.add(new MRFTree(mst, ds.Fiber(i)));
 				}
 				
-				//Classifier classificador = new Classifier(mrftList, ds.Freqlist); --> Outra Janela
-				Model modelo = new Model(mrftList, ds.Freqlist);
+				Classifier classificador = new Classifier(mrftList, ds.Freqlist); // --> Outra Janela
+				//Model modelo = new Model(mrftList, ds.Freqlist);
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Saving the model<br></html>");
 				
@@ -177,7 +177,7 @@ public class JanelaAprendizagem {
 					 
 		            FileOutputStream fileOut = new FileOutputStream(savePath + "modelo");
 		            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-		            objectOut.writeObject(modelo); 
+		            objectOut.writeObject(classificador); 
 		            objectOut.close();
 			    //TODO aqui nao falta fileOut.close() ?
 		        } catch (Exception ex) {

@@ -1,7 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.Serializable;
 
-public class Classifier {  
+public class Classifier implements Serializable{  
+	//default serialVersion id
+    private static final long serialVersionUID = 1L;
 
 	// atributos
 	private ArrayList<MRFTree> MRFTList;
@@ -42,6 +46,11 @@ public class Classifier {
 		
 		if (erro) return r;
 		else { throw new AssertionError("erro");}
+	}
+	
+	// TODO verificar se esta correto
+	public int getN() {
+		return FreqList.size();
 	}
 }
 
