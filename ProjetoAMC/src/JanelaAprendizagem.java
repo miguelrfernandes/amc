@@ -1,8 +1,6 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-//import java.awt.GridLayout;
-//import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
@@ -14,16 +12,15 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 
-//import java.io.File;  // Import the File class
+
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.FileOutputStream;
 import java.io.FileReader;
-//import java.io.FileWriter;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.Scanner; // Import the Scanner class to read text files
+
 
 public class JanelaAprendizagem {
 
@@ -76,21 +73,17 @@ public class JanelaAprendizagem {
 			public void mouseClicked(MouseEvent e) {
 				lblStatus.setText("<html>Training initiated<br></html>");
 				
-				
 				String dspath = txtDsPath.getText();
-				
-				//int n = Integer.parseInt(txtSize.getText());
 				
 				Dataset ds = null;
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Reading dataset<br></html>");
 				
-				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) { // leitura e gravação do dataset "ds" num ficheiro
+				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) { // leitura do dataset "ds" de um ficheiro .csv
 				    String line;
 				    while ((line = br.readLine()) != null) {
 				       String[] values = line.split(",");
 				       ArrayList<Integer> v = new ArrayList<Integer>();
-				       // int v[] = new int[n];
 				       for (String a : values) { 
 				    	   v.add(Integer.parseInt(a));
 				       }
@@ -105,7 +98,7 @@ public class JanelaAprendizagem {
 				       //lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)+ "" + v.size() + "" + ds.getN()
 				    	//	   + "" + ret  + "Reading dataset<br></html>");
 				       
-				       ds.Add(ret); // ArrayList<int[]>
+				       ds.Add(ret);
 				    }
 				//TODO aqui nao falta br.close() ?
 				// nao tenho a certeza se e necessario neste caso...
@@ -158,14 +151,13 @@ public class JanelaAprendizagem {
 				}
 				
 				Classifier classificador = new Classifier(mrftList, ds.Freqlist); // --> Outra Janela
-				//Model modelo = new Model(mrftList, ds.Freqlist);
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Saving the model<br></html>");
 				
 				String savePath = txtSavePath.getText();
 				
 				try {
-				      File myObj = new File(savePath + "modelo");
+				      File myObj = new File(savePath + "modelo.ser");
 				      if (myObj.createNewFile()) {
 				        System.out.println("File created: " + myObj.getName());
 				      } else {
@@ -178,18 +170,17 @@ public class JanelaAprendizagem {
 				
 				try {
 					 
-		            FileOutputStream fileOut = new FileOutputStream(savePath + "modelo");
+		            FileOutputStream fileOut = new FileOutputStream(savePath + "modelo.ser");
 		            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 		            objectOut.writeObject(classificador); 
 		            objectOut.close();
-			    //TODO aqui nao falta fileOut.close() ?
+		            fileOut.close();
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
 				
-				//TODO simplesmente pus o output na caixa em vez de na consola, mas nao consigo perceber se o conteudo esta a ser gravado no ficheiro
-				
-				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "The Object  was succesfully written to a file<br></html>");
+				//TODO nao consigo perceber se o conteudo esta a ser gravado no ficheiro
+				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "The Classifier model was succesfully written to a file<br></html>");
 			}
 		});
 		
@@ -207,15 +198,10 @@ public class JanelaAprendizagem {
 			public void mouseClicked(MouseEvent e) {
 				//In response to a button click:
 				fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				int returnVal = fc.showOpenDialog(fc); //showOpenDialog(aComponent);
+				int returnVal = fc.showOpenDialog(fc);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 		            File file = fc.getSelectedFile();
-		            //This is where a real application would open the file.
-		            //log.append("Opening: " + file.getName() + "." + newline);
 		            txtDsPath.setText(file.getPath());
-		            
-		        } else {
-		            //log.append("Open command cancelled by user." + newline);
 		        }
 			}
 		});
@@ -235,12 +221,10 @@ public class JanelaAprendizagem {
 			public void mouseClicked(MouseEvent e) {
 				//In response to a button click:
 				fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				int returnVal = fc.showOpenDialog(fc); //showOpenDialog(aComponent);
+				int returnVal = fc.showOpenDialog(fc);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 		            File directory = fc.getSelectedFile();
-		            //This is where a real application would open the file.
 		            txtSavePath.setText(directory.getPath() + "/");
-		            
 		        }
 			}
 		});
@@ -251,7 +235,5 @@ public class JanelaAprendizagem {
 		JLabel lblNewLabel_1 = new JLabel("Save path for the model");
 		lblNewLabel_1.setBounds(38, 81, 149, 16);
 		frmJanelaAprendizagem.getContentPane().add(lblNewLabel_1);
-		
-		
 	}
 }

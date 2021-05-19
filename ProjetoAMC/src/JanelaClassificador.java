@@ -71,13 +71,10 @@ public class JanelaClassificador {
 			public void mouseClicked(MouseEvent e) { // TODO adicionar restricao para ficheiros com a nossa implementacao modelo
 				//In response to a button click:
 				fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				int returnVal = fc.showOpenDialog(fc); //showOpenDialog(aComponent);
+				int returnVal = fc.showOpenDialog(fc);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 		            File file = fc.getSelectedFile();
-		            //log.append("Opening: " + file.getName() + "." + newline);
 		            txtModelPath.setText(file.getPath());
-		        } else {
-		            //log.append("Open command cancelled by user." + newline);
 		        }
 			}
 		});
@@ -101,7 +98,7 @@ public class JanelaClassificador {
 		 
 		            classificador = (Classifier)objectIn.readObject();
 		 
-		            System.out.println("The Object has been read from the file");
+		            System.out.println("The Classifier model has been read from the file");
 		            lblModelStatus.setText("OK!");
 		            objectIn.close();
 		            fileIn.close();
@@ -155,7 +152,5 @@ public class JanelaClassificador {
 		JButton btnNewButton_2 = new JButton("Reset");
 		btnNewButton_2.setBounds(148, 141, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnNewButton_2);
-		
-		
 	}
 }
