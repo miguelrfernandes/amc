@@ -100,8 +100,7 @@ public class JanelaAprendizagem {
 				       
 				       ds.Add(ret);
 				    }
-				//TODO aqui nao falta br.close() ?
-				// nao tenho a certeza se e necessario neste caso...
+				br.close();
 				} catch (FileNotFoundException e1) {
 		
 					e1.printStackTrace();
