@@ -100,7 +100,7 @@ public class JanelaAprendizagem {
 				       
 				       ds.Add(ret);
 				    }
-				br.close();
+				    br.close();
 				} catch (FileNotFoundException e1) {
 		
 					e1.printStackTrace();
@@ -118,7 +118,11 @@ public class JanelaAprendizagem {
 					
 					Dataset dsfiber = ds.Fiber(k);
 					WeightedGraph wg = new WeightedGraph(ds.getN());
-					int[] D = dsfiber.getD();
+					
+					int[] D = dsfiber.getD(); //TODO isto aqui nao faz nada pq nos assumimos fibra.D = this.D no dataset
+											  // e correto assumir valores maximos do dataset fibrado, tendo em conta o dataset original?
+											  // assim temos valores xi e xj que nao ocorrem na fibra, logo prxi,prxj = 0 e ptt temos log(x/0) = NaN
+					
 					int m = ds.Freqlist.get(k); // m = dimensão da fibra
 				
 					for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j
