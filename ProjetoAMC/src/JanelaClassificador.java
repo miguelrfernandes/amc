@@ -51,7 +51,7 @@ public class JanelaClassificador {
 	 */
 	private void initialize() {
 		frmJanelaClassificador = new JFrame();
-		frmJanelaClassificador.setTitle("Janela — Classificador");
+		frmJanelaClassificador.setTitle("Janela do Classificador");
 		frmJanelaClassificador.setBounds(100, 100, 450, 300);
 		frmJanelaClassificador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmJanelaClassificador.getContentPane().setLayout(null);
@@ -111,7 +111,7 @@ public class JanelaClassificador {
 		btnNewButton.setBounds(16, 72, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnNewButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("<html>Sample — x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>");
+		JLabel lblNewLabel_1 = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>");
 		lblNewLabel_1.setBounds(6, 115, 141, 24);
 		frmJanelaClassificador.getContentPane().add(lblNewLabel_1);
 		
@@ -135,12 +135,15 @@ public class JanelaClassificador {
 				for (String a : values) { 
 		    	   v.add(Integer.parseInt(a));
 				}
-				int[] sample = new int[classificador.getN()]; // TODO adicionar erro se v.size() != n
+				int[] sample = new int[classificador.getN()]; //TODO da erro. Nao da para ir buscar o n ao ficheiro do modelo?
+				if (v.size() != sample.length) {
+					System.out.println("Erro: A amostra fornecida nao tem o numero de medicoes correto");
+				}
 				for (int i=0; i < v.size(); i++)
 				{
 		           sample[i] = v.get(i).intValue();
 				}	
-				String result = "Resultado = " + classificador.classify(sample);
+				String result = "Resultado = " + classificador.classify(sample); 
 				lblResult.setText(result);
 			}
 		});

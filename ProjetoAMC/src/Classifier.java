@@ -48,9 +48,10 @@ public class Classifier implements Serializable{
 		else { throw new AssertionError("erro");}
 	}
 	
-	// TODO verificar se esta correto
+	// TODO nao esta correto. Freq.List.size() da o numero de classes, nao de variaveis
+	// corrigi
 	public int getN() {
-		return FreqList.size();
+		return MRFTList.get(0).n;
 	}
 }
 

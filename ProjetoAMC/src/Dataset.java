@@ -28,9 +28,10 @@ public class Dataset {
 		return n;
 	}
 	
+	/*
 	public int getClassifierDomain() {
 		return data.get(0)[n];
-	}
+	}*/
 
 	public int[] getD() {
 		return D;

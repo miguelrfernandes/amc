@@ -8,7 +8,7 @@ public class MRFTree {
 	private int[] e = new int[2]; // aresta especial
 	private int mc; // dimensao da fibra do dataset
 	private int m; // tamanho do dataset
-	private int n; // numero de medicoes
+	protected int n; // numero de medicoes
 	private int[] D; // dimensao do dominio do dataset
 	private double delta = 0.2; // pseudo-contagem
 	private ArrayList<int[]> E; // arestas
@@ -21,10 +21,10 @@ public class MRFTree {
 		this.tfiber = tfiber;
 		this.E = new ArrayList<int[]>();
 		this.D = new int[n];
-		n = tfiber.getN();
-		mc = tfiber.data.size();
-		D = tfiber.getD();
-		markovtree = new WeightedTree(n);
+		this.n = tfiber.getN();
+		this.mc = tfiber.data.size();
+		this.D = tfiber.getD();
+		this.markovtree = new WeightedTree(n);
 		
 		
 		// fixa-se o primeiro no como um no da aresta especial

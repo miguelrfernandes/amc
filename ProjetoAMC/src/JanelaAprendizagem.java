@@ -58,7 +58,7 @@ public class JanelaAprendizagem {
 		
 		// janela e suas caracteristicas
 		frmJanelaAprendizagem = new JFrame();
-		frmJanelaAprendizagem.setTitle("Janela — Aprendizagem");
+		frmJanelaAprendizagem.setTitle("Janela de Aprendizagem");
 		frmJanelaAprendizagem.setBounds(100, 100, 450, 325);
 		frmJanelaAprendizagem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmJanelaAprendizagem.getContentPane().setLayout(null);
@@ -137,7 +137,7 @@ public class JanelaAprendizagem {
 									I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto
 								}
 								// para debugging:
-								if (prxixj / (prxi * prxj) == 0) System.out.println("Erro — wg NaN causado por log(0)");
+								if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0)");
 							}
 						}
 						wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
@@ -146,7 +146,7 @@ public class JanelaAprendizagem {
 				System.out.println(wg); //TODO output d� NaN
 				Tree mst = wg.MST(); 
 				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
-				for (int i = 0; i < ds.getClassifierDomain(); i++) { 
+				for (int i = 0; i < ds.Freqlist.size(); i++) { 
 					mrftList.add(new MRFTree(mst, ds.Fiber(i)));
 				}
 				
