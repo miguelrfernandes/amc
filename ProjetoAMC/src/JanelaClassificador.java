@@ -96,7 +96,9 @@ public class JanelaClassificador {
 		            FileInputStream fileIn = new FileInputStream(modelPath);
 		            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 		 
-		            classificador = (Classifier)objectIn.readObject();
+		            // lemos o ficheiro e guardamos este Objeto na variável classificador
+		            // e necessario usar um cast (Classifier) para definir qual vai ser a classe do objeto que vai ser lido
+		            classificador = (Classifier) objectIn.readObject();
 		 
 		            System.out.println("The Classifier model has been read from the file");
 		            lblModelStatus.setText("OK!");
@@ -122,29 +124,33 @@ public class JanelaClassificador {
 		txtSample.setColumns(10);
 		
 		JLabel lblResult = new JLabel("Result: ");
-		lblResult.setBounds(26, 228, 61, 16);
+		lblResult.setBounds(26, 228, 169, 16);
 		frmJanelaClassificador.getContentPane().add(lblResult);
 		
 		JButton btnClassify = new JButton("Classify");
 		btnClassify.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String input = txtSample.getText();
-				String[] values = input.split(",");
-				ArrayList<Integer> v = new ArrayList<Integer>();
-				for (String a : values) { 
-		    	   v.add(Integer.parseInt(a));
+				try {
+					String input = txtSample.getText();
+					String[] values = input.split(",");
+					ArrayList<Integer> v = new ArrayList<Integer>();
+					for (String a : values) { 
+			    	   v.add(Integer.parseInt(a));
+					}
+					int[] sample = new int[classificador.getN()]; //TODO da erro. Nao da para ir buscar o n ao ficheiro do modelo?
+					if (v.size() != sample.length) {
+						System.out.println("Erro: A amostra fornecida nao tem o numero de medicoes correto");
+					}
+					for (int i=0; i < v.size(); i++)
+					{
+			           sample[i] = v.get(i).intValue();
+					}	
+					String result = "Result : " + classificador.classify(sample); 
+					lblResult.setText(result);
+				} catch (Exception error) {
+					lblResult.setText("Result : Error");
 				}
-				int[] sample = new int[classificador.getN()]; //TODO da erro. Nao da para ir buscar o n ao ficheiro do modelo?
-				if (v.size() != sample.length) {
-					System.out.println("Erro: A amostra fornecida nao tem o numero de medicoes correto");
-				}
-				for (int i=0; i < v.size(); i++)
-				{
-		           sample[i] = v.get(i).intValue();
-				}	
-				String result = "Resultado = " + classificador.classify(sample); 
-				lblResult.setText(result);
 			}
 		});
 		btnClassify.setBounds(16, 179, 117, 29);
@@ -152,8 +158,15 @@ public class JanelaClassificador {
 		
 		
 		
-		JButton btnNewButton_2 = new JButton("Reset");
-		btnNewButton_2.setBounds(148, 141, 117, 29);
-		frmJanelaClassificador.getContentPane().add(btnNewButton_2);
+		JButton btnReset = new JButton("Reset");
+		btnReset.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtSample.setText("0,...,0");
+				lblResult.setText("Result :");
+			}
+		});
+		btnReset.setBounds(148, 141, 117, 29);
+		frmJanelaClassificador.getContentPane().add(btnReset);
 	}
 }

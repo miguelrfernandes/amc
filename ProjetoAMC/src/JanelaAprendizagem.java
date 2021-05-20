@@ -79,6 +79,8 @@ public class JanelaAprendizagem {
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Reading dataset<br></html>");
 				
+				// TODO passar este codigo para a classe dataset?
+				
 				try (BufferedReader br = new BufferedReader(new FileReader(dspath))) { // leitura do dataset "ds" de um ficheiro .csv
 				    String line;
 				    while ((line = br.readLine()) != null) {
@@ -123,7 +125,7 @@ public class JanelaAprendizagem {
 											  // e correto assumir valores maximos do dataset fibrado, tendo em conta o dataset original?
 											  // assim temos valores xi e xj que nao ocorrem na fibra, logo prxi,prxj = 0 e ptt temos log(x/0) = NaN
 					
-					int m = ds.Freqlist.get(k); // m = dimensão da fibra
+					int m = ds.Freqlist.get(k); // m = dimensï¿½o da fibra
 				
 					for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j
 						for (int j = 0; j < wg.getDim(); j++) {
@@ -148,7 +150,7 @@ public class JanelaAprendizagem {
 							wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
 						}
 					}
-					System.out.println(wg); //TODO output dá NaN
+					System.out.println(wg); //TODO output dï¿½ NaN
 					Tree mst = wg.MST(); 
 					mrftList.add(new MRFTree(mst, dsfiber));
 				}
@@ -159,6 +161,7 @@ public class JanelaAprendizagem {
 				
 				String savePath = txtSavePath.getText();
 				
+				// TODO passar este codigo para a classe classifier?
 				try {
 				      File myObj = new File(savePath + "modelo.ser");
 				      if (myObj.createNewFile()) {
@@ -207,7 +210,7 @@ public class JanelaAprendizagem {
 		        }
 			}
 		});
-		txtDsPath.setText("Click here to select the path");
+		txtDsPath.setText("Click here to select the dataset path");
 		txtDsPath.setBounds(38, 43, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtDsPath);
 		txtDsPath.setColumns(10);
@@ -217,7 +220,7 @@ public class JanelaAprendizagem {
 		frmJanelaAprendizagem.getContentPane().add(lblNewLabel);
 		
 		txtSavePath = new JTextField();
-		txtSavePath.setText("Click here to select the path");
+		txtSavePath.setText("Click here to select a directory");
 		txtSavePath.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
