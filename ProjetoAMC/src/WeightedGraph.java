@@ -89,9 +89,11 @@ import java.util.Queue;
 		}
 		
 		// MST() está correta e funciona -> ver exemplo no main
-		// faria sentido retornar uma WeightedTree e nao uma Tree?
-		public Tree MST() {  // arvore de extensao maxima - soma dos pesos das arestas e maximal
-			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices //nao percebo, faz me sentido como esta
+		// faria sentido retornar uma WeightedTree e nao uma Tree? -- deve retornar uma Tree
+		public Tree MST() {  // arvore de extensao maximal - soma dos pesos das arestas e maximal
+			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices //nao percebo, faz me sentido como esta 
+			// Bea: acho que deve ser dim - 1, pois dim = n (nº de variáveis) e a tree recebe o numero de arestas (=nº de pais)
+			
 			// determina a MST com o Algoritmo de Prim
 			
 			// lista dos custos maximos para cada no
