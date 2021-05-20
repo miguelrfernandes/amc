@@ -111,42 +111,42 @@ public class JanelaAprendizagem {
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Training the model<br></html>");
 				
-				WeightedGraph wg = new WeightedGraph(ds.getN());
-				int[] D = ds.getD();
-				int m = 0;
-				for (int freq : ds.Freqlist) m += freq;
-				
 				// PASSO 2
-				for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j
-					for (int j = 0; j < wg.getDim(); j++) {
-						// calculamos a informacao mutua de cada variavel e guardamos
-						// este valor na aresta deste grafo pesado completo
-						double I = 0;
-						
-						// PASSO 2 - as variaveis estao definidas de acordo com o enunciado
-						for (int xi = 0; xi <= D[i]; xi++) { // ciclo que calcula o I, tendo em conta o dataset T
-							for (int xj = 0; xj <= D[j]; xj++) { 
-								double prxixj = ds.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  
-								double prxi = ds.Count(new int[] {i}, new int[] {xi}) / m; 
-								double prxj = ds.Count(new int[] {j}, new int[] {xj}) / m; 
-								if (prxixj == 0 && (prxixj / (prxi * prxj)) == 0) { 
-									I = I + 0;
-								}
-								else {
-									I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto
-								}
-								// para debugging:
-								if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0)");
-							}
-						}
-						wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
-					}
-				}
-				System.out.println(wg); //TODO output dï¿½ NaN
-				Tree mst = wg.MST(); 
 				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
-				for (int i = 0; i < ds.Freqlist.size(); i++) { 
-					mrftList.add(new MRFTree(mst, ds.Fiber(i)));
+				
+				for (int k = 0; k < ds.Freqlist.size(); k++) { 
+					
+					Dataset dsfiber = ds.Fiber(k);
+					WeightedGraph wg = new WeightedGraph(ds.getN());
+					int[] D = dsfiber.getD();
+					int m = ds.Freqlist.get(k); // m = dimensão da fibra
+				
+					for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j
+						for (int j = 0; j < wg.getDim(); j++) {
+							
+							double I = 0;
+						
+							for (int xi = 0; xi <= D[i]; xi++) { 
+								for (int xj = 0; xj <= D[j]; xj++) { 
+									double prxixj = dsfiber.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  
+									double prxi = dsfiber.Count(new int[] {i}, new int[] {xi}) / m; 
+									double prxj = dsfiber.Count(new int[] {j}, new int[] {xj}) / m; 
+									if (prxixj == 0 && (prxixj / (prxi * prxj)) == 0) { 
+										I = I + 0;
+									}
+									else {
+										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto
+									}
+									// para debugging:
+									if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0)");
+								}
+							}
+							wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
+						}
+					}
+					System.out.println(wg); //TODO output dá NaN
+					Tree mst = wg.MST(); 
+					mrftList.add(new MRFTree(mst, dsfiber));
 				}
 				
 				Classifier classificador = new Classifier(mrftList, ds.Freqlist); // --> Outra Janela
@@ -178,7 +178,6 @@ public class JanelaAprendizagem {
 		            ex.printStackTrace();
 		        }
 				
-				//TODO nao consigo perceber se o conteudo esta a ser gravado no ficheiro
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "The Classifier model was succesfully written to a file<br></html>");
 			}
 		});
