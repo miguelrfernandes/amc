@@ -27,6 +27,7 @@ public class JanelaAprendizagem {
 	private JFrame frmJanelaAprendizagem;
 	private JTextField txtDsPath;
 	private JTextField txtSavePath;
+	private JTextField txtModelName;
 
 	/**
 	 * Launch the application.
@@ -64,8 +65,17 @@ public class JanelaAprendizagem {
 		frmJanelaAprendizagem.getContentPane().setLayout(null);
 		
 		JLabel lblStatus = new JLabel("");
-		lblStatus.setBounds(37, 185, 388, 81);
+		lblStatus.setBounds(38, 210, 388, 81);
 		frmJanelaAprendizagem.getContentPane().add(lblStatus);
+		
+		JLabel lblModelName = new JLabel("ModelName");
+		lblModelName.setBounds(37, 149, 90, 16);
+		frmJanelaAprendizagem.getContentPane().add(lblModelName);
+		
+		txtModelName = new JTextField();
+		txtModelName.setBounds(47, 172, 250, 26);
+		frmJanelaAprendizagem.getContentPane().add(txtModelName);
+		txtModelName.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Learn");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -144,7 +154,7 @@ public class JanelaAprendizagem {
 										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto
 									}
 									// para debugging:
-									if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0)");
+									if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0). prxixj = " + prxixj + ", prxi * prxj = " + (prxi * prxj));
 								}
 							}
 							wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
@@ -163,20 +173,20 @@ public class JanelaAprendizagem {
 				
 				// TODO passar este codigo para a classe classifier?
 				try {
-				      File myObj = new File(savePath + "modelo.ser");
+				      File myObj = new File(savePath + txtModelName.getText());
 				      if (myObj.createNewFile()) {
 				        System.out.println("File created: " + myObj.getName());
 				      } else {
 				        System.out.println("File already exists.");
 				      }
-				    } catch (IOException error) {
-				      System.out.println("An error occurred.");
-				      error.printStackTrace();
-				    }
+			    } catch (IOException error) {
+			      System.out.println("An error occurred.");
+			      error.printStackTrace();
+			    }
 				
 				try {
 					 
-		            FileOutputStream fileOut = new FileOutputStream(savePath + "modelo.ser");
+		            FileOutputStream fileOut = new FileOutputStream(savePath + txtModelName.getText());
 		            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 		            objectOut.writeObject(classificador); 
 		            objectOut.close();
@@ -191,7 +201,7 @@ public class JanelaAprendizagem {
 		
 		// Caixas de texto dentro da janela, para colocacao de diretorios
 		
-		btnNewButton.setBounds(174, 149, 117, 29);
+		btnNewButton.setBounds(309, 144, 117, 29);
 		frmJanelaAprendizagem.getContentPane().add(btnNewButton);
 		
 		//Create a file chooser
@@ -207,11 +217,12 @@ public class JanelaAprendizagem {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 		            File file = fc.getSelectedFile();
 		            txtDsPath.setText(file.getPath());
+		            txtModelName.setText(file.getName().substring(0, lblModelName.getText().length()-2) + ".ser");
 		        }
 			}
 		});
 		txtDsPath.setText("Click here to select the dataset path");
-		txtDsPath.setBounds(38, 43, 253, 26);
+		txtDsPath.setBounds(48, 43, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtDsPath);
 		txtDsPath.setColumns(10);
 		
@@ -233,12 +244,14 @@ public class JanelaAprendizagem {
 		        }
 			}
 		});
-		txtSavePath.setBounds(38, 109, 253, 26);
+		txtSavePath.setBounds(48, 109, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtSavePath);
 		txtSavePath.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Save path for the model");
 		lblNewLabel_1.setBounds(38, 81, 149, 16);
 		frmJanelaAprendizagem.getContentPane().add(lblNewLabel_1);
+		
+
 	}
 }
