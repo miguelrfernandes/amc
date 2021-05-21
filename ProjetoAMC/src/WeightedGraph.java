@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -61,39 +62,69 @@ import java.util.Queue;
 		}
 		
 		
-		public Tree MST() {  
-			
-	
+		public Tree MST() {  // determina a MST com o Algoritmo de Prim
 			Tree maximal = new Tree(dim); 
 			
-		
-			// determina a MST com o Algoritmo de Prim
-			
 			// lista dos custos maximos para cada no
-			int[] C = new int[dim];
-			// inicializamos todos os custos maximos a -inf
-			// definindo -inf como -99
-			for (int i = 0; i < C.length; i++) C[i] = -99;
+			// nao e necessario para o nosso projeto
+			double[] C = new double[dim];
 			
 			// lista da aresta com esse custo maximo para no 
 			int[] E = new int[dim];
 			// inicializamos todas as arestas a null
 			// definimos null como -1, uma vez que nao ha nenhuma aresta -1
 			for (int i = 0; i < E.length; i++) E[i] = -1;
+						
 			
-			// define-se o no 0 como o no inicial
-			C[0] = 0;
-			
-			Queue<Integer> Q = new LinkedList<Integer>();
-			
-			for (int i = 1; i < dim; i++) Q.add(i); 
+			// inicializamos todos os custos maximos a -inf
+			// definindo -inf como int min_value
+			for (int i = 0; i < C.length; i++) C[i] = Integer.MIN_VALUE;
 			
 			boolean[] visited = new boolean[dim];
 			for (int i = 0; i < visited.length; i++) visited[i] = false;
 			
+			for (int i = 0; i < dim; i++) {
+				for (int j = i; j < dim; j++) { // pode ser j = i? ou tem de ser j = 0
+					if (!visited[i] && this.getWeight(i, j) > C[i]) {
+						C[i] = this.getWeight(i, j); // novo peso maximo
+						E[i] = i;
+					}
+				}
+			}
+			
+			// define-se o no 0 como o no inicial u
+			C[0] = 0;
+			
+			// adicionamos todos os nos exceto u a lista
+			Queue<Integer> Q = new LinkedList<Integer>();
+			for (int i = 1; i < dim; i++) Q.add(i); 
+			
+			// repomos a listas de visitados
+			for (int i = 0; i < visited.length; i++) visited[i] = false;
+			
+			ArrayList<Integer> F = new ArrayList<Integer>();
+			F.add(0);
+			
+			while (!Q.isEmpty()) {
+				//int x 
+				double max = Double.NEGATIVE_INFINITY;
+				int[] e = new int[2]; // aresta maximal
+				for (int x : F) {
+					for (int v :Q) {
+						if (this.getWeight(x, v) > max) {
+							e = new int[] {x,v};
+						}
+					}
+				}
+				Q.remove(e[0]); //F.add(v);
+				E[e[1]]=e[0]; // C[v] = g.weight(e)
+				F.add(e[1]);
+				maximal.addEdge(e[0], e[1]);
+			}
+			/*
 			while (!Q.isEmpty()) {
 				int no = Q.remove();
-				double max = C[no]; // C = [0,-99,-99,-99,...]
+				double max = C[no]; // C = [0,-inf,-inf,-inf,...]
 				for (int i = 0; i < dim; i++) {
 					if (!visited[i] && this.getWeight(i, no) > max) {
 						max = this.getWeight(i, no); // novo peso maximo
@@ -102,6 +133,7 @@ import java.util.Queue;
 				}
 				maximal.addEdge(no, C[no]); //adicionar a MST a aresta com o peso m�ximo, em que o pai � o n� "no" e o filho o "C[no]"
 			}
+			*/
 			
 			return maximal;
 		}

@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
-
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class JanelaAprendizagem {
 
+public class JanelaAprendizagem {
 	private JFrame frmJanelaAprendizagem;
 	private JTextField txtDsPath;
 	private JTextField txtSavePath;
@@ -155,7 +154,12 @@ public class JanelaAprendizagem {
 							else {wg.Add(i, j, -1.0);}
 						}
 					}
-					Tree mst = wg.MST(); 
+					System.out.println(wg);
+					
+					Tree mst = wg.MST();
+					
+					System.out.println(mst);
+					
 					mrftList.add(new MRFTree(mst, dsfiber)); 
 				}
 				
@@ -185,8 +189,10 @@ public class JanelaAprendizagem {
 				
 				// TESTES
 				
+				//System.out.println(classificador);
+				/*
 				System.out.println("Beginning tests...");
-				int limit = 1000;
+				int limit = 1000000;
 				int rtests = 0;
 				for (int i = 0; i < ds.getData().size() && i < limit; i++) {
 					int[] sample = Arrays.copyOfRange(ds.getData().get(i), 0, ds.getData().get(i).length-1);
@@ -197,6 +203,7 @@ public class JanelaAprendizagem {
 					System.out.println("" + result + " expected = " + expected + ", predicted = " + predicted);
 				}
 				System.out.println("Finished. " + rtests + "/" + Math.max(limit, rtests));
+				*/
 			}
 		});
 		
@@ -226,6 +233,7 @@ public class JanelaAprendizagem {
 		
 		txtDsPath.setBounds(48, 43, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtDsPath);
+		txtDsPath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Datasets2021/bcancer.csv"); // TODO comentar e apagar no fim
 		txtDsPath.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Dataset path");
@@ -248,6 +256,7 @@ public class JanelaAprendizagem {
 		});
 		txtSavePath.setBounds(48, 109, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtSavePath);
+		txtSavePath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Models2021/bcancer.ser"); // TODO comentar e apagar no fim
 		txtSavePath.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Save path for the model");

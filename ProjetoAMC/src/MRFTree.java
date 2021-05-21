@@ -11,7 +11,7 @@ public class MRFTree implements Serializable{
 	// consideramos como no de partida o primeiro no (no 0)
 	private int[] e = new int[2]; // aresta especial
 	private int mc; // dimensao da fibra do dataset
-	private int m; // tamanho do dataset
+	//private int m; // tamanho do dataset
 	protected int n; // numero de medicoes
 	private int[] D; // dimensao do dominio do dataset
 	private double delta = 0.2; // pseudo-contagem
@@ -77,11 +77,11 @@ public class MRFTree implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "MRFTree [Aresta especial e =" + Arrays.toString(e) + ", mc=" + mc + ", m=" + m + ", n=" + n + ", D=" + Arrays.toString(D)
+		return "MRFTree [Aresta especial e =" + Arrays.toString(e) + ", mc=" + mc + ", n=" + n + ", D=" + Arrays.toString(D)
 				+ ", delta=" + delta + ",\n E=" + Arrays.deepToString(E.toArray()) + ",\n tfiber=" + tfiber + ",\n markovtree=" + markovtree + "]";
 	}
 	
-	// metodo para calculo do phi de uma aresta //BEA: este método pode ser private
+	// metodo para calculo do phi de uma aresta //BEA: este mï¿½todo pode ser private
 	public double[][] phi(int i, int j) {  
 		double[][] phiv = new double[D[i]+1][D[j]+1]; 
 		
@@ -108,7 +108,7 @@ public class MRFTree implements Serializable{
 	}
 	
 	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset - ou seja, P_Mc
-	public double prob(int[] v) { //BEA: este método pode ser private
+	public double prob(int[] v) { //BEA: este mï¿½todo pode ser private
 		double r;
 		r = 1;
 		boolean c = true;
