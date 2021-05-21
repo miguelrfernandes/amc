@@ -70,9 +70,7 @@ public class Dataset {
 			}
 			else {  // estou a ordenar o dataset utilizando uma funcao do java, em que escolho a posicao com base no numero 
 				int aux=0;
-				for(int i = 0; i<v[this.n]; i++) {
-					aux = aux + this.Freqlist.get(i);
-				}
+				for(int i = 0; i<v[this.n]; i++) aux = aux + this.Freqlist.get(i);
 				data.add(aux, v);
 			}
 		
@@ -91,7 +89,7 @@ public class Dataset {
 		}
 		
 		else {
-		data.add(v);
+			data.add(v);
 		}
 	}
 	

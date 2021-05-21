@@ -126,44 +126,46 @@ public class JanelaAprendizagem {
 				// PASSO 2
 				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
 				
+				int[] D = ds.getD(); // TODO ver comentario abaixo
+				
 				for (int k = 0; k < ds.Freqlist.size(); k++) { //Aqui estamos a criar uma MRFTree para cada classe 
 					
 					Dataset dsfiber = ds.Fiber(k);
 					WeightedGraph wg = new WeightedGraph(ds.getN());
 					
-					int[] D = dsfiber.getD(); //TODO isto aqui nao faz nada pq nos assumimos fibra.D = this.D no dataset
-											  // e correto assumir valores maximos do dataset fibrado, tendo em conta o dataset original? - BEA: não é bem isso que fazemos quando atribuimos à fibra o dominio do Dataset T; na realidade 
-					//o que acontece é que sempre que falamos em dominio falamos nos valores possíveis das variáveis, que, neste caso definimos a partir do dataset T, e ao longo do projeto nunca utilizamos os valores maximos que ocorrem 
+					//int[] D = dsfiber.getD(); //TODO isto aqui nao faz nada pq nos assumimos fibra.D = this.D no dataset
+											  // e correto assumir valores maximos do dataset fibrado, tendo em conta o dataset original? - BEA: nï¿½o ï¿½ bem isso que fazemos quando atribuimos ï¿½ fibra o dominio do Dataset T; na realidade 
+					//o que acontece ï¿½ que sempre que falamos em dominio falamos nos valores possï¿½veis das variï¿½veis, que, neste caso definimos a partir do dataset T, e ao longo do projeto nunca utilizamos os valores maximos que ocorrem 
 					//nas fibras, mas sim os valores maximos que ocorrem no dataset (por serem os valores que definem o dominio das variaveis)
 											  // assim temos valores xi e xj que nao ocorrem na fibra, logo prxi,prxj = 0 e ptt temos log(x/0) = NaN   
 					
-					int m = ds.Freqlist.get(k); // m = dimensï¿½o da fibra - BEA: Acho melhor chamar mc, para estar de acordo com o enunciado
+					double m = ds.Freqlist.get(k); // m = dimensï¿½o da fibra - BEA: Acho melhor chamar mc, para estar de acordo com o enunciado
 				
 					
 					//BEA:  CHOW - LIU algorithm!
-					for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j - BEA: exato! É aqui que deve estar e não na classe weighted graph!
+					for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j - BEA: exato! ï¿½ aqui que deve estar e nï¿½o na classe weighted graph!
 						for (int j = 0; j < wg.getDim(); j++) {
 							
 							double I = 0;
 						
-							//BEA: I(i:j)= somatório encaixado num somatório
+							//BEA: I(i:j)= somatï¿½rio encaixado num somatï¿½rio
 							
 							for (int xi = 0; xi <= D[i]; xi++) { 
 								for (int xj = 0; xj <= D[j]; xj++) { 
-									double prxixj = dsfiber.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  // BEA: dúvida- no enunciado diz que o algoritmo de chow liu recebe um dataset T, porém aqui estamos a receber uma fibra (dataset fibrac), mas acho que faz mais sentido a fibra 
-									double prxi = dsfiber.Count(new int[] {i}, new int[] {xi}) / m; // alterava m para mc
-									double prxj = dsfiber.Count(new int[] {j}, new int[] {xj}) / m; 
+									double prxixj = Double.valueOf(dsfiber.Count(new int[] {i,j}, new int[] {xi, xj})) / m;  // BEA: dï¿½vida- no enunciado diz que o algoritmo de chow liu recebe um dataset T, porï¿½m aqui estamos a receber uma fibra (dataset fibrac), mas acho que faz mais sentido a fibra 
+									double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / m; // alterava m para mc
+									double prxj = Double.valueOf(dsfiber.Count(new int[] {j}, new int[] {xj})) / m; 
 									if (prxixj == 0 && (prxixj / (prxi * prxj)) == 0) { 
 										I = I + 0;
 									}
 									else {
-										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto //BEA: aqui log é base 10? pelo que percebi base 2 seria mais correto
+										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto //BEA: aqui log ï¿½ base 10? pelo que percebi base 2 seria mais correto
 									}
-									// para debugging: //Bea: Bem pensado e importante para indeterminações
+									// para debugging: //Bea: Bem pensado e importante para indeterminaï¿½ï¿½es
 									if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0). prxixj = " + prxixj + ", prxi * prxj = " + (prxi * prxj));//NaN?
 								}
 							}
-							wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j  - Bea: exato, antes não se estava a usar a função ADD 
+							wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j  - Bea: exato, antes nï¿½o se estava a usar a funï¿½ï¿½o ADD 
 						}
 					}
 					System.out.println(wg); //TODO output dï¿½ NaN
@@ -173,7 +175,7 @@ public class JanelaAprendizagem {
 				
 				Classifier classificador = new Classifier(mrftList, ds.Freqlist); // --> Outra Janela
 				
-				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Saving the model<br></html>");
+				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Saving the model </html>");
 				
 				String savePath = txtSavePath.getText();
 				
@@ -182,8 +184,10 @@ public class JanelaAprendizagem {
 				      File myObj = new File(savePath + txtModelName.getText());
 				      if (myObj.createNewFile()) {
 				        System.out.println("File created: " + myObj.getName());
+				        lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "File created: " + myObj.getName() + ".<br></html>");
 				      } else {
 				        System.out.println("File already exists.");
+				        lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "File already exists. Overwriting.<br></html>");
 				      }
 			    } catch (IOException error) {
 			      System.out.println("An error occurred.");
