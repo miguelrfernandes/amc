@@ -102,9 +102,13 @@ public class JanelaClassificador {
 		 
 		            System.out.println("The Classifier model has been read from the file");
 		            lblModelStatus.setText("OK!");
+		            
 		            objectIn.close();
 		            fileIn.close();
-		 
+		            String newsample = "";
+		            for (int i = 0; i < classificador.getN()-1; i++) newsample = newsample + "0,";
+		            newsample = newsample + "0";
+		            txtSample.setText(newsample);
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
@@ -119,7 +123,7 @@ public class JanelaClassificador {
 		
 		txtSample = new JTextField();
 		txtSample.setText("0,...,0");
-		txtSample.setBounds(6, 141, 130, 26);
+		txtSample.setBounds(6, 141, 299, 26);
 		frmJanelaClassificador.getContentPane().add(txtSample);
 		txtSample.setColumns(10);
 		
@@ -138,7 +142,7 @@ public class JanelaClassificador {
 					for (String a : values) { 
 			    	   v.add(Integer.parseInt(a));
 					}
-					int[] sample = new int[classificador.getN()]; //TODO dá erro. Nao da para ir buscar o n ao ficheiro do modelo? 
+					int[] sample = new int[classificador.getN()]; //TODO dï¿½ erro. Nao da para ir buscar o n ao ficheiro do modelo? 
 					if (v.size() != sample.length) {
 						System.out.println("Erro: A amostra fornecida nao tem o numero de medicoes correto");
 					}
@@ -164,9 +168,16 @@ public class JanelaClassificador {
 			public void mouseClicked(MouseEvent e) {
 				txtSample.setText("0,...,0");
 				lblResult.setText("Result :");
+				String newsample = "0,...,0";
+	            if (classificador != null) {
+	            	newsample = "";
+					for (int i = 0; i < classificador.getN()-1; i++) newsample = newsample + "0,";
+		            newsample = newsample + "0";
+	            }
+		        txtSample.setText(newsample);
 			}
 		});
-		btnReset.setBounds(148, 141, 117, 29);
+		btnReset.setBounds(327, 141, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnReset);
 	}
 }

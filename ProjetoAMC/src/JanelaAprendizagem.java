@@ -124,7 +124,7 @@ public class JanelaAprendizagem {
 					
 					Dataset dsfiber = ds.Fiber(k);
 					WeightedGraph wg = new WeightedGraph(ds.getN());
-					System.out.println(wg);
+					//System.out.println(wg);
 					
 					// e correto assumir valores maximos do dataset fibrado, tendo em conta o dataset original? 
 					    //- BEA: n�o � bem isso que fazemos quando atribuimos � fibra o dominio do Dataset T; na realidade 
@@ -153,6 +153,7 @@ public class JanelaAprendizagem {
 									}
 									else {
 										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto //BEA: aqui log � base 10? pelo que percebi base 2 seria mais correto
+										// o Prof. disse que o log podia ser qualquer base desde que fosse sempre calculado nessa base
 									}
 									// para debugging: //Bea: Bem pensado e importante para indetermina��es
 									if (prxixj == 0 || prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0). prxixj = " +
@@ -214,7 +215,7 @@ public class JanelaAprendizagem {
 		
 		// Caixas de texto dentro da janela, para colocacao de diretorios
 		
-		btnNewButton.setBounds(309, 144, 117, 29);
+		btnNewButton.setBounds(309, 169, 117, 29);
 		frmJanelaAprendizagem.getContentPane().add(btnNewButton);
 		
 		//Create a file chooser
@@ -230,12 +231,12 @@ public class JanelaAprendizagem {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 		            File file = fc.getSelectedFile();
 		            txtDsPath.setText(file.getPath());
-		            txtModelName.setText(file.getName().substring(0, lblModelName.getText().length()-2) + ".ser");
+		            txtModelName.setText(file.getName().substring(0, file.getName().length()-4) + ".ser");
 		        }
 			}
 		});
 		txtDsPath.setText("Click here to select the dataset path");
-		txtDsPath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Datasets2021/bcancer.csv");
+		txtDsPath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Datasets2021/bcancer.csv"); // TODO apagar
 		
 		txtDsPath.setBounds(48, 43, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtDsPath);
@@ -247,7 +248,7 @@ public class JanelaAprendizagem {
 		
 		txtSavePath = new JTextField();
 		txtSavePath.setText("Click here to select a directory");
-		txtSavePath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Models2021/bcancer.ser");
+		txtSavePath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Models2021/bcancer.ser"); // TODO apagar
 		txtSavePath.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
