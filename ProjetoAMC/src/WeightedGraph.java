@@ -92,7 +92,7 @@ import java.util.Queue;
 		// faria sentido retornar uma WeightedTree e nao uma Tree? -- deve retornar uma Tree
 		public Tree MST() {  // arvore de extensao maximal - soma dos pesos das arestas e maximal
 			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices //nao percebo, faz me sentido como esta 
-			// Bea: acho que deve ser dim - 1, pois dim = n (nº de variáveis) e a tree recebe o numero de arestas (=nº de pais)
+			// Bea: acho que deve ser dim - 1, pois dim = n (nº de variáveis) e a tree recebe o numero de arestas (=nº de pais+1)
 		
 			// determina a MST com o Algoritmo de Prim
 			
