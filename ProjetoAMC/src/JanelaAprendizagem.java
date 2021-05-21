@@ -151,15 +151,15 @@ public class JanelaAprendizagem {
 							for (int xi = 0; xi <= D[i]; xi++) { 
 								for (int xj = 0; xj <= D[j]; xj++) { 
 									double prxixj = dsfiber.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  // BEA: dúvida- no enunciado diz que o algoritmo de chow liu recebe um dataset T, porém aqui estamos a receber uma fibra (dataset fibrac), mas acho que faz mais sentido a fibra 
-									double prxi = dsfiber.Count(new int[] {i}, new int[] {xi}) / m; 
+									double prxi = dsfiber.Count(new int[] {i}, new int[] {xi}) / m; // alterava m para mc
 									double prxj = dsfiber.Count(new int[] {j}, new int[] {xj}) / m; 
 									if (prxixj == 0 && (prxixj / (prxi * prxj)) == 0) { 
 										I = I + 0;
 									}
 									else {
-										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto
+										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto //BEA: aqui log é base 10? pelo que percebi base 2 seria mais correto
 									}
-									// para debugging:
+									// para debugging: //Bea: Bem pensado e importante para indeterminações
 									if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0). prxixj = " + prxixj + ", prxi * prxj = " + (prxi * prxj));
 								}
 							}
