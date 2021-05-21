@@ -132,19 +132,25 @@ public class JanelaAprendizagem {
 					WeightedGraph wg = new WeightedGraph(ds.getN());
 					
 					int[] D = dsfiber.getD(); //TODO isto aqui nao faz nada pq nos assumimos fibra.D = this.D no dataset
-											  // e correto assumir valores maximos do dataset fibrado, tendo em conta o dataset original?
-											  // assim temos valores xi e xj que nao ocorrem na fibra, logo prxi,prxj = 0 e ptt temos log(x/0) = NaN
+											  // e correto assumir valores maximos do dataset fibrado, tendo em conta o dataset original? - BEA: não é bem isso que fazemos quando atribuimos à fibra o dominio do Dataset T; na realidade 
+					//o que acontece é que sempre que falamos em dominio falamos nos valores possíveis das variáveis, que, neste caso definimos a partir do dataset T, e ao longo do projeto nunca utilizamos os valores maximos que ocorrem 
+					//nas fibras, mas sim os valores maximos que ocorrem no dataset (por serem os valores que definem o dominio das variaveis)
+											  // assim temos valores xi e xj que nao ocorrem na fibra, logo prxi,prxj = 0 e ptt temos log(x/0) = NaN   
 					
-					int m = ds.Freqlist.get(k); // m = dimensï¿½o da fibra
+					int m = ds.Freqlist.get(k); // m = dimensï¿½o da fibra - BEA: Acho melhor chamar mc, para estar de acordo com o enunciado
 				
-					for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j
+					
+					//BEA:  CHOW - LIU algorithm!
+					for (int i = 0; i < wg.getDim(); i++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j - BEA: exato! É aqui que deve estar e não na classe weighted graph!
 						for (int j = 0; j < wg.getDim(); j++) {
 							
 							double I = 0;
 						
+							//BEA: I(i:j)= somatório encaixado num somatório
+							
 							for (int xi = 0; xi <= D[i]; xi++) { 
 								for (int xj = 0; xj <= D[j]; xj++) { 
-									double prxixj = dsfiber.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  
+									double prxixj = dsfiber.Count(new int[] {i,j}, new int[] {xi, xj}) / m;  // BEA: dúvida- no enunciado diz que o algoritmo de chow liu recebe um dataset T, porém aqui estamos a receber uma fibra (dataset fibrac), mas acho que faz mais sentido a fibra 
 									double prxi = dsfiber.Count(new int[] {i}, new int[] {xi}) / m; 
 									double prxj = dsfiber.Count(new int[] {j}, new int[] {xj}) / m; 
 									if (prxixj == 0 && (prxixj / (prxi * prxj)) == 0) { 
