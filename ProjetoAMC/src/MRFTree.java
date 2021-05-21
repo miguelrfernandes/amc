@@ -81,7 +81,7 @@ public class MRFTree implements Serializable{
 				+ ", delta=" + delta + ",\n E=" + Arrays.deepToString(E.toArray()) + ",\n tfiber=" + tfiber + ",\n markovtree=" + markovtree + "]";
 	}
 	
-	// metodo para calculo do phi de uma aresta
+	// metodo para calculo do phi de uma aresta //BEA: este método pode ser private
 	public double[][] phi(int i, int j) {  
 		double[][] phiv = new double[D[i]+1][D[j]+1]; 
 		
@@ -108,7 +108,7 @@ public class MRFTree implements Serializable{
 	}
 	
 	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset - ou seja, P_Mc
-	public double prob(int[] v) {
+	public double prob(int[] v) { //BEA: este método pode ser private
 		double r;
 		r = 1;
 		boolean c = true;
