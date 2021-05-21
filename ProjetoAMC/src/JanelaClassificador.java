@@ -68,7 +68,7 @@ public class JanelaClassificador {
 		txtModelPath = new JTextField();
 		txtModelPath.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) { // TODO adicionar restricao para ficheiros com a nossa implementacao modelo 
+			public void mouseClicked(MouseEvent e) { 
 				//In response to a button click:
 				fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				int returnVal = fc.showOpenDialog(fc);
@@ -96,15 +96,19 @@ public class JanelaClassificador {
 		            FileInputStream fileIn = new FileInputStream(modelPath);
 		            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 		 
-		            // lemos o ficheiro e guardamos este Objeto na vari√°vel classificador
+		            // lemos o ficheiro e guardamos este Objeto na variavel classificador
 		            // e necessario usar um cast (Classifier) para definir qual vai ser a classe do objeto que vai ser lido
 		            classificador = (Classifier) objectIn.readObject();
 		 
 		            System.out.println("The Classifier model has been read from the file");
 		            lblModelStatus.setText("OK!");
+		            
 		            objectIn.close();
 		            fileIn.close();
-		 
+		            String newsample = "";
+		            for (int i = 0; i < classificador.getN()-1; i++) newsample = newsample + "0,";
+		            newsample = newsample + "0";
+		            txtSample.setText(newsample);
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
@@ -113,13 +117,13 @@ public class JanelaClassificador {
 		btnNewButton.setBounds(16, 72, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnNewButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>"); //TODO nao da para por ao lado "n = valor"?
+		JLabel lblNewLabel_1 = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>"); 
 		lblNewLabel_1.setBounds(6, 115, 141, 24);
 		frmJanelaClassificador.getContentPane().add(lblNewLabel_1);
 		
 		txtSample = new JTextField();
 		txtSample.setText("0,...,0");
-		txtSample.setBounds(6, 141, 130, 26);
+		txtSample.setBounds(6, 141, 299, 26);
 		frmJanelaClassificador.getContentPane().add(txtSample);
 		txtSample.setColumns(10);
 		
@@ -138,7 +142,7 @@ public class JanelaClassificador {
 					for (String a : values) { 
 			    	   v.add(Integer.parseInt(a));
 					}
-					int[] sample = new int[classificador.getN()]; //TODO d· erro. Nao da para ir buscar o n ao ficheiro do modelo? 
+					int[] sample = new int[classificador.getN()]; 
 					if (v.size() != sample.length) {
 						System.out.println("Erro: A amostra fornecida nao tem o numero de medicoes correto");
 					}
@@ -164,9 +168,16 @@ public class JanelaClassificador {
 			public void mouseClicked(MouseEvent e) {
 				txtSample.setText("0,...,0");
 				lblResult.setText("Result :");
+				String newsample = "0,...,0";
+	            if (classificador != null) {
+	            	newsample = "";
+					for (int i = 0; i < classificador.getN()-1; i++) newsample = newsample + "0,";
+		            newsample = newsample + "0";
+	            }
+		        txtSample.setText(newsample);
 			}
 		});
-		btnReset.setBounds(148, 141, 117, 29);
+		btnReset.setBounds(327, 141, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnReset);
 	}
 }

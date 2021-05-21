@@ -1,9 +1,13 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class MRFTree {
+public class MRFTree implements Serializable{
+	//default serialVersion id
+    private static final long serialVersionUID = 1L;
+	
 	// consideramos como no de partida o primeiro no (no 0)
 	private int[] e = new int[2]; // aresta especial
 	private int mc; // dimensao da fibra do dataset
@@ -67,47 +71,6 @@ public class MRFTree {
 			}
 			visited[o] = true;
 		}
-		
-		
-		// para melhorar
-		// este algoritmo nao e mais eficiente pois implica o uso do remove num arraylist que nao sabe que o numero e limitado...
-		// seria mais eficiente se a remocao fosse O(log(n))
-		
-		
-		/*
-		// adicionamos as arestas segundo a direcao definida pelo no fixado
-		ArrayList<Integer> notvisited = new ArrayList<Integer>();
-		
-		for (int i = 0; i < n; i++)  notvisited.add(i);
-		
-		// usamos uma condicao para fazer um passo especial a primeira vez que encontra um filho ou pai deste no que foi fixado
-		boolean especial = true;
-		while (!q.isEmpty()) {
-			int o = q.remove();
-			// TODO podemos aumentar a eficiencia ao nao ver os nos que ja foram vistos
-			for (int i : notvisited) { // para cada no da arvore
-				if (arvore.EdgeQ(i, o)) { // se o no i e filho do no o
-					if (especial) {
-						// fixa-se a aresta especial como a aresta que liga o no definido anteriormente ao no de menor ordem (que esteja ligado)
-						e[1] = i;
-						especial = false;
-					}
-					
-					// adiciona-se esta aresta a lista de arestas
-					E.add(new int[] {o, i});
-					
-					// e adiciona-se este no a queue
-					q.add(i);
-					
-					// calcula-se o phi para esta aresta
-					// e guarda-se os resultados deste calculo numa matriz
-					// com os diferentes valores de phi(xi,xj) nesta aresta da arvore
-					markovtree.Add(o, i, phi(o,i));
-				}
-			}
-			notvisited.remove(Integer.valueOf(o));
-		}
-		*/
 	}
 	
 	

@@ -1,6 +1,10 @@
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class WeightedTree { 
+public class WeightedTree implements Serializable{ 
+	//default serialVersion id
+    private static final long serialVersionUID = 1L;
+    
 	double [][][][] ma;
 	int dim;
 	

@@ -1,7 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Dataset {
+public class Dataset implements Serializable{
+	//default serialVersion id
+    private static final long serialVersionUID = 1L;
+	
 	protected ArrayList<int[]> data;
 	private int n; // numero de variaveis aleatorias, o java comeca a contar do 0
 	private int[] D; // lista com os valores maximos das variaveis aleatorias, sem a classe variavel da classe
@@ -84,7 +88,7 @@ public class Dataset {
 	private void fiberAdd(int[] v) {
 		
 		if (v.length != this.n) {
-			// TODO trocar tipo de erro
+		
 			throw new AssertionError("Vector has the wrong dimension ");
 		}
 		

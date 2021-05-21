@@ -359,5 +359,9 @@ public class Main {
 		System.out.println();
 		System.out.println(gr.MST()); //suposto retornar "Tree [pais=[-1,3,3,0,0]]" 
 	
+		
+		double margem = 1e-200;
+		double r = Math.log(margem / (margem * margem));
+		System.out.println(r);
 	}
 }
