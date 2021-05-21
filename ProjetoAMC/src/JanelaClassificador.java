@@ -1,11 +1,9 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -13,12 +11,11 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-public class JanelaClassificador {
 
+public class JanelaClassificador {
 	private JFrame frmJanelaClassificador;
 	private JTextField txtModelPath;
 	private JTextField txtSample;
-
 	
 	// Classifier
 	Classifier classificador = null;
@@ -38,21 +35,19 @@ public class JanelaClassificador {
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
 	public JanelaClassificador() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frmJanelaClassificador = new JFrame();
 		frmJanelaClassificador.setTitle("Janela do Classificador");
-		frmJanelaClassificador.setBounds(100, 100, 450, 300);
+		frmJanelaClassificador.setBounds(100, 100, 480, 300);
 		frmJanelaClassificador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmJanelaClassificador.getContentPane().setLayout(null);
 		
@@ -60,7 +55,6 @@ public class JanelaClassificador {
 		lblNewLabel.setBounds(6, 6, 61, 16);
 		frmJanelaClassificador.getContentPane().add(lblNewLabel);
 		
-
 		
 		//Create a file chooser
 		final JFileChooser fc = new JFileChooser();
@@ -87,6 +81,10 @@ public class JanelaClassificador {
 		lblModelStatus.setBounds(145, 77, 160, 16);
 		frmJanelaClassificador.getContentPane().add(lblModelStatus);
 		
+		JLabel lblSample = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>"); 
+		lblSample.setBounds(6, 115, 438, 24);
+		frmJanelaClassificador.getContentPane().add(lblSample);
+		
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -96,19 +94,26 @@ public class JanelaClassificador {
 		            FileInputStream fileIn = new FileInputStream(modelPath);
 		            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 		 
-		            // lemos o ficheiro e guardamos este Objeto na variavel classificador
+		            // lemos o ficheiro e guardamos este Objeto na variável classificador
 		            // e necessario usar um cast (Classifier) para definir qual vai ser a classe do objeto que vai ser lido
 		            classificador = (Classifier) objectIn.readObject();
-		 
+
 		            System.out.println("The Classifier model has been read from the file");
-		            lblModelStatus.setText("OK!");
-		            
+		            lblModelStatus.setText("Model loaded!");
+
 		            objectIn.close();
 		            fileIn.close();
+		            
 		            String newsample = "";
 		            for (int i = 0; i < classificador.getN()-1; i++) newsample = newsample + "0,";
 		            newsample = newsample + "0";
 		            txtSample.setText(newsample);
+		            
+		            newsample = "<html>Sample : ";
+		            for (int i = 1; i < classificador.getN() && i < 14; i++) newsample = newsample +  "x<sub>" + i + "</sub>,";
+		            if (classificador.getN() < 14) newsample = newsample + "x<sub>" + classificador.getN() + "</sub></html>";
+		            else newsample = newsample + "...,x<sub>" + classificador.getN() + "</sub></html>";
+		            lblSample.setText(newsample);
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
@@ -117,9 +122,7 @@ public class JanelaClassificador {
 		btnNewButton.setBounds(16, 72, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnNewButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>"); 
-		lblNewLabel_1.setBounds(6, 115, 141, 24);
-		frmJanelaClassificador.getContentPane().add(lblNewLabel_1);
+		
 		
 		txtSample = new JTextField();
 		txtSample.setText("0,...,0");
@@ -175,6 +178,12 @@ public class JanelaClassificador {
 		            newsample = newsample + "0";
 	            }
 		        txtSample.setText(newsample);
+		        
+		        newsample = "<html>Sample : ";
+	            for (int i = 1; i < classificador.getN() && i < 14; i++) newsample = newsample +  "x<sub>" + i + "</sub>,";
+	            if (classificador.getN() < 14) newsample = newsample + "x<sub>" + classificador.getN() + "</sub></html>";
+	            else newsample = newsample + "...,x<sub>" + classificador.getN() + "</sub></html>";
+	            lblSample.setText(newsample);
 			}
 		});
 		btnReset.setBounds(327, 141, 117, 29);

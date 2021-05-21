@@ -58,7 +58,7 @@ public class JanelaAprendizagem {
 		// janela e suas caracteristicas
 		frmJanelaAprendizagem = new JFrame();
 		frmJanelaAprendizagem.setTitle("Janela de Aprendizagem");
-		frmJanelaAprendizagem.setBounds(100, 100, 450, 325);
+		frmJanelaAprendizagem.setBounds(100, 100, 450, 335);
 		frmJanelaAprendizagem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmJanelaAprendizagem.getContentPane().setLayout(null);
 		
