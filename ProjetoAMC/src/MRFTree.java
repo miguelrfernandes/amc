@@ -1,9 +1,13 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class MRFTree {
+public class MRFTree implements Serializable{
+	//default serialVersion id
+    private static final long serialVersionUID = 1L;
+	
 	// consideramos como no de partida o primeiro no (no 0)
 	private int[] e = new int[2]; // aresta especial
 	private int mc; // dimensao da fibra do dataset

@@ -1,3 +1,5 @@
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,10 +50,21 @@ public class Classifier implements Serializable{
 		else { throw new AssertionError("erro");}
 	}
 	
-	// TODO nao esta correto. Freq.List.size() da o numero de classes, nao de variaveis
-	// corrigi
+	public void writeFile(String path) {
+		try {
+            FileOutputStream fileOut = new FileOutputStream(path);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(this); 
+            objectOut.close();
+            fileOut.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+	
 	public int getN() {
 		return MRFTList.get(0).n;
+		// return FreqList.size(); // TODO corrigi porque nao esta correto. Freq.List.size() da o numero de classes, nao de variaveis
 	}
 }
 

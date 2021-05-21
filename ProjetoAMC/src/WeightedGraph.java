@@ -11,11 +11,14 @@ import java.util.Queue;
 			
 			this.dim = dim;
 			this.ma = new double[dim][dim];
+			for (int i = 0; i < dim; i++) {
+				for (int j = 0; j < dim; j++) ma[i][j] = -1.0;
+			}
 		
 		}
 		/*
 		public WeightedGraph(int dim, Dataset T) {  // construcao grafo completo e pesado - PASSO 1 
-													// Está correto.
+													// Estï¿½ correto.
 			this.dim = dim;
 			this.ma = new double[dim][dim];
 				
@@ -73,7 +76,7 @@ import java.util.Queue;
 		public void Add(int i, int j, double w){
 				if (i>=0 && i<this.dim && j>=0 && j<this.dim) {
 					this.ma[i][j] = w;
-					this.ma[j][i] = w;
+					this.ma[j][i] = w; // TODO ver se podemos tirar este
 				} else {
 					throw new AssertionError("node not in graph");
 			} 
@@ -88,11 +91,13 @@ import java.util.Queue;
 					return ma[i][j];		}
 		}
 		
-		// MST() está correta e funciona -> ver exemplo no main
+		// MST() estï¿½ correta e funciona -> ver exemplo no main
 		// faria sentido retornar uma WeightedTree e nao uma Tree? -- deve retornar uma Tree
 		public Tree MST() {  // arvore de extensao maximal - soma dos pesos das arestas e maximal
+			
+			// TODO verificar  se e necessario trocar para doubles
 			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices //nao percebo, faz me sentido como esta 
-			// Bea: acho que deve ser dim - 1, pois dim = n (nº de variáveis) e a tree recebe o numero de arestas (=nº de pais+1)
+			// Bea: acho que deve ser dim - 1, pois dim = n (nï¿½ de variï¿½veis) e a tree recebe o numero de arestas (=nï¿½ de pais+1)
 		
 			// determina a MST com o Algoritmo de Prim
 			
@@ -124,10 +129,10 @@ import java.util.Queue;
 				for (int i = 0; i < dim; i++) {
 					if (!visited[i] && this.getWeight(i, no) > max) {
 						max = this.getWeight(i, no); // novo peso maximo
-						C[no] = i; // novo nó "C[no]" a partir do qual se vai continuar a MST
+						C[no] = i; // novo nï¿½ "C[no]" a partir do qual se vai continuar a MST
 					}
 				}
-				maximal.addEdge(no, C[no]); //adicionar a MST a aresta com o peso máximo, em que o pai é o nó "no" e o filho o "C[no]"
+				maximal.addEdge(no, C[no]); //adicionar a MST a aresta com o peso mï¿½ximo, em que o pai ï¿½ o nï¿½ "no" e o filho o "C[no]"
 			}
 			
 			return maximal;
