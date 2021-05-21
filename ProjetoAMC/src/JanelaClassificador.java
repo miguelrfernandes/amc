@@ -105,7 +105,7 @@ public class JanelaClassificador {
 		            classificador = (Classifier) objectIn.readObject();
 		 
 		            System.out.println("The Classifier model has been read from the file");
-		            lblModelStatus.setText("OK!");
+		            lblModelStatus.setText("Model loaded!");
 		            
 		            objectIn.close();
 		            fileIn.close();
