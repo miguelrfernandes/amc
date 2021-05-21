@@ -18,6 +18,7 @@ import java.io.FileReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class JanelaAprendizagem {
@@ -181,6 +182,21 @@ public class JanelaAprendizagem {
 				classificador.writeFile(savePath + txtModelName.getText());
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "The Classifier model was succesfully written to a file<br></html>");
+				
+				// TESTES
+				
+				System.out.println("Beginning tests...");
+				int limit = 1000;
+				int rtests = 0;
+				for (int i = 0; i < ds.getData().size() && i < limit; i++) {
+					int[] sample = Arrays.copyOfRange(ds.getData().get(i), 0, ds.getData().get(i).length-1);
+					int expected = ds.getData().get(i)[ds.getData().get(i).length-1];
+					int predicted = classificador.classify(sample);
+					boolean result = expected==predicted;
+					if (result) rtests++;
+					System.out.println("" + result + " expected = " + expected + ", predicted = " + predicted);
+				}
+				System.out.println("Finished. " + rtests + "/" + Math.max(limit, rtests));
 			}
 		});
 		
