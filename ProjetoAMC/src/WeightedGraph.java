@@ -93,7 +93,7 @@ import java.util.Queue;
 		public Tree MST() {  // arvore de extensao maximal - soma dos pesos das arestas e maximal
 			Tree maximal = new Tree(dim); //dim nao esta correto, e o numero de vertices //nao percebo, faz me sentido como esta 
 			// Bea: acho que deve ser dim - 1, pois dim = n (nº de variáveis) e a tree recebe o numero de arestas (=nº de pais)
-			
+		
 			// determina a MST com o Algoritmo de Prim
 			
 			// lista dos custos maximos para cada no
