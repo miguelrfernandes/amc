@@ -113,7 +113,7 @@ public class JanelaClassificador {
 		btnNewButton.setBounds(16, 72, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnNewButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>");
+		JLabel lblNewLabel_1 = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>"); //TODO nao da para por ao lado "n = valor"?
 		lblNewLabel_1.setBounds(6, 115, 141, 24);
 		frmJanelaClassificador.getContentPane().add(lblNewLabel_1);
 		
