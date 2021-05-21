@@ -126,7 +126,7 @@ public class JanelaAprendizagem {
 				// PASSO 2
 				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
 				
-				for (int k = 0; k < ds.Freqlist.size(); k++) { 
+				for (int k = 0; k < ds.Freqlist.size(); k++) { //Aqui estamos a criar uma MRFTree para cada classe 
 					
 					Dataset dsfiber = ds.Fiber(k);
 					WeightedGraph wg = new WeightedGraph(ds.getN());
@@ -160,15 +160,15 @@ public class JanelaAprendizagem {
 										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto //BEA: aqui log é base 10? pelo que percebi base 2 seria mais correto
 									}
 									// para debugging: //Bea: Bem pensado e importante para indeterminações
-									if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0). prxixj = " + prxixj + ", prxi * prxj = " + (prxi * prxj));
+									if (prxixj == 0 && prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0). prxixj = " + prxixj + ", prxi * prxj = " + (prxi * prxj));//NaN?
 								}
 							}
-							wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j
+							wg.Add(i,  j,  I); // atribuir peso I a cada aresta entre i e j  - Bea: exato, antes não se estava a usar a função ADD 
 						}
 					}
 					System.out.println(wg); //TODO output dï¿½ NaN
 					Tree mst = wg.MST(); 
-					mrftList.add(new MRFTree(mst, dsfiber));
+					mrftList.add(new MRFTree(mst, dsfiber)); //Bea: aqui temos a lista de todas as MRFTrees, cada uma associada a uma classe c
 				}
 				
 				Classifier classificador = new Classifier(mrftList, ds.Freqlist); // --> Outra Janela
@@ -177,7 +177,7 @@ public class JanelaAprendizagem {
 				
 				String savePath = txtSavePath.getText();
 				
-				// TODO passar este codigo para a classe classifier?
+				// TODO passar este codigo para a classe classifier? - BEA: para ficar mais clean e organizado? 
 				try {
 				      File myObj = new File(savePath + txtModelName.getText());
 				      if (myObj.createNewFile()) {
