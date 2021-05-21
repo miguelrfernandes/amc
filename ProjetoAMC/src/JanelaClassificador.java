@@ -68,7 +68,7 @@ public class JanelaClassificador {
 		txtModelPath = new JTextField();
 		txtModelPath.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) { // TODO adicionar restricao para ficheiros com a nossa implementacao modelo
+			public void mouseClicked(MouseEvent e) { // TODO adicionar restricao para ficheiros com a nossa implementacao modelo 
 				//In response to a button click:
 				fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				int returnVal = fc.showOpenDialog(fc);
@@ -138,7 +138,7 @@ public class JanelaClassificador {
 					for (String a : values) { 
 			    	   v.add(Integer.parseInt(a));
 					}
-					int[] sample = new int[classificador.getN()]; //TODO da erro. Nao da para ir buscar o n ao ficheiro do modelo?
+					int[] sample = new int[classificador.getN()]; //TODO dá erro. Nao da para ir buscar o n ao ficheiro do modelo? 
 					if (v.size() != sample.length) {
 						System.out.println("Erro: A amostra fornecida nao tem o numero de medicoes correto");
 					}
