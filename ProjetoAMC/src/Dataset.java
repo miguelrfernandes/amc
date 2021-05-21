@@ -88,7 +88,7 @@ public class Dataset implements Serializable{
 	private void fiberAdd(int[] v) {
 		
 		if (v.length != this.n) {
-			// TODO trocar tipo de erro
+		
 			throw new AssertionError("Vector has the wrong dimension ");
 		}
 		

@@ -64,7 +64,7 @@ public class Classifier implements Serializable{
 	
 	public int getN() {
 		return MRFTList.get(0).n;
-		// return FreqList.size(); // TODO corrigi porque nao esta correto. Freq.List.size() da o numero de classes, nao de variaveis
+	
 	}
 }
 

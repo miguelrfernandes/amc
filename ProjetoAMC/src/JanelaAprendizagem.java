@@ -43,9 +43,9 @@ public class JanelaAprendizagem {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
+	 // Create the application.
+	 
 	public JanelaAprendizagem() {
 		initialize();
 	}
@@ -115,70 +115,55 @@ public class JanelaAprendizagem {
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Training the model<br></html>");
 				
-				// PASSO 2 — Treinamento do Modelo
+				// PASSO 2 - Treinamento do Modelo | Chow-Liu Algorithm
 				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
 				
 				int[] D = ds.getD();
 				
-				for (int k = 0; k < ds.Freqlist.size(); k++) { //Aqui estamos a criar uma MRFTree para cada classe 
+				for (int k = 0; k < ds.Freqlist.size(); k++) { 
 					
 					Dataset dsfiber = ds.Fiber(k);
-					WeightedGraph wg = new WeightedGraph(ds.getN());
-					//System.out.println(wg);
+					WeightedGraph wg = new WeightedGraph(ds.getN()); 
 					
-					// e correto assumir valores maximos do dataset fibrado, tendo em conta o dataset original? 
-					    //- BEA: n�o � bem isso que fazemos quando atribuimos � fibra o dominio do Dataset T; na realidade 
-					//o que acontece � que sempre que falamos em dominio falamos nos valores poss�veis das vari�veis, que, neste caso definimos a partir do dataset T, e ao longo do projeto nunca utilizamos os valores maximos que ocorrem 
-					//nas fibras, mas sim os valores maximos que ocorrem no dataset (por serem os valores que definem o dominio das variaveis)
-											  // assim temos valores xi e xj que nao ocorrem na fibra, logo prxi,prxj = 0 e ptt temos log(x/0) = NaN   
+					double mC = ds.Freqlist.get(k); 
 					
-					double mC = ds.Freqlist.get(k); // m = dimens�o da fibra - BEA: Acho melhor chamar mc, para estar de acordo com o enunciado
-					
-					
-					//BEA:  CHOW - LIU algorithm!
-					for (int j = 0; j < wg.getDim(); j++) { // ciclo para atribuir peso a cada aresta entre variavel i e variavel j - BEA: exato! � aqui que deve estar e n�o na classe weighted graph!
+					//Chow Li
+					for (int j = 0; j < wg.getDim(); j++) { 
 						for (int i = 0; i < j; i++) {
 							
 							double I = 0;
 							
-							//BEA: I(i:j)= somat�rio encaixado num somat�rio
-							
 							for (int xi = 0; xi <= D[i]; xi++) { 
 								for (int xj = 0; xj <= D[j]; xj++) { 
-									double prxixj = Double.valueOf(dsfiber.Count(new int[] {i,j}, new int[] {xi, xj})) / mC;  // BEA: d�vida- no enunciado diz que o algoritmo de chow liu recebe um dataset T, por�m aqui estamos a receber uma fibra (dataset fibrac), mas acho que faz mais sentido a fibra 
-									double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; // alterava m para mc
+									double prxixj = Double.valueOf(dsfiber.Count(new int[] {i,j}, new int[] {xi, xj})) / mC;  
+									double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; 
 									double prxj = Double.valueOf(dsfiber.Count(new int[] {j}, new int[] {xj})) / mC; 
-									if (prxixj == 0.0 && (prxixj / (prxi * prxj)) == 0.0) { // verifica se e igual a zero (double nunca e 0.0, mas sim aproximadamente zero)
+									if (prxixj == 0.0 && (prxixj / (prxi * prxj)) == 0.0) {
 										I = I + 0.0;
 									}
 									else {
-										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); // correto //BEA: aqui log � base 10? pelo que percebi base 2 seria mais correto
-										// o Prof. disse que o log podia ser qualquer base desde que fosse sempre calculado nessa base
+										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); 
 									}
-									// para debugging: //Bea: Bem pensado e importante para indetermina��es
+									/*
 									if (prxixj == 0 || prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0). prxixj = " +
 									prxixj + ", prxi * prxj = " + (prxi * prxj) + ", prxixj = dsfiber.Count(new int[] {" + i + "," + j +
-									"}, new int[] {" + xi + "," + xj + "}) / " + mC);
+									"}, new int[] {" + xi + "," + xj + "}) / " + mC);*/
 								}
 							}
-							// wg.Add(i,  j,  I);
-							// atribuir peso I a cada aresta entre i e j  - Bea: exato, antes n�o se estava a usar a fun��o ADD 
 							if (i!=j) {wg.Add(i,  j,  I);}
 							else {wg.Add(i, j, -1.0);}
 						}
 					}
-					System.out.println(wg); //TODO output d� NaN
 					Tree mst = wg.MST(); 
-					mrftList.add(new MRFTree(mst, dsfiber)); //Bea: aqui temos a lista de todas as MRFTrees, cada uma associada a uma classe c
+					mrftList.add(new MRFTree(mst, dsfiber)); 
 				}
 				
-				Classifier classificador = new Classifier(mrftList, ds.Freqlist); // --> Outra Janela
+				Classifier classificador = new Classifier(mrftList, ds.Freqlist); 
 				
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Saving the model </html>");
 				
 				String savePath = txtSavePath.getText();
-				
-				// TODO passar este codigo para a classe classifier? - BEA: para ficar mais clean e organizado? 
+				 
 				try {
 				      File myObj = new File(savePath + txtModelName.getText());
 				      if (myObj.createNewFile()) {
@@ -192,20 +177,6 @@ public class JanelaAprendizagem {
 			      System.out.println("An error occurred.");
 			      error.printStackTrace();
 			    }
-				
-				// TODO apagar
-				/*
-				try {
-					 
-		            FileOutputStream fileOut = new FileOutputStream(savePath + txtModelName.getText());
-		            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-		            objectOut.writeObject(classificador); 
-		            objectOut.close();
-		            fileOut.close();
-		        } catch (Exception ex) {
-		            ex.printStackTrace();
-		        }
-				*/
 				
 				classificador.writeFile(savePath + txtModelName.getText());
 				
@@ -236,7 +207,6 @@ public class JanelaAprendizagem {
 			}
 		});
 		txtDsPath.setText("Click here to select the dataset path");
-		txtDsPath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Datasets2021/bcancer.csv"); // TODO apagar
 		
 		txtDsPath.setBounds(48, 43, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtDsPath);
@@ -248,7 +218,6 @@ public class JanelaAprendizagem {
 		
 		txtSavePath = new JTextField();
 		txtSavePath.setText("Click here to select a directory");
-		txtSavePath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Models2021/bcancer.ser"); // TODO apagar
 		txtSavePath.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
