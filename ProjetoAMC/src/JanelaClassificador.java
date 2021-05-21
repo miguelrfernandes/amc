@@ -87,6 +87,10 @@ public class JanelaClassificador {
 		lblModelStatus.setBounds(145, 77, 160, 16);
 		frmJanelaClassificador.getContentPane().add(lblModelStatus);
 		
+		JLabel lblSample = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>"); //TODO nao da para por ao lado "n = valor"?
+		lblSample.setBounds(6, 115, 438, 24);
+		frmJanelaClassificador.getContentPane().add(lblSample);
+		
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -105,10 +109,17 @@ public class JanelaClassificador {
 		            
 		            objectIn.close();
 		            fileIn.close();
+		            
 		            String newsample = "";
 		            for (int i = 0; i < classificador.getN()-1; i++) newsample = newsample + "0,";
 		            newsample = newsample + "0";
 		            txtSample.setText(newsample);
+		            
+		            newsample = "<html>Sample : ";
+		            for (int i = 1; i < classificador.getN() && i < 14; i++) newsample = newsample +  "x<sub>" + i + "</sub>,";
+		            if (classificador.getN() < 14) newsample = newsample + "x<sub>" + classificador.getN() + "</sub></html>";
+		            else newsample = newsample + "...,x<sub>" + classificador.getN() + "</sub></html>";
+		            lblSample.setText(newsample);
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
@@ -117,9 +128,7 @@ public class JanelaClassificador {
 		btnNewButton.setBounds(16, 72, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnNewButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("<html>Sample : x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub></html>"); //TODO nao da para por ao lado "n = valor"?
-		lblNewLabel_1.setBounds(6, 115, 141, 24);
-		frmJanelaClassificador.getContentPane().add(lblNewLabel_1);
+		
 		
 		txtSample = new JTextField();
 		txtSample.setText("0,...,0");
@@ -175,6 +184,12 @@ public class JanelaClassificador {
 		            newsample = newsample + "0";
 	            }
 		        txtSample.setText(newsample);
+		        
+		        newsample = "<html>Sample : ";
+	            for (int i = 1; i < classificador.getN() && i < 14; i++) newsample = newsample +  "x<sub>" + i + "</sub>,";
+	            if (classificador.getN() < 14) newsample = newsample + "x<sub>" + classificador.getN() + "</sub></html>";
+	            else newsample = newsample + "...,x<sub>" + classificador.getN() + "</sub></html>";
+	            lblSample.setText(newsample);
 			}
 		});
 		btnReset.setBounds(327, 141, 117, 29);
