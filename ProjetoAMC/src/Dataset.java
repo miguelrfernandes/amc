@@ -80,7 +80,7 @@ public class Dataset implements Serializable{
 		
 		this.D = D_max(v, this.D); // aqui estamos a atualizar o conjuntos de valores mÃ¡ximos das variaveis aleatorias do dataset
 		
-		this.Freqlist = FreqList(v); // nao faz sentido nas fibras, porque nao tem a classe nas amostras 
+		this.Freqlist = AtualizaFreqList(v); // estamos a atualizar o vetor das frequências da classe, nomeadamente, a da classe do vetor adicionado
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class Dataset implements Serializable{
 	}
 	
 	// metodo auxiliar do metodo Add que atualiza a lista de frequencias de cada classe
-	private ArrayList<Integer> FreqList(int[] v) {
+	private ArrayList<Integer> AtualizaFreqList(int[] v) {
 		int i = v[this.n];
 		
 		if (this.Freqlist.size() > i) {
