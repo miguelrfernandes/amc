@@ -156,7 +156,7 @@ public class JanelaAprendizagem {
 		lblStatus.setBounds(38, 210, 388, 81);
 		frmJanelaAprendizagem.getContentPane().add(lblStatus);
 		
-		JLabel lblModelName = new JLabel("ModelName");
+		JLabel lblModelName = new JLabel("Model Name");
 		lblModelName.setBounds(37, 149, 90, 16);
 		frmJanelaAprendizagem.getContentPane().add(lblModelName);
 		
