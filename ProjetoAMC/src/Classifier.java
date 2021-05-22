@@ -26,7 +26,7 @@ public class Classifier implements Serializable{
 	 
 	public int classify(int[] amostra) {  
 		double m = 0;
-		for (int freq : FreqList) m += freq;  // tamanho do dataset original, donde se tirou a fiber
+		for (int freq : FreqList) m += Double.valueOf(freq);  // tamanho do dataset original, donde se tirou a fiber
 		
 		ArrayList<Double> odds = new ArrayList<Double>();
 		for (int C=0; C < FreqList.size(); C++) {  // C = variavel classe C
