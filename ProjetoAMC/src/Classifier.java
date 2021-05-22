@@ -27,7 +27,7 @@ public class Classifier implements Serializable{
 	}
 	 
 	public int classify(int[] amostra) {  
-		int m = 0;
+		double m = 0;
 		for (int freq : FreqList) m += freq;  // tamanho do dataset original, donde se tirou a fiber
 		
 		ArrayList<Double> odds = new ArrayList<Double>();
@@ -45,7 +45,7 @@ public class Classifier implements Serializable{
 				erro = true;
 			}
 		}
-		
+		System.out.println(odds.toString());
 		if (erro) return r;
 		else { throw new AssertionError("erro");} //TODO pensar em alterar o erro
 	}
