@@ -92,6 +92,50 @@ public class JanelaAprendizagem {
 		
 	}
 	
+	public void testes_old(Dataset ds, Classifier classificador, int limit) {
+		System.out.println(classificador);
+		
+		System.out.println("Beginning tests...");
+		//int limit = 1000000;
+		int rtests = 0;
+		for (int i = 0; i < ds.getData().size() && i < limit; i++) {
+			int[] sample = Arrays.copyOfRange(ds.getData().get(i), 0, ds.getData().get(i).length-1);
+			int expected = ds.getData().get(i)[ds.getData().get(i).length-1];
+			int predicted = classificador.classify(sample);
+			boolean result = expected==predicted;
+			if (result) rtests++;
+			System.out.println("" + result + ", expected = " + expected + ", predicted = " + predicted);
+		}
+		System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()));
+	}
+	
+	public void testes(Dataset ds, int limit) {		
+		System.out.println("Beginning tests...");
+		int rtests = 0;
+		
+		if (limit == 0) limit = Integer.MAX_VALUE;
+		
+		for (int i = 0; i < ds.getData().size() && i < limit; i++) {
+			int[] sample = ds.getData().get(i);
+			ds.getData().remove(i);
+			int l = ds.Freqlist.get(sample[ds.getN()]);
+			ds.Freqlist.set(sample[ds.getN()], --l);
+					
+			ArrayList<MRFTree> mrftList = ChowLiu(ds);
+			Classifier classificador = new Classifier(mrftList, ds.Freqlist); 
+			
+			int expected = sample[sample.length-1];
+			int predicted = classificador.classify(sample);
+			boolean result = expected==predicted;
+			if (result) rtests++;
+			System.out.println("" + result + ", expected = " + expected + ", predicted = " + predicted);
+			
+			ds.Add(sample);
+		}
+		
+		System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()));
+	}
+	
 	// Initialize the contents of the frame.
 
 	private void initialize() {
@@ -184,21 +228,7 @@ public class JanelaAprendizagem {
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "The Classifier model was succesfully written to a file<br></html>");
 				
 				// TESTES
-				
-				System.out.println(classificador);
-				
-				System.out.println("Beginning tests...");
-				int limit = 1000000;
-				int rtests = 0;
-				for (int i = 0; i < ds.getData().size() && i < limit; i++) {
-					int[] sample = Arrays.copyOfRange(ds.getData().get(i), 0, ds.getData().get(i).length-1);
-					int expected = ds.getData().get(i)[ds.getData().get(i).length-1];
-					int predicted = classificador.classify(sample);
-					boolean result = expected==predicted;
-					if (result) rtests++;
-					System.out.println("" + result + ", expected = " + expected + ", predicted = " + predicted);
-				}
-				System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()));
+				testes(ds, 0);
 			}
 		});
 		
@@ -228,7 +258,7 @@ public class JanelaAprendizagem {
 		
 		txtDsPath.setBounds(48, 43, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtDsPath);
-		txtDsPath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Datasets2021/bcancer.csv"); // TODO comentar e apagar no fim
+		//txtDsPath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Datasets2021/bcancer.csv"); // TODO comentar e apagar no fim
 		txtDsPath.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Dataset path");
@@ -251,13 +281,11 @@ public class JanelaAprendizagem {
 		});
 		txtSavePath.setBounds(48, 109, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtSavePath);
-		txtSavePath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Models2021/bcancer.ser"); // TODO comentar e apagar no fim
+		//txtSavePath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Models2021/bcancer.ser"); // TODO comentar e apagar no fim
 		txtSavePath.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Save path for the model");
 		lblNewLabel_1.setBounds(38, 81, 149, 16);
 		frmJanelaAprendizagem.getContentPane().add(lblNewLabel_1);
-		
-
 	}
 }
