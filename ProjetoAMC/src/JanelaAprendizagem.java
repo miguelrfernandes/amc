@@ -71,9 +71,13 @@ public class JanelaAprendizagem {
 							double prxixj = Double.valueOf(dsfiber.Count(new int[] {i,j}, new int[] {xi, xj})) / mC;  
 							double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; 
 							double prxj = Double.valueOf(dsfiber.Count(new int[] {j}, new int[] {xj})) / mC; 
-							//System.out.println("double prxj = Double.valueOf(" + dsfiber.Count(new int[] {j}, new int[] {xj}) + ") / " + mC);
 							
-							if (prxixj == 0.0 && (prxixj / (prxi * prxj)) == 0.0) {
+							/*if (prxixj == 0 || prxi * prxj == 0) System.out.println("Erro: wg com NaN causado por log(0). prxixj = " +
+							prxixj + ", prxi * prxj = " + (prxi * prxj) + ", prxixj = dsfiber.Count(new int[] {" + i + "," + j +
+							"}, new int[] {" + xi + "," + xj + "}) / " + mC);
+							*/
+							
+							if (prxixj == 0.0 || (prxixj / (prxi * prxj)) == 0.0) { // TODO trocar || por &&, analisar enunciado e metodo de chowliu
 								I = I + 0.0;
 							}
 							else {
@@ -85,6 +89,7 @@ public class JanelaAprendizagem {
 					else {wg.Add(i, j, -1.0);}
 				}
 			}
+			
 			mrftList.add(new MRFTree(wg.MST(), dsfiber)); 	
 		}
 		
@@ -228,7 +233,7 @@ public class JanelaAprendizagem {
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "The Classifier model was succesfully written to a file<br></html>");
 				
 				// TESTES
-				testes(ds, 0);
+				//testes(ds, 0);
 			}
 		});
 		
