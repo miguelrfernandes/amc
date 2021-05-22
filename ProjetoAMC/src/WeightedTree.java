@@ -12,7 +12,8 @@ public class WeightedTree implements Serializable{
 		this.dim = dim;
 		int i = 1;
 		int j = 1;
-		this.ma = new double[dim][dim][i][j]; // a aresta que liga o no i ao no j tem a matriz [dim][dim] associada
+		this.ma = new double[dim][dim][i][j]; // a aresta que liga o no i ao no j tem a matriz [dim][dim] associada   
+			//B:acho que não é bem isso, porque são as entradas da matriz exterior que indicam as arestas;
 	}
 	
 	public int getDim() {
@@ -44,7 +45,7 @@ public class WeightedTree implements Serializable{
 				this.ma[i][j] = phi;
 				this.ma[j][i] = phi;
 			} else {
-				throw new AssertionError("node not in graph");
+				throw new AssertionError("node not in graph"); //TODO alterar erro
 		} 
 	}
 
