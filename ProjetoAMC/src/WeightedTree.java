@@ -51,6 +51,6 @@ public class WeightedTree implements Serializable{
 
 	
 	public double[][] getWeight(int i, int j) {
-		return ma[i][j];
+		return ma[i][j]; //aqui não se deveria veriricar se i e j pertencem à matriz?
 	}
 }
