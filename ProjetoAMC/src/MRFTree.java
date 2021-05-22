@@ -122,7 +122,7 @@ public class MRFTree implements Serializable{
 			return r;
 		} else {
 			System.out.println(Arrays.toString(v) + " (>) " + Arrays.toString(D));
-			throw new AssertionError("Valor fora do dominio");
+			throw new AssertionError("Valor fora do dominio"); //TODO alterar tipo de erro
 		}
 	}
 	
