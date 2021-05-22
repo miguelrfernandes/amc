@@ -30,7 +30,7 @@ public class Classifier implements Serializable{
 		
 		ArrayList<Double> odds = new ArrayList<Double>();
 		for (int C=0; C < FreqList.size(); C++) {  // C = variavel classe C
-			double PrV = (FreqList.get(C)/m) * (MRFTList.get(C).prob(amostra));
+			double PrV = (Double.valueOf(FreqList.get(C))/m) * (MRFTList.get(C).prob(amostra));
 			odds.add(PrV);
 		}
 		
