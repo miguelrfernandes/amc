@@ -47,7 +47,7 @@ public class Classifier implements Serializable{
 		}
 		
 		if (erro) return r;
-		else { throw new AssertionError("erro");}
+		else { throw new AssertionError("erro");} //TODO pensar em alterar o erro
 	}
 	
 	public void writeFile(String path) {
