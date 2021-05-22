@@ -14,7 +14,7 @@ import java.util.Queue;
 			this.ma = new double[dim][dim];
 			
 			for (int i = 0; i < dim; i++) {
-				for (int j = 0; j < dim; j++) ma[i][j] = -1.0; // nao ter peso == -1.0
+				for (int j = i; j < dim; j++) ma[i][j] = Double.NEGATIVE_INFINITY; // nao ter peso == Double.NEGATIVE_INFINITY
 			}
 		
 		}
@@ -24,7 +24,7 @@ import java.util.Queue;
 		}
 		
 		public String toString() {  
-			String r = "Weighted Graph\n";
+			String r = "Weighted Graph, ma =\n";
 			for (int i = 0; i < dim; i++) {
 				if (i==0 && dim != 1) {
 					r = r + ("[" + Arrays.toString(this.ma[0]) + ",\n");
@@ -45,8 +45,8 @@ import java.util.Queue;
 		
 		public void Add(int i, int j, double w){
 				if (i>=0 && i<this.dim && j>=0 && j<this.dim) {
-					this.ma[i][j] = w;
-					this.ma[j][i] = w;
+					if (i<=j) this.ma[i][j] = w;
+					else this.ma[j][i] = w;
 				} else {
 					throw new AssertionError("node not in graph");
 			} 
@@ -54,15 +54,84 @@ import java.util.Queue;
 	
 		
 		public double getWeight(int i, int j) {
-			if (i >= this.dim || j >= this.dim){
+			if (i >= this.dim || j >= this.dim) {
 				throw new AssertionError("node not in graph");
-	}	
-			else{
-					return ma[i][j];		}
+			}	
+			else {
+				if (i<=j) return ma[i][j];
+				else return ma[j][i];
+			}
 		}
 		
 		
-		public Tree MST() {  // determina a MST com o Algoritmo de Prim
+		
+		
+		public Tree MST() {
+			// para ser a maximal e não a minimal, trocamos o sinal de todos os pesos
+			for (int i = 0; i < dim; i++) {
+				for (int j = 0; j < dim; j++) {
+					ma[i][j] = -ma[i][j];
+				}
+			}
+			
+			//definimos 0 como a raiz
+			Tree maximal = this.MST(0);
+			
+			// revertemos o que tinhamos feito no inicio
+			for (int i = 0; i < dim; i++) {
+				for (int j = 0; j < dim; j++) {
+					ma[i][j] = -ma[i][j];
+				}
+			}
+			
+			return maximal;	
+		}
+		
+		
+		public Tree MST(int r) {  // determina a MST com o Algoritmo de Prim
+			// r e a raiz da arvore, a partir da qual vamos comecar
+			
+			Tree minimal = new Tree(dim); 
+			
+			// lista dos custos minimos para cada no
+			// nao e necessario para o nosso projeto
+			double[] C = new double[dim];
+			
+			// lista da aresta com esse custo minimo para no 
+			int[] E = new int[dim];
+			
+			// inicializamos todas as arestas a null, definimos null como -1, uma vez que nao ha nenhuma aresta -1
+			// inicializamos todos os custos maximos a +inf
+			for (int i = 0; i < dim; i++) {
+				E[i] = -1;
+				C[i] = Double.POSITIVE_INFINITY;
+			}
+			
+			// define-se o custo do no r como 0
+			C[r] = 0;
+			
+			// adicionamos todos os nos exceto r a lista
+			Queue<Integer> Q = new LinkedList<Integer>();
+			for (int i = 1; i < dim; i++) if (i!= r) Q.add(i);
+			// a lista ja esta ordenada por ordem crescente
+
+			while (!Q.isEmpty()) {
+				int u = Q.remove();
+				// como o grafo e completo, todos os nos sao ajacentes a u
+				for (int v = 0; v < dim; v++) {
+					if (Q.contains(v) && this.getWeight(u, v) < C[v]) {
+						minimal.addEdge(v, u);
+						C[v] = this.getWeight(u, v);
+					}
+				}
+			}
+			
+			return minimal;
+		}
+		
+		
+		// TODO
+		public Tree MST1() {  // determina a MST com o Algoritmo de Prim
 			Tree maximal = new Tree(dim); 
 			
 			// lista dos custos maximos para cada no
@@ -107,6 +176,7 @@ import java.util.Queue;
 			ArrayList<Integer> F = new ArrayList<Integer>();
 			F.add(0);
 			
+			ArrayList<int[]> Edges = new ArrayList<int[]>();
 			
 			while (!Q.isEmpty()) {
 				double max = Double.NEGATIVE_INFINITY;
@@ -123,7 +193,9 @@ import java.util.Queue;
 				Q.remove(e[1]); //F.add(v);
 				F.add(e[1]);
 				maximal.addEdge(e[1], e[0]);
+				Edges.add(e);
 			}
+			System.out.println(Arrays.deepToString(Edges.toArray()));
 			/*
 			while (!Q.isEmpty()) {
 				int no = Q.remove();
@@ -140,5 +212,4 @@ import java.util.Queue;
 			
 			return maximal;
 		}
-
 	}

@@ -154,11 +154,11 @@ public class JanelaAprendizagem {
 							else {wg.Add(i, j, -1.0);}
 						}
 					}
-					System.out.println(wg);
+					//System.out.println(wg);
 					
 					Tree mst = wg.MST();
 					
-					System.out.println(mst);
+					//System.out.println(mst);
 					
 					mrftList.add(new MRFTree(mst, dsfiber)); 
 				}
@@ -189,8 +189,8 @@ public class JanelaAprendizagem {
 				
 				// TESTES
 				
-				//System.out.println(classificador);
-				/*
+				System.out.println(classificador);
+				
 				System.out.println("Beginning tests...");
 				int limit = 1000000;
 				int rtests = 0;
@@ -200,10 +200,10 @@ public class JanelaAprendizagem {
 					int predicted = classificador.classify(sample);
 					boolean result = expected==predicted;
 					if (result) rtests++;
-					System.out.println("" + result + " expected = " + expected + ", predicted = " + predicted);
+					System.out.println("" + result + ", expected = " + expected + ", predicted = " + predicted);
 				}
-				System.out.println("Finished. " + rtests + "/" + Math.max(limit, rtests));
-				*/
+				System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()));
+				
 			}
 		});
 		
