@@ -123,14 +123,13 @@ public class JanelaAprendizagem {
 				for (int k = 0; k < ds.Freqlist.size(); k++) { 
 					
 					Dataset dsfiber = ds.Fiber(k);
-					WeightedGraph wg = new WeightedGraph(ds.getN()); 
+					WeightedGraph wg = new WeightedGraph(ds.getN());
 					
-					double mC = ds.Freqlist.get(k); 
+					double mC = ds.Freqlist.get(k);
 					
 					//Chow Li
 					for (int j = 0; j < wg.getDim(); j++) { 
 						for (int i = 0; i < j; i++) {
-							
 							double I = 0;
 							
 							for (int xi = 0; xi <= D[i]; xi++) { 
@@ -138,6 +137,8 @@ public class JanelaAprendizagem {
 									double prxixj = Double.valueOf(dsfiber.Count(new int[] {i,j}, new int[] {xi, xj})) / mC;  
 									double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; 
 									double prxj = Double.valueOf(dsfiber.Count(new int[] {j}, new int[] {xj})) / mC; 
+									//System.out.println("double prxj = Double.valueOf(" + dsfiber.Count(new int[] {j}, new int[] {xj}) + ") / " + mC);
+									
 									if (prxixj == 0.0 && (prxixj / (prxi * prxj)) == 0.0) {
 										I = I + 0.0;
 									}
@@ -161,6 +162,7 @@ public class JanelaAprendizagem {
 					//System.out.println(mst);
 					
 					mrftList.add(new MRFTree(mst, dsfiber)); 
+					System.out.println(new MRFTree(mst, dsfiber));
 				}
 				
 				Classifier classificador = new Classifier(mrftList, ds.Freqlist); 

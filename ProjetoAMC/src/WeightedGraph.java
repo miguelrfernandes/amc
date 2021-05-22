@@ -87,6 +87,19 @@ import java.util.Queue;
 			return maximal;	
 		}
 		
+		public int ExtractMin(Queue<Integer> Q, double[] C) {
+			double min = Double.POSITIVE_INFINITY;
+			// a variavel tem de ser iniciada
+			int r = 0;
+			for (int i : Q) {
+				if (C[i] < min) {
+					min = C[i];
+					r = i;
+				}
+			}
+			Q.remove(r);
+			return r;
+		}
 		
 		public Tree MST(int r) {  // determina a MST com o Algoritmo de Prim
 			// r e a raiz da arvore, a partir da qual vamos comecar
@@ -107,17 +120,19 @@ import java.util.Queue;
 				C[i] = Double.POSITIVE_INFINITY;
 			}
 			
-			// define-se o custo do no r como 0
+			// define-se o custo do no r como 0 para este ser o primeiro
 			C[r] = 0;
+			// E[0] = -1;
 			
 			// adicionamos todos os nos exceto r a lista
 			Queue<Integer> Q = new LinkedList<Integer>();
-			for (int i = 1; i < dim; i++) if (i!= r) Q.add(i);
+			for (int i = 0; i < dim; i++) if (i!= r) Q.add(i);
+			
 			// a lista ja esta ordenada por ordem crescente
-
+			
 			while (!Q.isEmpty()) {
-				int u = Q.remove();
-				// como o grafo e completo, todos os nos sao ajacentes a u
+				int u = ExtractMin(Q, C);
+				// como o grafo e completo, todos os nos sao adjacentes a u
 				for (int v = 0; v < dim; v++) {
 					if (Q.contains(v) && this.getWeight(u, v) < C[v]) {
 						minimal.addEdge(v, u);
@@ -125,7 +140,7 @@ import java.util.Queue;
 					}
 				}
 			}
-			
+			System.out.println(minimal);
 			return minimal;
 		}
 		

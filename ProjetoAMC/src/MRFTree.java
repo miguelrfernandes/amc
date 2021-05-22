@@ -108,7 +108,7 @@ public class MRFTree implements Serializable{
 	}
 	
 	// Prob: dado um vetor de dados (x1, ..., xn) retorna a probabilidade destes dados no dataset - ou seja, P_Mc
-	public double prob(int[] v) { //BEA: este m�todo pode ser private
+	public double prob(int[] v) { //BEA: este m�todo pode ser private, Miguel: tem de ser public porque e usado no classificador
 		double r;
 		r = 1;
 		boolean c = true;
