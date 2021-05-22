@@ -82,7 +82,8 @@ import java.util.Queue;
 			
 			boolean[] visited = new boolean[dim];
 			for (int i = 0; i < visited.length; i++) visited[i] = false;
-			
+		
+			/*
 			for (int i = 0; i < dim; i++) {
 				for (int j = i; j < dim; j++) { // pode ser j = i? ou tem de ser j = 0
 					if (!visited[i] && this.getWeight(i, j) > C[i]) {
@@ -91,6 +92,7 @@ import java.util.Queue;
 					}
 				}
 			}
+			*/
 			
 			// define-se o no 0 como o no inicial u
 			C[0] = 0;
@@ -105,21 +107,22 @@ import java.util.Queue;
 			ArrayList<Integer> F = new ArrayList<Integer>();
 			F.add(0);
 			
+			
 			while (!Q.isEmpty()) {
-				//int x 
 				double max = Double.NEGATIVE_INFINITY;
 				int[] e = new int[2]; // aresta maximal
 				for (int x : F) {
-					for (int v :Q) {
+					for (int v : Q) {
 						if (this.getWeight(x, v) > max) {
 							e = new int[] {x,v};
+							max = this.getWeight(x, v);
 						}
 					}
 				}
-				Q.remove(e[0]); //F.add(v);
 				E[e[1]]=e[0]; // C[v] = g.weight(e)
+				Q.remove(e[1]); //F.add(v);
 				F.add(e[1]);
-				maximal.addEdge(e[0], e[1]);
+				maximal.addEdge(e[1], e[0]);
 			}
 			/*
 			while (!Q.isEmpty()) {
