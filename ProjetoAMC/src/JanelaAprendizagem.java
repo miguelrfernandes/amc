@@ -49,9 +49,50 @@ public class JanelaAprendizagem {
 	public JanelaAprendizagem() {
 		initialize();
 	}
-
 	
-	 // Initialize the contents of the frame.
+	public ArrayList<MRFTree> ChowLiu(Dataset ds) {
+		ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
+		
+		int[] D = ds.getD();
+		
+		for (int k = 0; k < ds.Freqlist.size(); k++) { 
+			
+			Dataset dsfiber = ds.Fiber(k);
+		
+			WeightedGraph wg = new WeightedGraph(ds.getN());
+			double mC = ds.Freqlist.get(k);
+			
+			for (int j = 0; j < wg.getDim(); j++) { 
+				for (int i = 0; i < j; i++) {
+					double I = 0;
+
+					for (int xi = 0; xi <= D[i]; xi++) { 
+						for (int xj = 0; xj <= D[j]; xj++) { 
+							double prxixj = Double.valueOf(dsfiber.Count(new int[] {i,j}, new int[] {xi, xj})) / mC;  
+							double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; 
+							double prxj = Double.valueOf(dsfiber.Count(new int[] {j}, new int[] {xj})) / mC; 
+							//System.out.println("double prxj = Double.valueOf(" + dsfiber.Count(new int[] {j}, new int[] {xj}) + ") / " + mC);
+							
+							if (prxixj == 0.0 && (prxixj / (prxi * prxj)) == 0.0) {
+								I = I + 0.0;
+							}
+							else {
+								I = I + prxixj * Math.log(prxixj / (prxi * prxj)); 
+							}
+						}
+					}
+					if (i!=j) {wg.Add(i,  j,  I);}
+					else {wg.Add(i, j, -1.0);}
+				}
+			}
+			mrftList.add(new MRFTree(wg.MST(), dsfiber)); 	
+		}
+		
+		return mrftList;
+		
+	}
+	
+	// Initialize the contents of the frame.
 
 	private void initialize() {
 		
@@ -116,54 +157,7 @@ public class JanelaAprendizagem {
 				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Training the model<br></html>");
 				
 				// PASSO 2 - Treinamento do Modelo | Chow-Liu Algorithm
-				ArrayList<MRFTree> mrftList = new ArrayList<MRFTree>();
-				
-				int[] D = ds.getD();
-				
-				for (int k = 0; k < ds.Freqlist.size(); k++) { 
-					
-					Dataset dsfiber = ds.Fiber(k);
-					WeightedGraph wg = new WeightedGraph(ds.getN());
-					
-					double mC = ds.Freqlist.get(k);
-					
-					//Chow Li
-					for (int j = 0; j < wg.getDim(); j++) { 
-						for (int i = 0; i < j; i++) {
-							double I = 0;
-							
-							for (int xi = 0; xi <= D[i]; xi++) { 
-								for (int xj = 0; xj <= D[j]; xj++) { 
-									double prxixj = Double.valueOf(dsfiber.Count(new int[] {i,j}, new int[] {xi, xj})) / mC;  
-									double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; 
-									double prxj = Double.valueOf(dsfiber.Count(new int[] {j}, new int[] {xj})) / mC; 
-									//System.out.println("double prxj = Double.valueOf(" + dsfiber.Count(new int[] {j}, new int[] {xj}) + ") / " + mC);
-									
-									if (prxixj == 0.0 && (prxixj / (prxi * prxj)) == 0.0) {
-										I = I + 0.0;
-									}
-									else {
-										I = I + prxixj * Math.log(prxixj / (prxi * prxj)); 
-									}
-									/*
-									if (prxixj == 0 || prxi * prxj == 0) System.out.println("Erro: wg NaN causado por log(0). prxixj = " +
-									prxixj + ", prxi * prxj = " + (prxi * prxj) + ", prxixj = dsfiber.Count(new int[] {" + i + "," + j +
-									"}, new int[] {" + xi + "," + xj + "}) / " + mC);*/
-								}
-							}
-							if (i!=j) {wg.Add(i,  j,  I);}
-							else {wg.Add(i, j, -1.0);}
-						}
-					}
-					//System.out.println(wg);
-					
-					Tree mst = wg.MST();
-					
-					//System.out.println(mst);
-					
-					mrftList.add(new MRFTree(mst, dsfiber)); 
-					System.out.println(new MRFTree(mst, dsfiber));
-				}
+				ArrayList<MRFTree> mrftList = ChowLiu(ds);
 				
 				Classifier classificador = new Classifier(mrftList, ds.Freqlist); 
 				
@@ -205,7 +199,6 @@ public class JanelaAprendizagem {
 					System.out.println("" + result + ", expected = " + expected + ", predicted = " + predicted);
 				}
 				System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()));
-				
 			}
 		});
 		

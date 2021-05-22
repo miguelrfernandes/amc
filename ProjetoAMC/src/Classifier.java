@@ -3,7 +3,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.io.Serializable;
 
 public class Classifier implements Serializable{  
 	//default serialVersion id
@@ -17,7 +16,6 @@ public class Classifier implements Serializable{
 	public Classifier(ArrayList<MRFTree> MRFTList, ArrayList<Integer> FreqList) {
 		this.MRFTList = MRFTList;
 		this.FreqList = FreqList;
-		
 	}
 	
 	// metodo toString
@@ -64,7 +62,6 @@ public class Classifier implements Serializable{
 	
 	public int getN() {
 		return MRFTList.get(0).n;
-	
 	}
 }
 
