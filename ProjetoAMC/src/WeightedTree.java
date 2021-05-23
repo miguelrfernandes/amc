@@ -46,29 +46,29 @@ public class WeightedTree implements Serializable {
 			} 
 			else {
 				if (i >= this.dim) {
-					throw new AssertionError("O nÛ" + i + "n„o pode estar numa ·rvore com dimens„o" + this.dim); 
+					throw new AssertionError("O n√≥" + i + "n√£o pode estar numa √°rvore com dimens√£o" + this.dim); 
 				}
 				if (j >= this.dim) {
-					throw new AssertionError("O nÛ" + j + "n„o pode estar numa ·rvore com dimens„o" + this.dim); 
+					throw new AssertionError("O n√≥" + j + "n√£o pode estar numa √°rvore com dimens√£o" + this.dim); 
 				}
 				else {
-					throw new AssertionError("NÛ È negativo"); 
+					throw new AssertionError("N√≥ √© negativo"); 
 				}
 			} 
 		}
 
 	
 	public double[][] getWeight(int i, int j) {
-		if (i<this.dim && j<this.dim) return ma[i][j]; 
+		if (i>=0 && i<this.dim && j>=0 && j<this.dim) return ma[i][j]; 
 		else {
 			if (i >= this.dim) {
-				throw new AssertionError("O nÛ" + i + "n„o pode estar numa ·rvore com dimens„o" + this.dim); 
+				throw new AssertionError("O n√≥" + i + "n√£o pode estar numa √°rvore com dimens√£o" + this.dim); 
 			}
 			if (j >= this.dim) {
-				throw new AssertionError("O nÛ" + j + "n„o pode estar numa ·rvore com dimens„o" + this.dim); 
+				throw new AssertionError("O n√≥" + j + "n√£o pode estar numa √°rvore com dimens√£o" + this.dim); 
 			}
 			else {
-				throw new AssertionError("NÛ È negativo"); 
+				throw new AssertionError("N√≥ √© negativo"); 
 			}
 		} 
 	}
