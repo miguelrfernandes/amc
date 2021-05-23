@@ -6,14 +6,14 @@ public class Dataset implements Serializable{
 	//default serialVersion id
     private static final long serialVersionUID = 1L;
 	
-	protected ArrayList<int[]> data;
+	protected ArrayList<int[]> data; // lista de amostras (dados)
 	private int n; // numero de variaveis aleatorias, o java comeca a contar do 0
 	private int[] D; // lista com os valores maximos das variaveis aleatorias, sem a classe variavel da classe
 	protected ArrayList<Integer> Freqlist; // lista de frequencias de cada classe do dataset
 
 	
 	public Dataset(int n){
-		this.n=n;  
+		this.n = n;  
 		this.D = new int[n]; 
 		this.data = new ArrayList<int[]>();
 		this.Freqlist = new ArrayList<Integer>();
@@ -31,11 +31,6 @@ public class Dataset implements Serializable{
 	public int getN() {
 		return n;
 	}
-	
-	/*
-	public int getClassifierDomain() {
-		return data.get(0)[n];
-	}*/
 
 	public int[] getD() {
 		return D;
@@ -78,13 +73,13 @@ public class Dataset implements Serializable{
 				data.add(aux, v);
 			}
 		
-		this.D = D_max(v, this.D); // aqui estamos a atualizar o conjuntos de valores máximos das variaveis aleatorias do dataset
+		this.D = D_max(v, this.D); // aqui estamos a atualizar o conjuntos de valores maximos das variaveis aleatorias do dataset
 		
-		this.Freqlist = AtualizaFreqList(v); // estamos a atualizar o vetor das frequ�ncias da classe, nomeadamente, a da classe do vetor adicionado
+		this.Freqlist = AtualizaFreqList(v); // estamos a atualizar o vetor das frequencias da classe, nomeadamente, a da classe do vetor adicionado
 		}
 	}
 	
-	// metodo auxiliar para adicionar vetores a fibras 
+	// Metodo auxiliar para adicionar vetores a fibras 
 	private void fiberAdd(int[] v) {
 		
 		if (v.length != this.n) {
@@ -97,7 +92,7 @@ public class Dataset implements Serializable{
 		}
 	}
 	
-	// metodo auxiliar do metodo Add que atualiza a lista de frequencias de cada classe
+	// Metodo auxiliar do metodo Add que atualiza a lista de frequencias de cada classe
 	private ArrayList<Integer> AtualizaFreqList(int[] v) {
 		int i = v[this.n];
 		
@@ -119,7 +114,7 @@ public class Dataset implements Serializable{
 		return this.Freqlist;	
 	}
  	
-	// metodo auxiliar do metodo Add para calcular atualizar o dominio das variaveis
+	// Metodo auxiliar do metodo Add para calcular atualizar o dominio das variaveis
 	private int[] D_max(int[] v, int[] D) {
 		for (int i=0; i < D.length; i++) {
 			if(D[i]<v[i]){ 
@@ -129,12 +124,9 @@ public class Dataset implements Serializable{
 		return D;
 		}
 	
-	// metodo que recebe um lista de variaveis e uma lista dos seus valores respetivos e faz uma contagem
-	// recebe uma lista de variaveis e valores destas e retorna o numero de vezes que estas variaveis tomam simultaneamente os esses valores no dataset.
+	// Metodo que recebe um lista de variaveis e uma lista dos seus valores respetivos e faz uma contagem
+	// recebe uma lista de variaveis e valores destas e retorna o numero de vezes que estas variaveis tomam simultaneamente esses valores no dataset.
 	public int Count(int[] vars, int[] val) {
-		// nao precisamos de confirmar se o valores pertencem ao dominio de cada variavel
-		// pois esta funcao pressupoe que isto ja tenha sido verificado previamente no classifier
-		// desta forma, poupamos algum trabalho computacional
 		int r = 0; 
 		for (int i = 0; i < data.size(); i++ )  {
 			boolean c = true;
@@ -154,7 +146,6 @@ public class Dataset implements Serializable{
 		
 		if (this.Freqlist.size()> c){
 			int i = 0;
-			// percorremos a lista de frequencias para determinar o indice a partir do qual começa as entradas da classe c pois o dataset esta ordenado
 			for (int k = 0; k < this.Freqlist.size(); k++){
 				if ( k < c ) i = i + this.Freqlist.get(k);
 			}

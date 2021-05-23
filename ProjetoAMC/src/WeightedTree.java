@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class WeightedTree implements Serializable{ 
+public class WeightedTree implements Serializable { 
 	//default serialVersion id
     private static final long serialVersionUID = 1L;
     
@@ -12,8 +12,7 @@ public class WeightedTree implements Serializable{
 		this.dim = dim;
 		int i = 1;
 		int j = 1;
-		this.ma = new double[dim][dim][i][j]; // a aresta que liga o no i ao no j tem a matriz [dim][dim] associada   
-			//B:acho que não é bem isso, porque são as entradas da matriz exterior que indicam as arestas;
+		this.ma = new double[dim][dim][i][j]; 
 	}
 	
 	public int getDim() {
@@ -40,17 +39,37 @@ public class WeightedTree implements Serializable{
 		return "WeightedTree [ma=" + r + ", dim=" + dim + "]";
 	}
 
-	public void Add(int i, int j, double[][] phi){
+	public void Add(int i, int j, double[][] phi) {
 			if (i>=0 && i<this.dim && j>=0 && j<this.dim) {
 				this.ma[i][j] = phi;
 				this.ma[j][i] = phi;
-			} else {
-				throw new AssertionError("node not in graph"); //TODO alterar erro
-		} 
-	}
+			} 
+			else {
+				if (i >= this.dim) {
+					throw new AssertionError("O nó" + i + "não pode estar numa árvore com dimensão" + this.dim); 
+				}
+				if (j >= this.dim) {
+					throw new AssertionError("O nó" + j + "não pode estar numa árvore com dimensão" + this.dim); 
+				}
+				else {
+					throw new AssertionError("Nó é negativo"); 
+				}
+			} 
+		}
 
 	
 	public double[][] getWeight(int i, int j) {
-		return ma[i][j]; //aqui não se deveria veriricar se i e j pertencem à matriz?
+		if (i<this.dim && j<this.dim) return ma[i][j]; 
+		else {
+			if (i >= this.dim) {
+				throw new AssertionError("O nó" + i + "não pode estar numa árvore com dimensão" + this.dim); 
+			}
+			if (j >= this.dim) {
+				throw new AssertionError("O nó" + j + "não pode estar numa árvore com dimensão" + this.dim); 
+			}
+			else {
+				throw new AssertionError("Nó é negativo"); 
+			}
+		} 
 	}
 }

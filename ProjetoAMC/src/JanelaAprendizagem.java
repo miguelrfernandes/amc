@@ -72,12 +72,7 @@ public class JanelaAprendizagem {
 							double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; 
 							double prxj = Double.valueOf(dsfiber.Count(new int[] {j}, new int[] {xj})) / mC; 
 							
-							/*if (prxixj == 0 || prxi * prxj == 0) System.out.println("Erro: wg com NaN causado por log(0). prxixj = " +
-							prxixj + ", prxi * prxj = " + (prxi * prxj) + ", prxixj = dsfiber.Count(new int[] {" + i + "," + j +
-							"}, new int[] {" + xi + "," + xj + "}) / " + mC);
-							*/
-							
-							if (prxixj == 0.0 || (prxixj / (prxi * prxj)) == 0.0) { // TODO trocar || por &&, analisar enunciado e metodo de chowliu
+							if (prxixj == 0.0 || (prxixj / (prxi * prxj)) == 0.0 || prxi == 0.0 || prxj == 0.0) { //TODO confirmar ultimas duas condicoes
 								I = I + 0.0;
 							}
 							else {
@@ -96,7 +91,7 @@ public class JanelaAprendizagem {
 		return mrftList;
 		
 	}
-	
+	//TODO delete?
 	public void testes_old(Dataset ds, Classifier classificador, int limit) {
 		System.out.println(classificador);
 		
@@ -113,7 +108,7 @@ public class JanelaAprendizagem {
 		}
 		System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()));
 	}
-	
+	//TODO delete?
 	public void testes(Dataset ds, int limit) {		
 		System.out.println("Beginning tests...");
 		int rtests = 0;

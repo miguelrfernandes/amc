@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Classifier implements Serializable{  
+public class Classifier implements Serializable {  
 	//default serialVersion id
     private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class Classifier implements Serializable{
 		
 		// determinamos a classe mais provavel, isto e, que tem maior probabilidade para amostra dada
 		int r = 0;
-		boolean erro = false; // para garantir que encontramos a classe e mais provavel
+		boolean erro = false; // para garantir que encontramos a classe mais provavel
 		for (int c=0; c < odds.size() && !erro; c++) {
 			if (odds.get(c) == Collections.max(odds)) {
 				r = c;
@@ -45,7 +45,7 @@ public class Classifier implements Serializable{
 		}
 		System.out.println(odds.toString());
 		if (erro) return r;
-		else { throw new AssertionError("erro");} //TODO pensar em alterar o erro
+		else { throw new AssertionError("Erro");} 
 	}
 	
 	public void writeFile(String path) {

@@ -104,11 +104,13 @@ public class JanelaClassificador {
 		            objectIn.close();
 		            fileIn.close();
 		            
+		            // adicionar zeros a caixa de texto
 		            String newsample = "";
 		            for (int i = 0; i < classificador.getN()-1; i++) newsample = newsample + "0,";
 		            newsample = newsample + "0";
 		            txtSample.setText(newsample);
 		            
+		            // adicionar x1,x2,...,xn ao titulo da caixa de texto
 		            newsample = "<html>Sample : ";
 		            for (int i = 1; i < classificador.getN() && i < 14; i++) newsample = newsample +  "x<sub>" + i + "</sub>,";
 		            if (classificador.getN() < 14) newsample = newsample + "x<sub>" + classificador.getN() + "</sub></html>";
@@ -121,8 +123,6 @@ public class JanelaClassificador {
 		});
 		btnNewButton.setBounds(16, 72, 117, 29);
 		frmJanelaClassificador.getContentPane().add(btnNewButton);
-		
-		
 		
 		txtSample = new JTextField();
 		txtSample.setText("0,...,0");

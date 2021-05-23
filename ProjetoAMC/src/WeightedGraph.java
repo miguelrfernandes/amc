@@ -84,7 +84,6 @@ import java.util.Queue;
 			Tree minimal = new Tree(dim); 
 			
 			// lista dos custos minimos para cada no
-			// nao e necessario para o nosso projeto
 			double[] C = new double[dim];
 			
 			// lista da aresta com esse custo minimo para no 
