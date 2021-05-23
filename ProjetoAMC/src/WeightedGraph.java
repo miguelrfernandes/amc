@@ -6,7 +6,7 @@ import java.util.Queue;
 		private int dim;
 		private double[][] ma;
 		
-		public WeightedGraph(int dim) { // metodo construtor
+		public WeightedGraph(int dim) { 
 			this.dim = dim;
 			this.ma = new double[dim][dim];
 			
@@ -120,7 +120,7 @@ import java.util.Queue;
 		// metodo auxiliar para o metodo MST
 		public int ExtractMin(Queue<Integer> Q, double[] C) {
 			double min = Double.POSITIVE_INFINITY;
-			int r = 0; // o java obriga a que a variavel seja iniciada
+			int r = 0; 
 			for (int i : Q) {
 				if (C[i] < min) {
 					min = C[i];

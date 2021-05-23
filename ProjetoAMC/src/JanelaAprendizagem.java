@@ -91,7 +91,7 @@ public class JanelaAprendizagem {
 		return mrftList;
 		
 	}
-	//TODO delete?
+	
 	public void testes_old(Dataset ds, Classifier classificador, int limit) {
 		System.out.println(classificador);
 		
@@ -106,9 +106,9 @@ public class JanelaAprendizagem {
 			if (result) rtests++;
 			System.out.println("" + result + ", expected = " + expected + ", predicted = " + predicted);
 		}
-		System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()));
+		System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()) + "=" + rtests*100/Math.min(limit, ds.getData().size()));
 	}
-	//TODO delete?
+	
 	public void testes(Dataset ds, int limit) {		
 		System.out.println("Beginning tests...");
 		int rtests = 0;
@@ -132,9 +132,8 @@ public class JanelaAprendizagem {
 			
 			ds.Add(sample);
 		}
-		
-		System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()));
-	}
+		System.out.println("Finished. " + rtests + "/" + Math.min(limit, ds.getData().size()) + " = " + Double.valueOf(rtests)*100/Double.valueOf(Math.min(limit, ds.getData().size())) + "%");
+	} 
 	
 	// Initialize the contents of the frame.
 
@@ -205,7 +204,7 @@ public class JanelaAprendizagem {
 				
 				Classifier classificador = new Classifier(mrftList, ds.Freqlist); 
 				
-				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Saving the model </html>");
+				lblStatus.setText(lblStatus.getText().substring(0, lblStatus.getText().length()-7)  + "Saving the model. </html>");
 				
 				String savePath = txtSavePath.getText();
 				 
@@ -258,7 +257,6 @@ public class JanelaAprendizagem {
 		
 		txtDsPath.setBounds(48, 43, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtDsPath);
-		//txtDsPath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Datasets2021/bcancer.csv"); // TODO comentar e apagar no fim
 		txtDsPath.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Dataset path");
@@ -281,7 +279,6 @@ public class JanelaAprendizagem {
 		});
 		txtSavePath.setBounds(48, 109, 253, 26);
 		frmJanelaAprendizagem.getContentPane().add(txtSavePath);
-		//txtSavePath.setText("/Users/miguelfernandes/Documents/GitHub/amc/Models2021/bcancer.ser"); // TODO comentar e apagar no fim
 		txtSavePath.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Save path for the model");

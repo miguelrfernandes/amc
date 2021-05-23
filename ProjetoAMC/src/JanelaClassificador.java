@@ -98,7 +98,6 @@ public class JanelaClassificador {
 		            // e necessario usar um cast (Classifier) para definir qual vai ser a classe do objeto que vai ser lido
 		            classificador = (Classifier) objectIn.readObject();
 
-		            //System.out.println("The Classifier model has been read from the file");
 		            lblModelStatus.setText("Model loaded!");
 
 		            objectIn.close();

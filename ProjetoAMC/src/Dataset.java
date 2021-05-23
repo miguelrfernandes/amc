@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Dataset implements Serializable{
 	//default serialVersion id
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; 
 	
 	protected ArrayList<int[]> data; // lista de amostras (dados)
 	private int n; // numero de variaveis aleatorias, o java comeca a contar do 0

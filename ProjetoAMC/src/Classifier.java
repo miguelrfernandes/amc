@@ -43,7 +43,7 @@ public class Classifier implements Serializable {
 				erro = true;
 			}
 		}
-		//System.out.println(odds.toString());
+		//System.out.println(odds.toString()); // para ver probabilidades ao correr testes
 		if (erro) return r;
 		else { throw new AssertionError("Erro");} 
 	}
