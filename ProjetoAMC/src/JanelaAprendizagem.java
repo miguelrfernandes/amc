@@ -67,12 +67,17 @@ public class JanelaAprendizagem {
 					double I = 0;
 
 					for (int xi = 0; xi <= D[i]; xi++) { 
-						double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; 
 						for (int xj = 0; xj <= D[j]; xj++) { 
 							double prxixj = Double.valueOf(dsfiber.Count(new int[] {i,j}, new int[] {xi, xj})) / mC;  
+							double prxi = Double.valueOf(dsfiber.Count(new int[] {i}, new int[] {xi})) / mC; 
 							double prxj = Double.valueOf(dsfiber.Count(new int[] {j}, new int[] {xj})) / mC; 
 							
-							if (prxixj != 0.0)	I = I + prxixj * Math.log(prxixj / (prxi * prxj)); 
+							if (prxixj == 0.0 || (prxixj / (prxi * prxj)) == 0.0 || prxi == 0.0 || prxj == 0.0) { //TODO confirmar ultimas duas condicoes
+								I = I + 0.0;
+							}
+							else {
+								I = I + prxixj * Math.log(prxixj / (prxi * prxj)); 
+							}
 						}
 					}
 					if (i!=j) {wg.Add(i,  j,  I);}

@@ -85,23 +85,22 @@ public class MRFTree implements Serializable{
 	public double[][] phi(int i, int j) {  
 		double[][] phiv = new double[D[i]+1][D[j]+1]; 
 		
-		int[] vars = {i, j};
-		
 		if (i == e[0] && j == e[1]) { // verifica se esta e a aresta especial
 			for (int xi = 0; xi <= D[i]; xi++) {
 				for (int xj = 0; xj <= D[j]; xj++) {
+					int[] vars = {i, j};
 					int[] vals = {xi, xj};
 					phiv[xi][xj] = (tfiber.Count(vars, vals) + delta) / (mc + delta * D[i] * D[j]);
 				}
 			}
 		} else { // esta nao e a aresta especial
-			int[] var = {i};
 			for (int xi = 0; xi <= D[i]; xi++) {
-				int[] val = {xi};
-				double count = tfiber.Count(var, val);
 				for (int xj = 0; xj <= D[j]; xj++) {
+					int[] vars = {i, j};
 					int[] vals = {xi, xj};
-					phiv[xi][xj] = (tfiber.Count(vars, vals) + delta) / (count + delta * D[j]);
+					int[] var = {i};
+					int[] val = {xi};
+					phiv[xi][xj] = (tfiber.Count(vars, vals) + delta) / (tfiber.Count(var, val) + delta * D[j]);
 				}
 			}
 		}
