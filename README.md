@@ -1,5 +1,9 @@
-# Projeto AMC
-Projeto de Algoritmos e Modelação Computacional AMC, Engenharia Biomédica 3.º Ano MEBiom, Instituto Superior Técnico IST
+# Projeto de Algoritmos e Modelação Computacional, Campos de Markov Aleatórios – Árvores
+Engenharia Biomédica 3.º Ano MEBiom 2º Semestre 2020/2021, Instituto Superior Técnico IST
+
+*Augusto Marques*  
+*Beatriz Filipe*  
+*Miguel Fernandes*
 
 Introdução
 ==========
